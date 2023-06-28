@@ -1,0 +1,34 @@
+{
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"start": "vite",
+		"check": "tsc --noEmit",
+		"prerender": "vite-node prerender.ts",
+		"build": "npm run check && vite build && npm run prerender",
+		"preview": "npm run build && vite preview"
+	},
+	"prettier": {
+		"useTabs": true,
+		"semi": false,
+		"singleQuote": true,
+		"trailingComma": "all",
+		"singleAttributePerLine": true
+	},
+	"dependencies": {
+		"@solidjs/router": "^0.8.2",
+		"lodash-es": "^4.17.21",
+		"modern-normalize": "^2.0.0",
+		"solid-js": "^1.7.6"
+	},
+	"devDependencies": {
+		"@types/lodash-es": "^4.17.7",
+		"@types/node": "^20.3.1",
+		"cheerio": "^1.0.0-rc.12",
+		"lightningcss": "^1.21.1",
+		"typescript": "^5.1.3",
+		"vite": "^4.4.0-beta.3",
+		"vite-node": "^0.32.2",
+		"vite-plugin-solid": "^2.7.0"
+	}
+}
