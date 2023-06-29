@@ -7,7 +7,7 @@ import { resolve } from 'node:path'
 import { load } from 'cheerio'
 import { renderToStringAsync, generateHydrationScript } from 'solid-js/web'
 import indexHtml from './dist/index.html?raw'
-import { routes } from '#/routes'
+import { routes } from '#/utils/routes'
 import { createApp } from '#/main'
 
 // See https://www.solidjs.com/docs/latest#hydrationscript
