@@ -4,19 +4,19 @@
 import { lazy, type Component } from 'solid-js'
 import { type RouteDefinition } from '@solidjs/router'
 
-const routeModules = import.meta.glob('./routes/**/*.route.{mdx,tsx}')
+const routeModules = import.meta.glob('./routes/**/*.route.tsx')
 
 export const routes = Object.entries(routeModules).map<RouteDefinition>(
 	([path, mod]) => {
 		let segments = path.split('/')
 
-		// Get segments relative to 'routes', e.g; ['about', 'index.route.mdx']
+		// Get segments relative to 'routes', e.g; ['about', 'index.route.tsx']
 		segments = segments.slice(
 			segments.indexOf('routes') + 1,
 			segments.length + 1,
 		)
 
-		// Remove '.route.mdx'
+		// Remove '.route.tsx'
 		const fileIndex = segments.length - 1
 		segments[fileIndex] = segments[fileIndex].split('.')[0]
 
