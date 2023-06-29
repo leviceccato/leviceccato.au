@@ -31,6 +31,8 @@ export default (function (props) {
 				let html = `<${tag} data-route-head `
 
 				Object.entries(attrs).forEach(([name, value]) => {
+					// Cast booleans to either non-existing or
+					// empty strings
 					if (value === false) {
 						return
 					}
