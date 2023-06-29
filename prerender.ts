@@ -34,12 +34,11 @@ for (const route of routes) {
     }
     dom('head').append(routeData.head)
 
-    const html = dom.root().html()
-
     const dir = resolve(dist, '.' + route.path)
     mkdirSync(dir, { recursive: true })
-
     const path = resolve(dir, './index.html')
+
+    const html = dom.root().html()
     if (!html) {
         console.error(`Failed to build index.html file contents for route: '${route.path}'`)
         process.exit(1)
