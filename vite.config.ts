@@ -4,7 +4,7 @@ import solid from 'vite-plugin-solid'
 
 export default {
 	root: 'src',
-	clearScreen: true,
+	clearScreen: false,
 	server: {
 		host: true,
 	},
