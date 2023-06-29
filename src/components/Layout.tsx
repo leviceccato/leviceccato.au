@@ -12,14 +12,16 @@ type Props = {
 }
 
 export default (function (props) {
-	const allHeadItems = () => {
-		const items = [
-			...(props.head || []),
-			['title', {}, props.title],
-			['meta', { name: 'description', content: props.description }],
-		]
+	const headCustom = () => props.head || []
 
-		return items
+	const head = () => [
+		...headCustom(),
+		['title', {}, props.title],
+		['meta', { name: 'description', content: props.description }],
+	]
+
+	const headHtml = () => {
+		return head()
 			.map(([tag, attrs, content]) => {
 				let html = `<${tag} data-route-head `
 
@@ -49,7 +51,7 @@ export default (function (props) {
 	onMount(() => {
 		// When the layout changes swap all old head elements with new ones
 		document.querySelectorAll('[data-route-head]').forEach((el) => el.remove())
-		document.head.insertAdjacentHTML('beforeend', allHeadItems())
+		document.head.insertAdjacentHTML('beforeend', headHtml())
 	})
 
 	return (
@@ -59,7 +61,7 @@ export default (function (props) {
 				type="application/json"
 				id="route-data"
 				textContent={JSON.stringify({
-					head: allHeadItems(),
+					head: headHtml(),
 				})}
 			/>
 			<main>{props.children}</main>
