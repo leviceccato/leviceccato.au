@@ -13,18 +13,11 @@ type Props = {
 
 export default (function (props) {
 	const allHeadItems = () => {
-		const items = props.head || []
-
-		if (props.title) {
-			items.push(['title', {}, props.title])
-		}
-
-		if (props.description) {
-			items.push([
-				'meta',
-				{ name: 'description', content: props.description },
-			])
-		}
+		const items = [
+			...(props.head || []),
+			['title', {}, props.title],
+			['meta', { name: 'description', content: props.description }],
+		]
 
 		return items
 			.map(([tag, attrs, content]) => {
