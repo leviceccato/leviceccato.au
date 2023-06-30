@@ -1,6 +1,5 @@
 import { type Component, For } from 'solid-js'
 import { A, useLocation } from '@solidjs/router'
-import style from './Header.module.css'
 
 export const Header: Component<{
 	id: string
@@ -18,10 +17,7 @@ export const Header: Component<{
 			>
 				Skip to main content
 			</a>
-			<header
-				class={style.root}
-				id={props.id}
-			>
+			<header id={props.id}>
 				<nav class="Header-nav">
 					<For each={props.nav}>
 						{(column) => (
