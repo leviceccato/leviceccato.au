@@ -40,7 +40,7 @@ for (const route of routes) {
 
     const html = dom.root().html()
     if (!html) {
-        console.error(`Failed to build index.html file contents for route: '${route.path}'`)
+        console.error(`Failed to build index.html file contents for route '${route.path}'`)
         process.exit(1)
     }
 
