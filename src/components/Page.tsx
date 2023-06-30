@@ -3,14 +3,7 @@
 // serialises this data into the HTML so that the
 // prerendering script can handle updating the head.
 
-import {
-	Switch,
-	Match,
-	onMount,
-	mergeProps,
-	type JSX,
-	type Component,
-} from 'solid-js'
+import { Show, onMount, mergeProps, type JSX, type Component } from 'solid-js'
 import { LayoutDefault } from '#/components/LayoutDefault'
 
 // Allow head items with no textContent
@@ -23,7 +16,7 @@ export const Page: Component<{
 	title: string
 	description: string
 	head?: HeadItem[]
-	layout?: 'default'
+	layout?: 'default' | 'empty'
 	headDataAttr?: string
 	routeDataId?: string
 }> = (props) => {
@@ -89,11 +82,10 @@ export const Page: Component<{
 					head: headHtml(),
 				})}
 			/>
-			<Switch fallback={_props.children}>
-				<Match when={_props.layout === 'default'}>
-					<LayoutDefault>{_props.children}</LayoutDefault>
-				</Match>
-			</Switch>
+			<Show when={_props.layout === 'empty'}>{_props.children}</Show>
+			<Show when={_props.layout === 'default'}>
+				<LayoutDefault>{_props.children}</LayoutDefault>
+			</Show>
 		</>
 	)
 }
