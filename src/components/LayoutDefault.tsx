@@ -1,20 +1,7 @@
 import { type ParentComponent } from 'solid-js'
 import { Header } from '#/components/Header'
-
-const nav = [
-	[
-		{ text: 'Home', url: '/' },
-		{ text: 'Blog', url: '/blog' },
-	],
-	[
-		{ text: 'Logos', url: '/logos' },
-		{ text: 'Art', url: '/art' },
-	],
-	[
-		{ text: 'Colophon', url: '/colophon' },
-		{ text: 'Search', url: '/search' },
-	],
-]
+import { Main } from '#/components/Main'
+import { Footer } from '#/components/Footer'
 
 export const LayoutDefault: ParentComponent = (props) => {
 	return (
@@ -22,9 +9,9 @@ export const LayoutDefault: ParentComponent = (props) => {
 			<Header
 				id="header"
 				skipLinkUrl="#main"
-				nav={nav}
 			/>
-			<main id="main">{props.children}</main>
+			<Main id="main">{props.children}</Main>
+			<Footer />
 		</>
 	)
 }
