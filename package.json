@@ -1,4 +1,5 @@
 {
+	"name": "leviceccato.au",
 	"private": true,
 	"scripts": {
 		"start": "vite",
