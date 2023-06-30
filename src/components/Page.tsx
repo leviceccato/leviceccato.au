@@ -28,8 +28,8 @@ export const Page: Component<Props> = (props) => {
 	const _props = mergeProps(
 		{
 			layout: 'default',
-			headDataAttr: 'route-data',
-			routeDataId: 'route-data',
+			headDataAttr: 'route',
+			routeDataId: 'route',
 			head: [],
 		},
 		props,
