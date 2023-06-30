@@ -44,7 +44,7 @@ export const Page: Component<Props> = (props) => {
 	const headHtml = () => {
 		return head()
 			.map(([tag, attrs, content]) => {
-				let html = `<${tag} data-${_props.headDataAttr} `
+				let html = `<${tag} data-${_props.headDataAttr}`
 
 				Object.entries(attrs).forEach(([name, value]) => {
 					// Cast booleans to either non-existing or
@@ -57,11 +57,11 @@ export const Page: Component<Props> = (props) => {
 						value = ''
 					}
 
-					html += `${name}='${value}' `
+					html += ` ${name}='${value}'`
 				})
 
 				if (!content) {
-					return `${html}/>`
+					return `${html} />`
 				}
 
 				return `${html}>${content}</${tag}>`
