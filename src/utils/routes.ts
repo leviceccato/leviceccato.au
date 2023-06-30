@@ -4,7 +4,7 @@
 import { lazy, type Component } from 'solid-js'
 import { type RouteDefinition } from '@solidjs/router'
 
-const routeModules = import.meta.glob('./routes/**/*.route.tsx')
+const routeModules = import.meta.glob('../routes/**/*.route.tsx')
 
 export const routes = Object.entries(routeModules).map<RouteDefinition>(
 	([path, mod]) => {
@@ -21,7 +21,7 @@ export const routes = Object.entries(routeModules).map<RouteDefinition>(
 		segments[fileIndex] = segments[fileIndex].split('.')[0]
 
 		// Remove implied indexes
-		if (segments[fileIndex] === 'index') {
+		if (segments[fileIndex] === '_index') {
 			segments.pop()
 		}
 
