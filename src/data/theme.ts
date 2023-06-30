@@ -5,6 +5,12 @@ export const colours = {
     bg: '#f5f5f5',
 }
 
+export const sizes = {
+    pageInlineMargin: 18,
+    maxContainerInlineSize: 550,
+    columnGap: 6,
+}
+
 // Custom cursors. The 2x image is actually 1.5x because it looks better for some reason.
 // Hi DPI versions not showing correctly on firefox.
 
