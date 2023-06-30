@@ -21,10 +21,10 @@ export const LayoutDefault: ParentComponent = (props) => {
 		<>
 			<Header
 				id="header"
-				endId="header-end"
+				skipLinkUrl="#main"
 				nav={nav}
 			/>
-			<main>{props.children}</main>
+			<main id="main">{props.children}</main>
 		</>
 	)
 }
