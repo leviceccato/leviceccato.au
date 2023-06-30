@@ -1,4 +1,4 @@
-import { breakpoints } from "#/data/breakpoints"
+import { breakpoints } from '#/data/breakpoints'
 
 export function rem(pixel: number): string {
 	return `${pixel / 16}rem`
