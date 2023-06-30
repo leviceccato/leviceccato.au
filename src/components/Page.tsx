@@ -31,7 +31,7 @@ export const Page: Component<{
 		{
 			layout: 'default',
 			headDataAttr: 'route-data',
-			routeDataId: 'route-head',
+			routeDataId: 'route-data',
 			head: [],
 		},
 		props,
