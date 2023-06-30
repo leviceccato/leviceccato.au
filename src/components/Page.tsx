@@ -59,7 +59,7 @@ export const Page: Component<{
 						value = ''
 					}
 
-					html += `${name}="${value}" `
+					html += `${name}='${value}' `
 				})
 
 				if (!content) {
