@@ -1,6 +1,6 @@
 import { type Component, Suspense } from 'solid-js'
 import { useRoutes } from '@solidjs/router'
-import { routes } from '#/utils/routes'
+import { routes } from '#/data/routes'
 
 export const App: Component = () => {
 	const Routes = useRoutes(routes)
