@@ -26,11 +26,13 @@ Run development server.
 npm start
 ```
 
-Build site.
+Build and preview the site in production mode.
 
 ```shell
-npm run build
+npm run preview
 ```
+
+See `package.json#scripts` for more commands.
 
 ## Licenses
 
