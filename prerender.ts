@@ -21,7 +21,7 @@ for (const route of routes) {
     const appHtml = await renderToStringAsync(createApp(route.path))
 
     dom('head').append(hydrationScript)
-    dom('#root').html(appHtml)
+    dom('body').html(appHtml)
 
     let routeData: any
     try {

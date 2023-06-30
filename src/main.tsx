@@ -14,11 +14,10 @@ export function createApp(url?: string) {
 
 if (!import.meta.env.SSR) {
 	const app = createApp()
-	const root = document.getElementById('root')!
 
 	if (import.meta.env.DEV) {
-		render(app, root)
+		render(app, document.body)
 	} else {
-		hydrate(app, root)
+		hydrate(app, document.body)
 	}
 }
