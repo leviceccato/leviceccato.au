@@ -1,11 +1,13 @@
 import * as t from '#/toolkit'
 
-export default () => (
-	<t.Page
-		title="Logos"
-		description=""
-	>
-		Logos
-	</t.Page>
+export default t.route(
+	{
+		title: 'Logos',
+		description: 'asd',
+	},
+	() => (
+		<>
+			<div>Logos</div>
+		</>
+	),
 )
-

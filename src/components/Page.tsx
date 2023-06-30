@@ -11,15 +11,20 @@ type HeadItem =
 	| [string, Record<string, string | boolean>]
 	| [string, Record<string, string | boolean>, string]
 
-export const Page: Component<{
-	children?: JSX.Element
+export type RouteProps = {
 	title: string
 	description: string
 	head?: HeadItem[]
 	layout?: 'default' | 'empty'
+}
+
+type Props = RouteProps & {
+	children?: JSX.Element
 	headDataAttr?: string
 	routeDataId?: string
-}> = (props) => {
+}
+
+export const Page: Component<Props> = (props) => {
 	const _props = mergeProps(
 		{
 			layout: 'default',
