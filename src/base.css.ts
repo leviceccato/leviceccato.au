@@ -2,22 +2,22 @@ import { fontFace, globalStyle as g } from '@vanilla-extract/css'
 import { colours, cursors } from '#/data/theme'
 
 const manrope = fontFace([
-    {
-        fontWeight: 500,
-        fontStyle: 'normal',
-        src: [
-            'url("/fonts/manrope-medium.woff2") format("woff2")',
-            'url("/fonts/manrope-medium.woff") format("woff")'
-        ],
-    },
-    {
-        fontWeight: 700,
-        fontStyle: 'normal',
-        src: [
-            'url("/fonts/manrope-bold.woff2") format("woff2")',
-            'url("/fonts/manrope-bold.woff") format("woff")'
-        ],
-    }
+	{
+		fontWeight: 500,
+		fontStyle: 'normal',
+		src: [
+			'url("/fonts/manrope-medium.woff2") format("woff2")',
+			'url("/fonts/manrope-medium.woff") format("woff")',
+		],
+	},
+	{
+		fontWeight: 700,
+		fontStyle: 'normal',
+		src: [
+			'url("/fonts/manrope-bold.woff2") format("woff2")',
+			'url("/fonts/manrope-bold.woff") format("woff")',
+		],
+	},
 ])
 
 g('html', {
@@ -27,8 +27,10 @@ g('html', {
 g('body', {
 	margin: 0,
 	height: '100%',
+	display: 'flex',
+	flexDirection: 'column',
 	backgroundColor: colours.bg,
-    color: colours.fg,
+	color: colours.fg,
 	// Fixes bold looking fonts on macOS in Chrome & Safari
 	WebkitFontSmoothing: 'antialiased',
 	// Fixes bold looking fonts on macOS in Firefox
