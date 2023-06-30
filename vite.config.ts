@@ -8,12 +8,6 @@ export default {
 	server: {
 		host: true,
 	},
-	plugins: [
-		// Solid hot reloading requires specific syntax, we have disabled to avoid
-		// changing code style, plus Solid is fast enough any way. SSR is
-		// necessary for our prerender script to work.
-		solid({ hot: false, ssr: true }),
-	],
 	resolve: {
 		alias: {
 			// '#' is used since '@' may be confused with npm organisations
@@ -39,4 +33,10 @@ export default {
 		// Bleeding edge
 		target: 'esnext',
 	},
+	plugins: [
+		// Solid hot reloading requires specific syntax, we have disabled to avoid
+		// changing code style, plus Solid is fast enough any way. SSR is
+		// necessary for our prerender script to work.
+		solid({ hot: false, ssr: true }),
+	],
 } satisfies UserConfig
