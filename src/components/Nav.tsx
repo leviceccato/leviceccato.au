@@ -9,10 +9,12 @@ type Link = {
 
 type Column = Link[] | null
 
-export const Nav: Component<{
-	columns: [Column, Column, Column]
+export type NavProps = {
+	columns: Column[]
 	position: 'start' | 'end'
-}> = (props) => {
+}
+
+export const Nav: Component<NavProps> = (props) => {
 	const location = useLocation()
 
 	const borderMap = { start: 'borderEnd', end: 'borderStart' } as const

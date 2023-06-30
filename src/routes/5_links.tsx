@@ -1,13 +1,15 @@
 import * as t from '#/toolkit'
 
+export const meta = t.meta({})
+
 export default t.route(
 	{
-		title: 'Resume',
+		title: 'Links',
 		description: 'asd',
 	},
 	() => (
 		<>
-			<div>Resume</div>
+			<div>Links</div>
 		</>
 	),
 )

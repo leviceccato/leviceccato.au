@@ -19,3 +19,11 @@ export function minBp(breakpoint: keyof typeof breakpoints): string {
 export function svgEncode(svgStr: string): string {
 	return `data:image/svg+xml,${encodeURIComponent(svgStr)}`
 }
+
+export function chunk<TItem>(arr: TItem[], size: number): TItem[][] {
+	const result: TItem[][] = []
+	while (arr.length > 0) {
+		result.push(arr.splice(0, size))
+	}
+	return result
+}

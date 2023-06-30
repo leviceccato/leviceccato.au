@@ -16,6 +16,7 @@ export type RouteProps = {
 	description: string
 	head?: HeadItem[]
 	layout?: 'default' | 'empty'
+	isHidden?: boolean
 }
 
 type Props = RouteProps & {
@@ -31,6 +32,7 @@ export const Page: Component<Props> = (props) => {
 			headDataAttr: 'route',
 			routeDataId: 'route',
 			head: [],
+			isHidden: false,
 		},
 		props,
 	)

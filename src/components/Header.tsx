@@ -1,11 +1,12 @@
 import { type Component } from 'solid-js'
-import { Nav } from '#/components/Nav'
+import { Nav, type NavProps } from '#/components/Nav'
 import * as css from './Header.css'
 
 export const Header: Component<{
 	id: string
 	// An destination for the skip link must be specified
 	skipLinkUrl: string
+	nav: NavProps['columns']
 }> = (props) => {
 	return (
 		<header
@@ -20,20 +21,7 @@ export const Header: Component<{
 			</a>
 			<Nav
 				position="start"
-				columns={[
-					[
-						{ text: 'Home', url: '/' },
-						{ text: 'Blog', url: '/blog' },
-					],
-					[
-						{ text: 'Logos', url: '/logos' },
-						{ text: 'Art', url: '/art' },
-					],
-					[
-						{ text: 'Colophon', url: '/colophon' },
-						{ text: 'Search', url: '/search' },
-					],
-				]}
+				columns={props.nav}
 			/>
 		</header>
 	)

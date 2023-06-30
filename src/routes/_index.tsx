@@ -1,6 +1,8 @@
 import * as t from '#/toolkit'
 import { createSignal } from 'solid-js'
 
+export const meta = t.meta({})
+
 export default t.route(
 	{
 		title: 'Home',
@@ -14,7 +16,7 @@ export default t.route(
 				<div>Home</div>
 
 				<p>Count: {count()}</p>
-				<button onClick={() => setCount(v => v + 1)}>Increment count</button>
+				<button onClick={() => setCount((v) => v + 1)}>Increment count</button>
 			</>
 		)
 	},
