@@ -3,39 +3,50 @@
 // serialises this data into the HTML so that the
 // prerendering script can handle updating the head.
 
-import * as t from '#/utils/toolkit'
-import { onMount, type JSX } from 'solid-js'
+import {
+	Switch,
+	Match,
+	onMount,
+	mergeProps,
+	type JSX,
+	type Component,
+} from 'solid-js'
+import { LayoutDefault } from '#/components/LayoutDefault'
 
 // Allow head items with no textContent
 type HeadItem =
 	| [string, Record<string, string | boolean>]
 	| [string, Record<string, string | boolean>, string]
 
-// Forwarded to layouts, since Page is designed to
-// be renderless.
-export type PageProps = {
+export const Page: Component<{
 	children?: JSX.Element
 	title: string
 	description: string
 	head?: HeadItem[]
-}
-
-export default t.component<PageProps & {
-	headDataAttr: string
-	routeDataId: string
-}>((props) => {
-	const headCustom = () => props.head || []
+	layout?: 'default'
+	headDataAttr?: string
+	routeDataId?: string
+}> = (props) => {
+	const _props = mergeProps(
+		{
+			layout: 'default',
+			headDataAttr: 'route-data',
+			routeDataId: 'route-head',
+			head: [],
+		},
+		props,
+	)
 
 	const head = () => [
-		...headCustom(),
-		['title', {}, props.title],
-		['meta', { name: 'description', content: props.description }],
+		..._props.head,
+		['title', {}, _props.title],
+		['meta', { name: 'description', content: _props.description }],
 	]
 
 	const headHtml = () => {
 		return head()
 			.map(([tag, attrs, content]) => {
-				let html = `<${tag} data-${props.headDataAttr} `
+				let html = `<${tag} data-${_props.headDataAttr} `
 
 				Object.entries(attrs).forEach(([name, value]) => {
 					// Cast booleans to either non-existing or
@@ -62,7 +73,9 @@ export default t.component<PageProps & {
 
 	onMount(() => {
 		// When the layout changes swap all old head elements with new ones
-		document.querySelectorAll(`[data-${props.headDataAttr}]`).forEach((el) => el.remove())
+		document
+			.querySelectorAll(`[data-${_props.headDataAttr}]`)
+			.forEach((el) => el.remove())
 		document.head.insertAdjacentHTML('beforeend', headHtml())
 	})
 
@@ -71,12 +84,16 @@ export default t.component<PageProps & {
 			{/* Serialise data so it can be added to head during prerendering */}
 			<script
 				type="application/json"
-				id={props.routeDataId}
+				id={_props.routeDataId}
 				textContent={JSON.stringify({
 					head: headHtml(),
 				})}
 			/>
-			{props.children}
+			<Switch fallback={_props.children}>
+				<Match when={_props.layout === 'default'}>
+					<LayoutDefault>{_props.children}</LayoutDefault>
+				</Match>
+			</Switch>
 		</>
 	)
-})
+}

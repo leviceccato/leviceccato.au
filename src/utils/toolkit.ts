@@ -2,8 +2,8 @@ import { type Component } from 'solid-js'
 
 export { type ParentProps } from 'solid-js'
 
-export { default as Layout } from '#/components/Layout'
+export { Page } from '#/components/Page'
 
-export function component<TProps>(componentFunc: Component<TProps>): Component<TProps> {
+export function route<TProps>(componentFunc: Component<TProps>): Component<TProps> {
     return componentFunc
 }

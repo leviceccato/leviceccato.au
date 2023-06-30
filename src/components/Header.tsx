@@ -1,13 +1,12 @@
-import * as t from '#/utils/toolkit'
-import { For } from 'solid-js'
+import { type Component, For } from 'solid-js'
 import { A, useLocation } from '@solidjs/router'
 
-export default t.component<{
+export const Header: Component<{
 	id: string
 	// An ID for the skip link must be specified
 	endId: string
 	nav: { text: string; url: string }[][]
-}>((props) => {
+}> = (props) => {
 	const location = useLocation()
 
 	return (
@@ -48,4 +47,4 @@ export default t.component<{
 			/>
 		</>
 	)
-})
+}

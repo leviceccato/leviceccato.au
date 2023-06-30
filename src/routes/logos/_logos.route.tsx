@@ -1,10 +1,10 @@
 import * as t from '#/utils/toolkit'
 
-export default t.component(() => (
-	<t.Layout
+export default t.route(() => (
+	<t.Page
 		title="Logos"
 		description=""
 	>
 		Logos
-	</t.Layout>
+	</t.Page>
 ))

@@ -2,7 +2,7 @@ import 'modern-normalize/modern-normalize.css'
 import '#/base.css'
 import { render, hydrate } from 'solid-js/web'
 import { Router } from '@solidjs/router'
-import App from '#/components/App'
+import { App } from '#/components/App'
 
 export function createApp(url?: string) {
 	return () => (
