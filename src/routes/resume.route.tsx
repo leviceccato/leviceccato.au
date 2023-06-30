@@ -1,6 +1,6 @@
 import * as t from '#/utils/toolkit'
 
-export default t.route(() => (
+export default () => (
 	<t.Page
 		title="Resume"
 		description=""
@@ -8,4 +8,4 @@ export default t.route(() => (
 	>
 		Resume
 	</t.Page>
-))
+)
