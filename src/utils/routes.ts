@@ -20,8 +20,9 @@ export const routes = Object.entries(routeModules).map<RouteDefinition>(
 		const fileIndex = segments.length - 1
 		segments[fileIndex] = segments[fileIndex].split('.')[0]
 
-		// Remove implied indexes
-		if (segments[fileIndex] === '_index') {
+		// Index files are designated with a leading underscore. Their names
+		// are for readability only. Their segment should be removed.
+		if (segments[fileIndex].startsWith('_')) {
 			segments.pop()
 		}
 
