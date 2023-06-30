@@ -1,5 +1,6 @@
 import { type Component, For } from 'solid-js'
 import { A, useLocation } from '@solidjs/router'
+import * as css from './Header.css'
 
 export const Header: Component<{
 	id: string
@@ -10,34 +11,32 @@ export const Header: Component<{
 	const location = useLocation()
 
 	return (
-		<>
+		<header id={props.id}>
 			<a
 				class="Skip VisuallyHidden focusable"
 				href={props.skipLinkUrl}
 			>
 				Skip to main content
 			</a>
-			<header id={props.id}>
-				<nav class="Header-nav">
-					<For each={props.nav}>
-						{(column) => (
-							<div class="Header-column">
-								<For each={column}>
-									{(item) => (
-										<A
-											class="Header-link"
-											href={item.url}
-											textContent={item.text}
-											activeClass="active"
-											aria-current={item.url === location.pathname && 'page'}
-										/>
-									)}
-								</For>
-							</div>
-						)}
-					</For>
-				</nav>
-			</header>
-		</>
+			<nav class={css.nav}>
+				<For each={props.nav}>
+					{(column) => (
+						<div class={css.column}>
+							<For each={column}>
+								{(item) => (
+									<A
+										class={css.link}
+										href={item.url}
+										textContent={item.text}
+										activeClass="active"
+										aria-current={item.url === location.pathname && 'page'}
+									/>
+								)}
+							</For>
+						</div>
+					)}
+				</For>
+			</nav>
+		</header>
 	)
 }
