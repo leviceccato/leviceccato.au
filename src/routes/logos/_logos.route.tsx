@@ -1,4 +1,4 @@
-import * as t from '#/utils/toolkit'
+import * as t from '#/toolkit'
 
 export default () => (
 	<t.Page
