@@ -12,7 +12,7 @@ Welcome to the repository of Levi Ceccato's portfolio & blog. It’s built as an
 
 ### Development
 
-Make sure you run all commands from the root of this project. *Note:* npm commands may fail due to unmet peer dependency requirements triggered by use of the beta Vite build. This can be fixed by applying a `--force` flag. 
+Make sure you run all commands from the root of this project.
 
 Install dependencies.
 
