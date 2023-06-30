@@ -1,4 +1,5 @@
 import { fontFace, globalStyle as g } from '@vanilla-extract/css'
+import { colours, cursors } from '#/data/theme'
 
 const manrope = fontFace([
     {
@@ -26,8 +27,8 @@ g('html', {
 g('body', {
 	margin: 0,
 	height: '100%',
-	backgroundColor: '#f5f5f5',
-    color: 'black',
+	backgroundColor: colours.bg,
+    color: colours.fg,
 	// Fixes bold looking fonts on macOS in Chrome & Safari
 	WebkitFontSmoothing: 'antialiased',
 	// Fixes bold looking fonts on macOS in Firefox
@@ -36,9 +37,23 @@ g('body', {
 	fontFamily: manrope,
 })
 
+g('*', {
+	cursor: [
+		`url("${cursors.arrow1X}"), default`,
+		`-webkit-image-set(url("${cursors.arrow1X}") 1x, url("${cursors.arrow1P5X}") 2x), default;`,
+	],
+})
+
+g('a, button', {
+	cursor: [
+		`url("${cursors.pointer1X}"), default`,
+		`-webkit-image-set(url("${cursors.pointer1X}") 1x, url("${cursors.pointer1P5X}") 2x), default;`,
+	],
+})
+
 g('::selection', {
-	backgroundColor: 'black',
-	color: '#f5f5f5',
+	backgroundColor: colours.fg,
+	color: colours.bg,
 })
 
 g('blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre', {

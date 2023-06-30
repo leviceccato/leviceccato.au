@@ -19,3 +19,7 @@ export function clampVw(
 export function minBp(breakpoint: keyof typeof breakpoints): string {
 	return `(min-width: ${breakpoints[breakpoint]}px)`
 }
+
+export function svgEncode(svgStr: string): string {
+	return `data:image/svg+xml,${encodeURIComponent(svgStr)}`
+}
