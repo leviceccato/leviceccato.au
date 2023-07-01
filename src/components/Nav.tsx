@@ -1,5 +1,5 @@
 import { For, Show, type Component } from 'solid-js'
-import { Link } from '#/components/Link'
+import { A } from '#/components/A'
 import * as css from './Nav.css'
 
 export type Column =
@@ -25,12 +25,12 @@ export const Nav: Component<NavProps> = (props) => {
 						<Show when={column}>
 							<For each={column}>
 								{(link) => (
-									<Link
+									<A
 										class={css.link}
 										href={link.url}
 									>
 										{link.text}
-									</Link>
+									</A>
 								)}
 							</For>
 						</Show>
