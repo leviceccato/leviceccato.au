@@ -39,12 +39,5 @@ export const link = style({
 	boxSizing: 'content-box',
 	display: 'block',
 	lineHeight: 1.4,
-	fontWeight: 700,
-	letterSpacing: '-0.02em',
 	paddingBlock: '0.1em',
-	textDecorationThickness: 2,
-	':hover': {
-		textDecorationLine: 'underline',
-		textUnderlineOffset: 2,
-	},
 })

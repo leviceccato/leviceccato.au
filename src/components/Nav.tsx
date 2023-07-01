@@ -1,13 +1,13 @@
 import { For, Show, type Component } from 'solid-js'
-import { A, useLocation } from '@solidjs/router'
+import { Link } from '#/components/Link'
 import * as css from './Nav.css'
 
-export type Link = {
-	url: string
-	text: string
-}
-
-export type Column = Link[] | null
+export type Column =
+	| {
+			url: string
+			text: string
+	  }[]
+	| null
 
 export type NavProps = {
 	columns: Column[]
@@ -15,8 +15,6 @@ export type NavProps = {
 }
 
 export const Nav: Component<NavProps> = (props) => {
-	const location = useLocation()
-
 	const borderMap = { start: 'borderEnd', end: 'borderStart' } as const
 
 	return (
@@ -27,13 +25,12 @@ export const Nav: Component<NavProps> = (props) => {
 						<Show when={column}>
 							<For each={column}>
 								{(link) => (
-									<A
+									<Link
 										class={css.link}
 										href={link.url}
-										textContent={link.text}
-										activeClass="active"
-										aria-current={link.url === location.pathname && 'page'}
-									/>
+									>
+										{link.text}
+									</Link>
 								)}
 							</For>
 						</Show>
