@@ -1,21 +1,24 @@
 import * as t from '#/toolkit'
-import { createSignal } from 'solid-js'
 
 export default t.route(
 	{
 		title: 'Home',
 		description: 'asd',
 	},
-	() => {
-		const [count, setCount] = createSignal(0)
+	() => (
+		<>
+			<t.H1>
+				Levi is a <t.A href="/logos">designer</t.A>—
+				<t.A href="/blog">developer</t.A> and <t.A href="/art">illustrator</t.A>
+				.
+			</t.H1>
 
-		return (
-			<>
-				<div>Home</div>
-
-				<p>Count: {count()}</p>
-				<button onClick={() => setCount((v) => v + 1)}>Increment count</button>
-			</>
-		)
-	},
+			<t.P>
+				He's currently working with Orygen to improve mental health in young
+				people and hacking away at various side projects, most of which are
+				viewable on this site. The best way to get in contact with him is by
+				sending an email to mail@levic.com.au.
+			</t.P>
+		</>
+	),
 )
