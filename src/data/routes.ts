@@ -4,24 +4,14 @@
 import { lazy, type Component } from 'solid-js'
 import { type RouteDefinition } from '@solidjs/router'
 
-export type RouteMeta = {
-	isHidden?: boolean
-}
-
 // Route modules are imported lazily
 const routeModules = import.meta.glob<{ default: Component<any> }>(
 	'../routes/**/*_*.tsx',
 )
 
-// Route metas are imported statically (this will be treeshaken)
-const routeMetas = import.meta.glob<RouteMeta>('../routes/**/*_*.tsx', {
-	import: 'meta',
-	eager: true,
-})
-
 type Route = Pick<RouteDefinition, 'component' | 'path'> & {
-	meta: RouteMeta
 	filePath: string
+	isHidden: boolean
 }
 
 // First transform into object so that metas can be accessed from a
@@ -37,27 +27,41 @@ export const routes = Object.entries(routeModules)
 			segments.length + 1,
 		)
 
-		// Remove number and or underscores
-		segments = segments.map((segment) => segment.split('_')[1])
+		let isHidden = false
 
-		const fileIndex = segments.length - 1
-		// Remove '.tsx'
-		segments[fileIndex] = segments[fileIndex].split('.')[0]
-		// Index files segments should be removed
-		if (segments[fileIndex] === 'index') {
-			segments.pop()
-		}
+		segments = segments.flatMap((segment, segmentIndex) => {
+			let [number, segmentName] = segment.split('_')
+
+			// Remove file extension
+			if (segmentIndex === segments.length - 1) {
+				segmentName = segmentName.split('.')[0]
+			}
+
+			// Ignore indexes
+			if (segmentName === 'index') {
+				return []
+			}
+
+			// If not an index and with a number, then treat
+			// as a hidden page, which means that it is removed
+			// from navigation order
+			if (!number) {
+				isHidden = true
+			}
+
+			return [segmentName]
+		})
 
 		return {
 			filePath: path,
-			meta: routeMetas[path],
+			isHidden,
 			path: '/' + segments.join('/'),
 			component: lazy(mod),
 		}
 	})
 	.reduce<Record<string, Omit<Route, 'path'>>>((previous, current) => {
 		previous[current.path] = {
-			meta: current.meta,
+			isHidden: current.isHidden,
 			filePath: current.filePath,
 			component: current.component,
 		}
