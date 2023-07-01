@@ -25,7 +25,7 @@ for (const route of routes) {
 
 	let routeData: any
 	try {
-		routeData = JSON.parse(dom('#route-data').text())
+		routeData = JSON.parse(dom('#route').text())
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(`Invalid data for route '${route.path}': ${error.message}`)
