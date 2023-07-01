@@ -1,7 +1,7 @@
 import { type ParentComponent } from 'solid-js'
 import * as css from './VisuallyHidden.css'
 
-export const VisuallyHidden: ParentComponent<{ isFocusable: boolean }> = (
+export const VisuallyHidden: ParentComponent<{ isFocusable?: boolean }> = (
 	props,
 ) => {
 	return (
