@@ -23,7 +23,7 @@ export const root = styleVariants({
 		rootBase,
 		{
 			selectors: {
-				'&:not(:focus)': hiddenStyle,
+				'&:not(:focus-within)': hiddenStyle,
 			},
 		},
 	],
