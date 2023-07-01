@@ -1,12 +1,50 @@
-import { type Component } from 'solid-js'
-import { Nav } from '#/components/Nav'
+import { type Component, createEffect, createSignal } from 'solid-js'
+import { Nav, type Column } from '#/components/Nav'
 import * as css from './Footer.css'
+import { useLocation } from '@solidjs/router'
+import { getNextRoute } from '#/data/routes'
 
-export const Footer: Component = () => (
-	<footer class={css.root}>
-		<Nav
-			position="end"
-			columns={[null, [{ url: '#main', text: 'Back to top' }], null]}
-		/>
-	</footer>
-)
+const backToTopLink = { url: '#main', text: 'Back to top' }
+
+export const Footer: Component = () => {
+	const location = useLocation()
+
+	const [columns, setColumns] = createSignal<Column[]>([
+		null,
+		[backToTopLink],
+		null,
+	])
+
+	createEffect(() => {
+		const previousRoute = getNextRoute(location.pathname, -1)
+		const nextRoute = getNextRoute(location.pathname, 1)
+
+		const previousLink = previousRoute
+			? [
+					{
+						url: previousRoute.path,
+						text: 'Previous',
+					},
+			  ]
+			: null
+		const nextLink = nextRoute
+			? [
+					{
+						url: nextRoute.path,
+						text: 'Next',
+					},
+			  ]
+			: null
+
+		setColumns([previousLink, [backToTopLink], nextLink])
+	})
+
+	return (
+		<footer class={css.root}>
+			<Nav
+				position="end"
+				columns={columns()}
+			/>
+		</footer>
+	)
+}
