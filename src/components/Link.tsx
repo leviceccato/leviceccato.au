@@ -28,7 +28,7 @@ export const Link: ParentComponent<{
 					class={css.activeIndicator}
 				>
 					{' '}
-					⦁
+					•
 				</span>
 			</Show>
 		</A>
