@@ -23,7 +23,13 @@ export const Link: ParentComponent<{
 		>
 			{props.children}
 			<Show when={isActive()}>
-				<span aria-hidden> ⦁</span>
+				<span
+					aria-hidden
+					class={css.activeIndicator}
+				>
+					{' '}
+					⦁
+				</span>
 			</Show>
 		</A>
 	)

@@ -9,3 +9,7 @@ export const root = style({
 		textUnderlineOffset: 2,
 	},
 })
+
+export const activeIndicator = style({
+	pointerEvents: 'none',
+})
