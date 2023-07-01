@@ -7,14 +7,14 @@ import { resolve } from 'node:path'
 import { load } from 'cheerio'
 import { renderToStringAsync, generateHydrationScript } from 'solid-js/web'
 import indexHtml from './dist/index.html?raw'
-import { appRoutes } from '#/data/routes'
+import { routes } from '#/data/routes'
 import { createApp } from '#/main'
 
 // See https://www.solidjs.com/docs/latest#hydrationscript
 const hydrationScript = generateHydrationScript()
 const dist = resolve('./dist')
 
-for (const route of appRoutes) {
+for (const route of routes) {
 	const dom = load(indexHtml)
 	// renderToStringAsync must be used to ensure lazy routes
 	// are completely loaded
