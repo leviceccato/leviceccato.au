@@ -15,11 +15,24 @@ const columnBase = style({
 	inlineSize: '100%',
 	fontSize: clampVw(16, 18),
 	paddingBlock: '0.4em',
+	borderBlock: '2px solid',
 })
 
 export const column = styleVariants({
-	borderStart: [columnBase, { borderBlockStart: '2px solid currentColor' }],
-	borderEnd: [columnBase, { borderBlockEnd: '2px solid currentColor' }],
+	borderStart: [
+		columnBase,
+		{
+			borderBlockStartColor: 'currentcolor',
+			borderBlockEndColor: 'transparent',
+		},
+	],
+	borderEnd: [
+		columnBase,
+		{
+			borderBlockStartColor: 'transparent',
+			borderBlockEndColor: 'currentColor',
+		},
+	],
 })
 
 export const link = style({
