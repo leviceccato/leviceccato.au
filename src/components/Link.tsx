@@ -6,9 +6,14 @@ export const Link: ParentComponent<{
 	href: string
 	class?: string
 }> = (props) => {
-	const location = useLocation()
+	const { pathname } = useLocation()
 
-	const isActive = () => props.href === location.pathname
+	const isActive = () => {
+		if (props.href === '/') {
+			return pathname === props.href
+		}
+		return pathname.startsWith(props.href)
+	}
 
 	return (
 		<A
