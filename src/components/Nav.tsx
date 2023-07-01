@@ -2,12 +2,12 @@ import { For, Show, type Component } from 'solid-js'
 import { A, useLocation } from '@solidjs/router'
 import * as css from './Nav.css'
 
-type Link = {
+export type Link = {
 	url: string
 	text: string
 }
 
-type Column = Link[] | null
+export type Column = Link[] | null
 
 export type NavProps = {
 	columns: Column[]
