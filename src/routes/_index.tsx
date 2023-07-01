@@ -1,8 +1,6 @@
 import * as t from '#/toolkit'
 import { createSignal } from 'solid-js'
 
-export const meta = t.meta({})
-
 export default t.route(
 	{
 		title: 'Home',
