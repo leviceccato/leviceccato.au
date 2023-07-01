@@ -34,6 +34,10 @@ npm run preview
 
 See `package.json#scripts` for more commands.
 
+## Deployment
+
+This app is hosted on Render. Deploys must be manually triggered from the [Render dashboard](https://dashboard.render.com).
+
 ## Licenses
 
 All non-third-party source code is licensed under the [MIT license](http://opensource.org/licenses/mit-license.php). Content and images are © 2023 Levi Ceccato.
