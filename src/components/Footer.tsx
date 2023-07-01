@@ -1,5 +1,6 @@
 import { type Component, createEffect, createSignal } from 'solid-js'
 import { Nav, type Column } from '#/components/Nav'
+import { Container } from '#/components/Container'
 import * as css from './Footer.css'
 import { useLocation } from '@solidjs/router'
 import { getNextRoute } from '#/data/routes'
@@ -41,10 +42,12 @@ export const Footer: Component = () => {
 
 	return (
 		<footer class={css.root}>
-			<Nav
-				position="end"
-				columns={columns()}
-			/>
+			<Container>
+				<Nav
+					position="end"
+					columns={columns()}
+				/>
+			</Container>
 		</footer>
 	)
 }

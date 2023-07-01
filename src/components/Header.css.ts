@@ -2,6 +2,10 @@ import { clampVw } from '#/utils/misc'
 import { sizes } from '#/data/theme'
 import { style } from '@vanilla-extract/css'
 
+export const root = style({
+	paddingBlockStart: clampVw(0, 70),
+})
+
 export const skipLink = style({
 	marginInline: 'auto',
 	inlineSize: '100%',
@@ -15,8 +19,4 @@ export const skipLink = style({
 			textDecoration: 'underline',
 		},
 	},
-})
-
-export const root = style({
-	paddingBlockStart: clampVw(0, 70),
 })

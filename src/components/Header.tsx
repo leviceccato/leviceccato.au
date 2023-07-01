@@ -1,6 +1,7 @@
 import { type Component } from 'solid-js'
 import { Nav, type NavProps } from '#/components/Nav'
 import { VisuallyHidden } from '#/components/VisuallyHidden'
+import { Container } from '#/components/Container'
 import * as css from './Header.css'
 
 export const Header: Component<{
@@ -14,18 +15,20 @@ export const Header: Component<{
 			id={props.id}
 			class={css.root}
 		>
-			<VisuallyHidden isFocusable>
-				<a
-					class="Skip VisuallyHidden focusable"
-					href={props.skipLinkUrl}
-				>
-					Skip to main content
-				</a>
-			</VisuallyHidden>
-			<Nav
-				position="start"
-				columns={props.nav}
-			/>
+			<Container>
+				<VisuallyHidden isFocusable>
+					<a
+						class="Skip VisuallyHidden focusable"
+						href={props.skipLinkUrl}
+					>
+						Skip to main content
+					</a>
+				</VisuallyHidden>
+				<Nav
+					position="start"
+					columns={props.nav}
+				/>
+			</Container>
 		</header>
 	)
 }

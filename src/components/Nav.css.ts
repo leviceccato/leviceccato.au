@@ -4,11 +4,8 @@ import { style, styleVariants } from '@vanilla-extract/css'
 
 export const root = style({
 	display: 'flex',
-	marginInline: 'auto',
 	justifyContent: 'space-between',
 	gap: sizes.columnGap,
-	maxInlineSize: sizes.maxContainerInlineSize,
-	paddingInline: sizes.pageInlineMargin,
 })
 
 const columnBase = style({
