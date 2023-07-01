@@ -9,14 +9,14 @@ const routeModules = import.meta.glob<{ default: Component<any> }>(
 	'../routes/**/*_*.tsx',
 )
 
-type Route = Pick<RouteDefinition, 'component' | 'path'> & {
+export type Route = Pick<RouteDefinition, 'component' | 'path'> & {
 	filePath: string
 	isHidden: boolean
 }
 
 // First transform into object so that metas can be accessed from a
 // provided route path
-export const routes = Object.entries(routeModules)
+export const routeMap = Object.entries(routeModules)
 	.sort(([a], [b]) => a.localeCompare(b, 'en-AU', { numeric: true }))
 	.map<Route>(([path, mod]) => {
 		let segments = path.split('/')
@@ -59,8 +59,9 @@ export const routes = Object.entries(routeModules)
 			component: lazy(mod),
 		}
 	})
-	.reduce<Record<string, Omit<Route, 'path'>>>((previous, current) => {
+	.reduce<Record<string, Route>>((previous, current) => {
 		previous[current.path] = {
+			path: current.path,
 			isHidden: current.isHidden,
 			filePath: current.filePath,
 			component: current.component,
@@ -68,7 +69,32 @@ export const routes = Object.entries(routeModules)
 		return previous
 	}, {})
 
+export const routes = Object.entries(routeMap)
+
+export function getNextRoute(
+	path: string,
+	direction: number,
+): Route | undefined {
+	const routeIndex = routes.findIndex(([p]) => p === path)
+	if (routeIndex === -1) {
+		return undefined
+	}
+
+	let route = routes[routeIndex + direction]
+	while (route && route[1].isHidden) {
+		direction += direction
+		route = routes[routeIndex + direction]
+	}
+
+	if (!route) {
+		return undefined
+	}
+
+	return route[1]
+}
+
 // For use in Solid Router and our prerender script
-export const appRoutes = Object.entries(routes).map<RouteDefinition>(
-	([path, route]) => ({ path, component: route.component }),
-)
+export const appRoutes = routes.map<RouteDefinition>(([path, route]) => ({
+	path,
+	component: route.component,
+}))
