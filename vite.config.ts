@@ -29,11 +29,15 @@ export default {
 		},
 	},
 	plugins: [
-		// Solid hot reloading requires specific syntax, we have disabled to avoid
-		// changing code style, plus Solid is fast enough any way. SSR is
-		// necessary for our prerender script to work.
-		solidPlugin({ hot: false, ssr: true }),
+		solidPlugin({
+			// Solid hot reloading requires specific syntax, we have disabled to avoid
+			// changing code style, plus Solid is fast enough any way.
+			hot: false,
+			// SSR is necessary for our prerender script to work.
+			ssr: true,
+		}),
 		vanillaExtractPlugin({
+			// This is required to get correct class names when prerendering
 			emitCssInSsr: true,
 		}),
 	],
