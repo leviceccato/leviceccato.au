@@ -70,13 +70,9 @@ export function getNextRoute(
 	}
 
 	let route = routes[routeIndex + direction]
-	while (route && route.isHidden) {
+	while (route?.isHidden) {
 		direction += direction
 		route = routes[routeIndex + direction]
-	}
-
-	if (!route) {
-		return undefined
 	}
 
 	return route
