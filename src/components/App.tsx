@@ -14,7 +14,7 @@ export const App: Component = () => {
 	return (
 		// Suspense is required for prerendering async
 		// routes to work
-		<Suspense fallback={<div>Loading...</div>}>
+		<Suspense>
 			<Routes />
 		</Suspense>
 	)
