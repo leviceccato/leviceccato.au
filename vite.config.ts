@@ -13,7 +13,9 @@ export default {
 		// All CSS is merged into a single file and loaded upfront. We're
 		// doing this because it makes it easier to avoid FOUC with our
 		// prerendering setup, otherwise we would have to render preload
-		// links for each route, which Solid doesn't make easy.
+		// links for each route, which Solid doesn't make easy. Our CSS
+		// output should be small any way, due to aggressive
+		// componentisation.
 		cssCodeSplit: false,
 		outDir: '../dist',
 		// Avoid potential conflicts with routes
