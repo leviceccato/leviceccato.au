@@ -33,6 +33,8 @@ export default {
 		// changing code style, plus Solid is fast enough any way. SSR is
 		// necessary for our prerender script to work.
 		solidPlugin({ hot: false, ssr: true }),
-		vanillaExtractPlugin(),
+		vanillaExtractPlugin({
+			emitCssInSsr: true,
+		}),
 	],
 } satisfies UserConfig
