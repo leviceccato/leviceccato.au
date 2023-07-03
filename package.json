@@ -4,7 +4,7 @@
 	"scripts": {
 		"start": "vite",
 		"check": "tsc --noEmit",
-		"prerender": "vite-node prerender.ts",
+		"prerender": "vite-node --mode 'production' prerender.ts",
 		"build": "npm run check && vite build && npm run prerender",
 		"preview": "npm run build && vite preview"
 	},
