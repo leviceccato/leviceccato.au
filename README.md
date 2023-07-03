@@ -8,7 +8,7 @@ Welcome to the repository of Levi Ceccato's portfolio & blog. It’s built as an
 
 ### Requirements
 
-- Node ^16.12
+- Node 14.18+, 16+
 
 ### Development
 
@@ -36,7 +36,7 @@ See `package.json#scripts` for more commands.
 
 ## Deployment
 
-This app is hosted on Render. Deploys must be manually triggered from the [Render dashboard](https://dashboard.render.com).
+This app is hosted on Netlify. Commits to `main` will trigger a deploy.
 
 ## Licenses
 
