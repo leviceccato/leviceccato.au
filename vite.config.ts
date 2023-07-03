@@ -10,11 +10,6 @@ export default {
 		host: true,
 	},
 	build: {
-		// All CSS is merged into a single file and loaded upfront. We're
-		// doing this because it makes it easier to avoid FOUC with our
-		// prerendering setup, otherwise we would have to render preload
-		// links for each route, which Solid doesn't make easy.
-		cssCodeSplit: false,
 		outDir: '../dist',
 		// Avoid potential conflicts with routes
 		assetsDir: '_assets',
