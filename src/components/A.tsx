@@ -1,4 +1,5 @@
 import { Show, type ParentComponent, mergeProps } from 'solid-js'
+import { Text } from '#/components/Text'
 import { A as SolidA, useLocation } from '@solidjs/router'
 import * as css from './A.css'
 
@@ -24,16 +25,16 @@ export const A: ParentComponent<{
 			aria-current={isActive() && 'page'}
 			href={_props.href}
 		>
-			{_props.children}
-			<Show when={isActive()}>
-				<span
-					aria-hidden
-					class={css.activeIndicator}
-				>
-					{' '}
-					•
-				</span>
-			</Show>
+			<Text>
+				{_props.children}
+				<Show when={isActive()}>
+					<span
+						aria-hidden
+						class={css.activeIndicator}
+						textContent=" •"
+					/>
+				</Show>
+			</Text>
 		</SolidA>
 	)
 }
