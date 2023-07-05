@@ -8,7 +8,7 @@ export const A: ParentComponent<{
 	isInline?: boolean
 	class?: string
 }> = (props) => {
-	const _props = mergeProps({ isInline: true }, props)
+	const _props = mergeProps({ class: '', isInline: true }, props)
 
 	const { pathname } = useLocation()
 
@@ -21,7 +21,7 @@ export const A: ParentComponent<{
 
 	return (
 		<SolidA
-			class={`${css.root} ${_props.class ?? ''}`}
+			class={`${css.root} ${_props.class}`}
 			aria-current={isActive() && 'page'}
 			href={_props.href}
 		>
