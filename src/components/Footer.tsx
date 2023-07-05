@@ -1,4 +1,4 @@
-import { type Component, createEffect, createSignal } from 'solid-js'
+import { type Component } from 'solid-js'
 import { Nav, type Column } from '#/components/Nav'
 import { Container } from '#/components/Container'
 import * as css from './Footer.css'
@@ -10,35 +10,31 @@ const backToTopLink = { url: '#main', text: 'Back to top' }
 export const Footer: Component = () => {
 	const location = useLocation()
 
-	const [columns, setColumns] = createSignal<Column[]>([
-		null,
-		[backToTopLink],
-		null,
-	])
+	const columns = () => {
+		const c: Column[] = [null, [backToTopLink], null]
 
-	createEffect(() => {
 		const previousRoute = getNextRoute(location.pathname, -1)
+		if (previousRoute) {
+			c[0] = [
+				{
+					url: previousRoute.path,
+					text: 'Previous',
+				},
+			]
+		}
+
 		const nextRoute = getNextRoute(location.pathname, 1)
+		if (nextRoute) {
+			c[0] = [
+				{
+					url: nextRoute.path,
+					text: 'Next',
+				},
+			]
+		}
 
-		const previousLink = previousRoute
-			? [
-					{
-						url: previousRoute.path,
-						text: 'Previous',
-					},
-			  ]
-			: null
-		const nextLink = nextRoute
-			? [
-					{
-						url: nextRoute.path,
-						text: 'Next',
-					},
-			  ]
-			: null
-
-		setColumns([previousLink, [backToTopLink], nextLink])
-	})
+		return c
+	}
 
 	return (
 		<footer class={css.root}>
