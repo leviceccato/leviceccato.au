@@ -1,4 +1,6 @@
-import { style, styleVariants, fontFace } from '@vanilla-extract/css'
+import { style, createVar, styleVariants, fontFace } from '@vanilla-extract/css'
+
+export const lineHeightVar = createVar()
 
 const manrope = fontFace([
 	{
@@ -14,49 +16,33 @@ const manrope = fontFace([
 ])
 
 const rootBase = style({
-	display: 'block',
 	fontSize: 'inherit',
+	fontFamily: manrope,
 })
 
 export const root = styleVariants({
-	default: [
+	inline: [rootBase],
+	block: [
 		rootBase,
 		{
-			...createCroppedFont(manrope, 500, 0.8, 0.8, 1.4),
-		},
-	],
-	bold: [
-		rootBase,
-		{
-			...createCroppedFont(manrope, 700, 0.8, 0.8, 1.4),
+			display: 'block',
+			lineHeight: lineHeightVar,
+			'::before': {
+				content: '',
+				display: 'block',
+				height: 0,
+				width: 0,
+				// 0.75 is specific to the Manrope font
+				marginTop: `calc((0.75 - ${lineHeightVar}) * 0.5em)`,
+			},
+			'::after': {
+				content: '',
+				display: 'block',
+				height: 0,
+				width: 0,
+				// 1.25 is specific to the Manrope font
+				marginBottom: `calc((1.25 - ${lineHeightVar}) * 0.5em)`,
+			},
 		},
 	],
 })
-
-function createCroppedFont(
-	family: string,
-	weight: number,
-	top: number,
-	bottom: number,
-	lineHeight: number,
-) {
-	return {
-		fontWeight: weight,
-		fontFamily: family,
-		lineHeight,
-		'::before': {
-			content: '',
-			display: 'block',
-			height: 0,
-			width: 0,
-			marginTop: `calc((${top} - ${lineHeight}) * 0.5em)`,
-		},
-		'::after': {
-			content: '',
-			display: 'block',
-			height: 0,
-			width: 0,
-			marginBottom: `calc((${bottom} - ${lineHeight}) * 0.5em)`,
-		},
-	}
-}
