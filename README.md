@@ -10,7 +10,7 @@ Solid was chosen a couple of reasons, primarily its performance. In Solid it's o
 
 For styling I'm using vanilla-extract. This is a library which lets you define your styles with Typescript in special `.css.ts` files. These get precompiled by babel into CSS. Having your whole app in TypeScript, styles included, is such a productivity hack. There's no need for a preprocessor either, you can just use regular TypeScript and it will get compiled away.
 
-Vite is used as the build tool. I chose it for its excellent performance, ecosystem, ease-of-use and general community adoption. There is another tool this project uses that is built on top of Vite called vite-node. This is what allows my to easily prerender all routes of the app. It's a content focused site, so no SSR is necessary, but the performance and SEO benefits of raw HTML can't be understated.
+Vite is used as the build tool. I chose it for its excellent performance, ecosystem, ease-of-use and general community adoption. There is another tool this project uses that is built on top of Vite called vite-node. This is what allows me to easily prerender all routes of the app. It's a content focused site, so no SSR is necessary, but the performance and SEO benefits of raw HTML can't be understated.
 
 ## Usage
 
