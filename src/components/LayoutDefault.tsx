@@ -20,10 +20,10 @@ export const LayoutDefault: ParentComponent = (props) => {
 		<>
 			<Header
 				id="header"
-				skipLinkUrl="#main"
+				skipLinkId="main"
 				nav={groupedHeaderNav}
 			/>
-			<Main id="main">{props.children}</Main>
+			<Main>{props.children}</Main>
 			<Footer />
 		</>
 	)
