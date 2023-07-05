@@ -1,24 +1,5 @@
-import { fontFace, globalStyle as g } from '@vanilla-extract/css'
+import { globalStyle as g } from '@vanilla-extract/css'
 import { colours, cursors } from '#/data/theme'
-
-const manrope = fontFace([
-	{
-		fontWeight: 500,
-		fontStyle: 'normal',
-		src: [
-			'url("/fonts/manrope-medium.woff2") format("woff2")',
-			'url("/fonts/manrope-medium.woff") format("woff")',
-		],
-	},
-	{
-		fontWeight: 700,
-		fontStyle: 'normal',
-		src: [
-			'url("/fonts/manrope-bold.woff2") format("woff2")',
-			'url("/fonts/manrope-bold.woff") format("woff")',
-		],
-	},
-])
 
 g('html', {
 	height: '100%',
@@ -36,7 +17,6 @@ g('body', {
 	// Fixes bold looking fonts on macOS in Firefox
 	MozOsxFontSmoothing: 'grayscale',
 	lineHeight: 1.4,
-	fontFamily: manrope,
 })
 
 g('*', {
