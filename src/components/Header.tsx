@@ -22,12 +22,7 @@ export const Header: Component<{
 		>
 			<Container>
 				<VisuallyHidden isFocusable>
-					<a
-						class="Skip VisuallyHidden focusable"
-						href={props.skipLinkUrl}
-					>
-						Skip to main content
-					</a>
+					<a href={props.skipLinkUrl}>Skip to main content</a>
 				</VisuallyHidden>
 				<Nav
 					position="start"
