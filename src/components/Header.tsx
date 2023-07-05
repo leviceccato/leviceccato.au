@@ -1,4 +1,4 @@
-import { type Component } from 'solid-js'
+import { type Component, mergeProps } from 'solid-js'
 import { Nav, type NavProps } from '#/components/Nav'
 import { VisuallyHidden } from '#/components/VisuallyHidden'
 import { Container } from '#/components/Container'
@@ -10,21 +10,23 @@ export const Header: Component<{
 	skipLinkId: string
 	nav: NavProps['columns']
 }> = (props) => {
+	const _props = mergeProps({ skipLinkId: 'header-end' }, props)
+
 	return (
 		<header
-			id={props.id}
+			id={_props.id}
 			class={css.root}
 		>
 			<Container>
 				<VisuallyHidden isFocusable>
-					<a href={`#${props.skipLinkId}`}>Skip to main content</a>
+					<a href={`#${_props.skipLinkId}`}>Skip to main content</a>
 				</VisuallyHidden>
 				<Nav
 					position="start"
-					columns={props.nav}
+					columns={_props.nav}
 				/>
 			</Container>
-			<span id={props.skipLinkId} />
+			<span id={_props.skipLinkId} />
 		</header>
 	)
 }
