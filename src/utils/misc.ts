@@ -8,8 +8,8 @@ export function clampVw(
 ): string {
 	const slope = (minValue - maxValue) / (minVw - maxVw)
 	const intersection = maxValue - slope * maxVw
-	const _value = `${intersection}px + ${slope * 100}vw`
-	return `clamp(${minValue}px, ${_value}, ${maxValue}px)`
+	const value = `${intersection}px + ${slope * 100}vw`
+	return `clamp(${minValue}px, ${value}, ${maxValue}px)`
 }
 
 export function minBp(breakpoint: keyof typeof breakpoints): string {
