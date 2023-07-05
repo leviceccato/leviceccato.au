@@ -6,14 +6,9 @@ import * as css from './Header.css'
 
 export const Header: Component<{
 	id: string
-	// A destination for the skip link must be specified
-	skipLinkUrl: string
+	// Set a name for the skip link target
+	skipLinkId: string
 	nav: NavProps['columns']
-	// Manually allow setting underline styles, using ems
-	// is too unpredictable at smaller sizes and lower
-	// pixel densities.
-	underlineThickness: number
-	underlineOffset: number
 }> = (props) => {
 	return (
 		<header
@@ -22,13 +17,14 @@ export const Header: Component<{
 		>
 			<Container>
 				<VisuallyHidden isFocusable>
-					<a href={props.skipLinkUrl}>Skip to main content</a>
+					<a href={`#${props.skipLinkId}`}>Skip to main content</a>
 				</VisuallyHidden>
 				<Nav
 					position="start"
 					columns={props.nav}
 				/>
 			</Container>
+			<span id={props.skipLinkId} />
 		</header>
 	)
 }
