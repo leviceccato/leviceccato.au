@@ -8,17 +8,18 @@ export const Text: ParentComponent<{
 	variant?: Variant
 	lineHeight?: number
 }> = (props) => {
-	const _props = mergeProps(
-		{ lineHeight: 1.4, variant: 'inline' as const },
-		props,
-	)
+	const _props = mergeProps({ variant: 'inline' as const }, props)
 
 	return (
 		<span
 			class={css.root[_props.variant]}
-			style={assignInlineVars({
-				[css.lineHeightVar]: String(_props.lineHeight),
-			})}
+			style={{
+				...(_props.lineHeight
+					? assignInlineVars({
+							[css.lineHeightVar]: String(_props.lineHeight),
+					  })
+					: {}),
+			}}
 		>
 			{_props.children}
 		</span>
