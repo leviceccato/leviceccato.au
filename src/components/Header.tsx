@@ -9,6 +9,11 @@ export const Header: Component<{
 	// A destination for the skip link must be specified
 	skipLinkUrl: string
 	nav: NavProps['columns']
+	// Manually allow setting underline styles, using ems
+	// is too unpredictable at smaller sizes and lower
+	// pixel densities.
+	underlineThickness: number
+	underlineOffset: number
 }> = (props) => {
 	return (
 		<header
