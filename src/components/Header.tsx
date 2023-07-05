@@ -6,7 +6,7 @@ import * as css from './Header.css'
 
 export const Header: Component<{
 	id: string
-	// An destination for the skip link must be specified
+	// A destination for the skip link must be specified
 	skipLinkUrl: string
 	nav: NavProps['columns']
 }> = (props) => {
