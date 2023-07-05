@@ -7,6 +7,11 @@ export const A: ParentComponent<{
 	href: string
 	isInline?: boolean
 	class?: string
+	// Manually allow setting underline styles, using ems
+	// is too unpredictable at smaller sizes and lower
+	// pixel densities.
+	underlineThickness?: number
+	underlineOffset?: number
 }> = (props) => {
 	const _props = mergeProps({ class: '', isInline: true }, props)
 
