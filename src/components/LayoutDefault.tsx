@@ -24,7 +24,7 @@ export const LayoutDefault: ParentComponent = (props) => {
 				nav={groupedHeaderNav}
 			/>
 			<Main>{props.children}</Main>
-			<Footer />
+			<Footer backToTopLinkUrl="#header" />
 		</>
 	)
 }
