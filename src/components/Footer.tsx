@@ -5,13 +5,17 @@ import * as css from './Footer.css'
 import { useLocation } from '@solidjs/router'
 import { getNextRoute } from '#/data/routes'
 
-const backToTopLink = { url: '#main', text: 'Back to top' }
-
-export const Footer: Component = () => {
+export const Footer: Component<{
+	backToTopLinkUrl: string
+}> = (props) => {
 	const location = useLocation()
 
 	const columns = () => {
-		const c: Column[] = [null, [backToTopLink], null]
+		const c: Column[] = [
+			null,
+			[{ url: props.backToTopLinkUrl, text: 'Back to top' }],
+			null,
+		]
 
 		const previousRoute = getNextRoute(location.pathname, -1)
 		if (previousRoute) {
