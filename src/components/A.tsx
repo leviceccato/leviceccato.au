@@ -50,6 +50,7 @@ export const A: ParentComponent<{
 				!event.defaultPrevented
 			) {
 				event.preventDefault()
+				// navigate must take a relative URL
 				const route = target.href.replace(target.origin, '')
 				navigate(route)
 			}
