@@ -1,10 +1,11 @@
-import { Show, type ParentComponent, mergeProps } from 'solid-js'
+import { Show, type ParentComponent, mergeProps, type JSX } from 'solid-js'
 import { Text } from '#/components/Text'
-import { A as SolidA, useLocation } from '@solidjs/router'
+import { useLocation, useNavigate } from '@solidjs/router'
 import * as css from './A.css'
 
 export const A: ParentComponent<{
 	href: string
+	target?: string
 	isInline?: boolean
 	class?: string
 	// Manually allow setting underline styles, using ems
@@ -16,6 +17,7 @@ export const A: ParentComponent<{
 	const _props = mergeProps({ class: '', isInline: true }, props)
 
 	const { pathname } = useLocation()
+	const navigate = useNavigate()
 
 	const isActive = () => {
 		if (_props.href === '/') {
@@ -24,11 +26,36 @@ export const A: ParentComponent<{
 		return pathname.startsWith(_props.href)
 	}
 
+	// Based on Devon Govett's framework independent client side router link utility.
+	// See: https://twitter.com/devongovett/status/1672307153699471360
+	// This allows A to be used as both a router link or a generic anchor element
+	const handleClick: JSX.EventHandler<HTMLAnchorElement, MouseEvent> =
+		function (event) {
+			const target = event.currentTarget
+
+			if (
+				target instanceof HTMLAnchorElement &&
+				(!_props.target || _props.target === '_self') &&
+				target.origin === window.location.origin &&
+				event.button === 0 &&
+				!event.metaKey &&
+				!event.ctrlKey &&
+				!event.altKey &&
+				!event.shiftKey
+			) {
+				event.preventDefault()
+				const route = target.href.replace(target.origin, '')
+				navigate(route)
+			}
+		}
+
 	return (
-		<SolidA
+		<a
 			class={`${css.root} ${_props.class}`}
 			aria-current={isActive() && 'page'}
 			href={_props.href}
+			onClick={handleClick}
+			target={_props.target}
 		>
 			<Text>
 				{_props.children}
@@ -40,6 +67,6 @@ export const A: ParentComponent<{
 					/>
 				</Show>
 			</Text>
-		</SolidA>
+		</a>
 	)
 }
