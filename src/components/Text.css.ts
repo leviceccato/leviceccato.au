@@ -17,6 +17,7 @@ const manrope = fontFace([
 
 const rootBase = style({
 	fontSize: 'inherit',
+	cursor: 'inherit',
 	fontFamily: manrope,
 })
 
