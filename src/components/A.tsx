@@ -46,7 +46,8 @@ export const A: ParentComponent<{
 				!event.ctrlKey &&
 				// Download
 				!event.altKey &&
-				!event.shiftKey
+				!event.shiftKey &&
+				!event.defaultPrevented
 			) {
 				event.preventDefault()
 				const route = target.href.replace(target.origin, '')
