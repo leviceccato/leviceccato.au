@@ -35,11 +35,16 @@ export const A: ParentComponent<{
 
 			if (
 				target instanceof HTMLAnchorElement &&
+				// Allow setting target to '_self' to opt out of automatic routing behaviour
 				(!_props.target || _props.target === '_self') &&
 				target.origin === window.location.origin &&
+				// Left clicks only
 				event.button === 0 &&
+				// Open in new tab (macOS)
 				!event.metaKey &&
+				// Open in new tab (Windows)
 				!event.ctrlKey &&
+				// Download
 				!event.altKey &&
 				!event.shiftKey
 			) {
