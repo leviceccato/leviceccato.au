@@ -29,7 +29,7 @@ export const Footer: Component<{
 
 		const nextRoute = getNextRoute(location.pathname, 1)
 		if (nextRoute) {
-			c[0] = [
+			c[2] = [
 				{
 					url: nextRoute.path,
 					text: 'Next',
