@@ -9,7 +9,7 @@ export const A: ParentComponent<{
 	isInline?: boolean
 	enableActiveIndicator?: boolean
 	class?: string
-	// Manually allow setting underline styles, using ems
+	// Allow manually setting underline styles, using ems
 	// is too unpredictable at smaller sizes and lower
 	// pixel densities.
 	underlineThickness?: number
