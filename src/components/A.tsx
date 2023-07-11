@@ -69,7 +69,7 @@ export const A: ParentComponent<{
 			target={_props.target}
 		>
 			<Text>
-				{_props.children}
+				<span class={css.main}>{_props.children}</span>
 				<Show when={_props.enableActiveIndicator && isActive()}>
 					<span
 						aria-hidden
