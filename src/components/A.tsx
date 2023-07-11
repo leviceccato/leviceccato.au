@@ -27,6 +27,7 @@ export const A: ParentComponent<{
 		if (props.href === '/') {
 			return pathname === props.href
 		}
+
 		return pathname.startsWith(props.href)
 	}
 
