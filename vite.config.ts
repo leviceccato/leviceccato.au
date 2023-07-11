@@ -2,6 +2,7 @@ import { resolve } from 'node:path'
 import { type UserConfig } from 'vite'
 import solidPlugin from 'vite-plugin-solid'
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
+import { imagetools } from 'vite-imagetools'
 
 export default {
 	root: 'src',
@@ -42,5 +43,6 @@ export default {
 			// This is required to get correct class names when prerendering
 			emitCssInSsr: true,
 		}),
+		imagetools(),
 	],
 } satisfies UserConfig
