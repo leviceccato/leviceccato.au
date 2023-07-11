@@ -30,6 +30,8 @@ export const Nav: Component<NavProps> = (props) => {
 										class={css.link}
 										href={link.url}
 										enableActiveIndicator={!link.disableIndicator}
+										underlineThickness={2}
+										underlineOffset={2}
 									>
 										{link.text}
 									</A>
