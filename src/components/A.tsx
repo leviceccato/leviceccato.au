@@ -1,4 +1,4 @@
-import { Show, type ParentComponent, mergeProps, type JSX } from 'solid-js'
+import { Show, type ParentComponent, type JSX } from 'solid-js'
 import { Text } from '#/components/Text'
 import { useLocation, useNavigate } from '@solidjs/router'
 import { assignInlineVars } from '@vanilla-extract/dynamic'
@@ -16,30 +16,29 @@ export const A: ParentComponent<{
 	underlineThickness?: number
 	underlineOffset?: number
 }> = (props) => {
-	const _props = mergeProps(
-		{ class: '', isInline: true, enableActiveIndicator: true },
-		props,
-	)
+	props.class ??= ''
+	props.isInline ??= true
+	props.enableActiveIndicator ??= true
 
 	const { pathname } = useLocation()
 	const navigate = useNavigate()
 
 	const isActive = () => {
-		if (_props.href === '/') {
-			return pathname === _props.href
+		if (props.href === '/') {
+			return pathname === props.href
 		}
-		return pathname.startsWith(_props.href)
+		return pathname.startsWith(props.href)
 	}
 
 	const vars = () => {
 		const vars: Record<string, string> = {}
 
-		if (_props.underlineOffset !== undefined) {
-			vars[css.textUnderlineOffsetVar] = String(_props.underlineOffset)
+		if (props.underlineOffset !== undefined) {
+			vars[css.textUnderlineOffsetVar] = String(props.underlineOffset)
 		}
 
-		if (_props.underlineThickness !== undefined) {
-			vars[css.textDecorationThicknessVar] = String(_props.underlineThickness)
+		if (props.underlineThickness !== undefined) {
+			vars[css.textDecorationThicknessVar] = String(props.underlineThickness)
 		}
 
 		return assignInlineVars(vars)
@@ -55,7 +54,7 @@ export const A: ParentComponent<{
 			if (
 				target instanceof HTMLAnchorElement &&
 				// Allow setting target to '_self' to opt out of automatic routing behaviour
-				(!_props.target || _props.target === '_self') &&
+				(!props.target || props.target === '_self') &&
 				target.origin === window.location.origin &&
 				// Left clicks only
 				event.button === 0 &&
@@ -77,16 +76,16 @@ export const A: ParentComponent<{
 
 	return (
 		<a
-			class={`${css.root} ${_props.class}`}
+			class={`${css.root} ${props.class}`}
 			aria-current={isActive() && 'page'}
-			href={_props.href}
+			href={props.href}
 			onClick={handleClick}
-			target={_props.target}
+			target={props.target}
 			style={vars()}
 		>
 			<Text>
-				<span class={css.main}>{_props.children}</span>
-				<Show when={_props.enableActiveIndicator && isActive()}>
+				<span class={css.main}>{props.children}</span>
+				<Show when={props.enableActiveIndicator && isActive()}>
 					<span
 						aria-hidden
 						class={css.activeIndicator}

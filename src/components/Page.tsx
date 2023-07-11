@@ -3,7 +3,7 @@
 // serialises this data into the HTML so that the
 // prerendering script can handle updating the head.
 
-import { Show, onMount, mergeProps, type JSX, type Component } from 'solid-js'
+import { Show, onMount, type JSX, type Component } from 'solid-js'
 import { LayoutDefault } from '#/components/LayoutDefault'
 
 // Allow head items with no textContent
@@ -26,27 +26,22 @@ type Props = RouteProps & {
 }
 
 export const Page: Component<Props> = (props) => {
-	const _props = mergeProps(
-		{
-			layout: 'default',
-			headDataAttr: 'route',
-			routeDataId: 'route',
-			head: [],
-			isHidden: false,
-		},
-		props,
-	)
+	props.layout ??= 'default'
+	props.headDataAttr ??= 'route'
+	props.routeDataId ??= 'route'
+	props.head ??= []
+	props.isHidden ??= false
 
 	const head = () => [
-		..._props.head,
-		['title', {}, _props.title],
-		['meta', { name: 'description', content: _props.description }],
+		...props.head!,
+		['title', {}, props.title],
+		['meta', { name: 'description', content: props.description }],
 	]
 
 	const headHtml = () => {
 		return head()
 			.map(([tag, attrs, content]) => {
-				let html = `<${tag} data-${_props.headDataAttr}`
+				let html = `<${tag} data-${props.headDataAttr}`
 
 				Object.entries(attrs).forEach(([name, value]) => {
 					// Cast booleans to either non-existing or
@@ -74,7 +69,7 @@ export const Page: Component<Props> = (props) => {
 	onMount(() => {
 		// When the layout changes swap all old head elements with new ones
 		document
-			.querySelectorAll(`[data-${_props.headDataAttr}]`)
+			.querySelectorAll(`[data-${props.headDataAttr}]`)
 			.forEach((el) => el.remove())
 		document.head.insertAdjacentHTML('beforeend', headHtml())
 	})
@@ -84,14 +79,14 @@ export const Page: Component<Props> = (props) => {
 			{/* Serialise data so it can be added to head during prerendering */}
 			<script
 				type="application/json"
-				id={_props.routeDataId}
+				id={props.routeDataId}
 				textContent={JSON.stringify({
 					head: headHtml(),
 				})}
 			/>
-			<Show when={_props.layout === 'empty'}>{_props.children}</Show>
-			<Show when={_props.layout === 'default'}>
-				<LayoutDefault>{_props.children}</LayoutDefault>
+			<Show when={props.layout === 'empty'}>{props.children}</Show>
+			<Show when={props.layout === 'default'}>
+				<LayoutDefault>{props.children}</LayoutDefault>
 			</Show>
 		</>
 	)

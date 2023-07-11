@@ -1,10 +1,10 @@
-import { type ParentComponent, mergeProps } from 'solid-js'
+import { type ParentComponent } from 'solid-js'
 import * as css from './Container.css'
 
 export const Container: ParentComponent<{
 	class?: string
 }> = (props) => {
-	const _props = mergeProps({ class: '' }, props)
+	props.class ??= ''
 
-	return <div class={`${css.root} ${_props.class}`}>{_props.children}</div>
+	return <div class={`${css.root} ${props.class}`}>{props.children}</div>
 }

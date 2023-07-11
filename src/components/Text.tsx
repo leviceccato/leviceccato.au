@@ -1,4 +1,4 @@
-import { mergeProps, type ParentComponent } from 'solid-js'
+import { type ParentComponent } from 'solid-js'
 import { assignInlineVars } from '@vanilla-extract/dynamic'
 import * as css from './Text.css'
 
@@ -8,20 +8,20 @@ export const Text: ParentComponent<{
 	variant?: Variant
 	lineHeight?: number
 }> = (props) => {
-	const _props = mergeProps({ variant: 'inline' as const }, props)
+	props.variant ??= 'inline'
 
 	return (
 		<span
-			class={css.root[_props.variant]}
+			class={css.root[props.variant]}
 			style={{
-				...(_props.lineHeight
+				...(props.lineHeight
 					? assignInlineVars({
-							[css.lineHeightVar]: String(_props.lineHeight),
+							[css.lineHeightVar]: String(props.lineHeight),
 					  })
 					: {}),
 			}}
 		>
-			{_props.children}
+			{props.children}
 		</span>
 	)
 }

@@ -1,4 +1,4 @@
-import { type ParentComponent, mergeProps } from 'solid-js'
+import { type ParentComponent } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { Container } from '#/components/Container'
 import { Text } from '#/components/Text'
@@ -8,15 +8,15 @@ export const Heading: ParentComponent<{
 	level: '1' | '2' | '3' | '4' | '5' | '6'
 	class?: string
 }> = (props) => {
-	const _props = mergeProps({ class: '' }, props)
+	props.class ??= ''
 
 	return (
-		<Container class={_props.class}>
+		<Container class={props.class}>
 			<Dynamic
-				component={`h${_props.level}`}
+				component={`h${props.level}`}
 				class={css.heading}
 			>
-				<Text variant="block">{_props.children}</Text>
+				<Text variant="block">{props.children}</Text>
 			</Dynamic>
 		</Container>
 	)
