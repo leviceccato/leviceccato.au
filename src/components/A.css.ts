@@ -1,4 +1,4 @@
-import { style, createVar } from '@vanilla-extract/css'
+import { style, createVar, fallbackVar } from '@vanilla-extract/css'
 
 export const textDecorationThicknessVar = createVar()
 export const textUnderlineOffsetVar = createVar()
@@ -10,11 +10,11 @@ export const root = style({
 
 export const main = style({
 	pointerEvents: 'none',
-	textDecorationThickness: '0.09em',
+	textDecorationThickness: fallbackVar(textDecorationThicknessVar, '0.09em'),
 	selectors: {
 		[`${root}:hover &`]: {
 			textDecorationLine: 'underline',
-			textUnderlineOffset: '0.1em',
+			textUnderlineOffset: fallbackVar(textUnderlineOffsetVar, '0.1em'),
 		},
 	},
 })

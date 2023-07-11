@@ -35,11 +35,11 @@ export const A: ParentComponent<{
 		const vars: Record<string, string> = {}
 
 		if (props.underlineOffset !== undefined) {
-			vars[css.textUnderlineOffsetVar] = String(props.underlineOffset)
+			vars[css.textUnderlineOffsetVar] = `${props.underlineOffset}px`
 		}
 
 		if (props.underlineThickness !== undefined) {
-			vars[css.textDecorationThicknessVar] = String(props.underlineThickness)
+			vars[css.textDecorationThicknessVar] = `${props.underlineThickness}px`
 		}
 
 		return assignInlineVars(vars)
