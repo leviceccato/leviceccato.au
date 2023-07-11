@@ -1,4 +1,7 @@
-import { style } from '@vanilla-extract/css'
+import { style, createVar } from '@vanilla-extract/css'
+
+export const textDecorationThicknessVar = createVar()
+export const textUnderlineOffsetVar = createVar()
 
 export const root = style({
 	fontWeight: 700,

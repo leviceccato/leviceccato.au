@@ -1,6 +1,7 @@
 import { Show, type ParentComponent, mergeProps, type JSX } from 'solid-js'
 import { Text } from '#/components/Text'
 import { useLocation, useNavigate } from '@solidjs/router'
+import { assignInlineVars } from '@vanilla-extract/dynamic'
 import * as css from './A.css'
 
 export const A: ParentComponent<{
@@ -28,6 +29,20 @@ export const A: ParentComponent<{
 			return pathname === _props.href
 		}
 		return pathname.startsWith(_props.href)
+	}
+
+	const vars = () => {
+		const vars: Record<string, string> = {}
+
+		if (_props.underlineOffset !== undefined) {
+			vars[css.textUnderlineOffsetVar] = String(_props.underlineOffset)
+		}
+
+		if (_props.underlineThickness !== undefined) {
+			vars[css.textDecorationThicknessVar] = String(_props.underlineThickness)
+		}
+
+		return assignInlineVars(vars)
 	}
 
 	// Based on Devon Govett's framework independent client side router link utility.
@@ -67,6 +82,7 @@ export const A: ParentComponent<{
 			href={_props.href}
 			onClick={handleClick}
 			target={_props.target}
+			style={vars()}
 		>
 			<Text>
 				<span class={css.main}>{_props.children}</span>
