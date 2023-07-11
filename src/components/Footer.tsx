@@ -23,6 +23,7 @@ export const Footer: Component<{
 				{
 					url: previousRoute.path,
 					text: 'Previous',
+					disableIndicator: true,
 				},
 			]
 		}
@@ -33,6 +34,7 @@ export const Footer: Component<{
 				{
 					url: nextRoute.path,
 					text: 'Next',
+					disableIndicator: true,
 				},
 			]
 		}

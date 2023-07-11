@@ -7,6 +7,7 @@ export const A: ParentComponent<{
 	href: string
 	target?: string
 	isInline?: boolean
+	enableActiveIndicator?: boolean
 	class?: string
 	// Manually allow setting underline styles, using ems
 	// is too unpredictable at smaller sizes and lower
@@ -14,7 +15,10 @@ export const A: ParentComponent<{
 	underlineThickness?: number
 	underlineOffset?: number
 }> = (props) => {
-	const _props = mergeProps({ class: '', isInline: true }, props)
+	const _props = mergeProps(
+		{ class: '', isInline: true, enableActiveIndicator: true },
+		props,
+	)
 
 	const { pathname } = useLocation()
 	const navigate = useNavigate()
@@ -66,7 +70,7 @@ export const A: ParentComponent<{
 		>
 			<Text>
 				{_props.children}
-				<Show when={isActive()}>
+				<Show when={_props.enableActiveIndicator && isActive()}>
 					<span
 						aria-hidden
 						class={css.activeIndicator}

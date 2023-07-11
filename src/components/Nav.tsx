@@ -6,6 +6,7 @@ export type Column =
 	| {
 			url: string
 			text: string
+			disableIndicator?: boolean
 	  }[]
 	| null
 
@@ -28,6 +29,7 @@ export const Nav: Component<NavProps> = (props) => {
 									<A
 										class={css.link}
 										href={link.url}
+										enableActiveIndicator={!link.disableIndicator}
 									>
 										{link.text}
 									</A>
