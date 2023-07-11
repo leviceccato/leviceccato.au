@@ -5,7 +5,8 @@
 		"start": "vite",
 		"check": "tsc --noEmit",
 		"prerender": "vite-node -m production prerender.ts",
-		"build": "npm run check && vite build && npm run prerender",
+		"index": "pagefind --source dist",
+		"build": "npm run check && vite build && npm run prerender && npm run index",
 		"preview": "npm run build && vite preview"
 	},
 	"prettier": {
@@ -26,6 +27,7 @@
 		"@vanilla-extract/css": "^1.12.0",
 		"@vanilla-extract/vite-plugin": "^3.8.2",
 		"cheerio": "^1.0.0-rc.12",
+		"pagefind": "^0.12.0",
 		"typescript": "^5.1.3",
 		"vite": "^4.3.9",
 		"vite-imagetools": "^5.0.4",
