@@ -12,7 +12,6 @@ export default t.route(
 				<t.A href="/blog">developer</t.A> and <t.A href="/art">illustrator</t.A>
 				.
 			</t.H1>
-
 			<t.P>
 				He's currently working with Orygen to improve mental health in young
 				people and hacking away at various side projects, most of which are
