@@ -27,3 +27,22 @@ export function chunk<TItem>(arr: TItem[], size: number): TItem[][] {
 	}
 	return result
 }
+
+// Based on Flavio Copes' utility.
+// See: https://flaviocopes.com/how-to-slugify-a-string-in-javascript/
+export function slugify(text: string): string {
+	return (
+		text
+			.trim()
+			.toLowerCase()
+			// Remove accents, swap ñ for n, etc
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '')
+			// Remove invalid characters
+			.replace(/[^a-z0-9 -]/g, '')
+			// Replace whitespace with a hyphen
+			.replace(/\s+/g, '-')
+			// Collapse consecutive hyphens
+			.replace(/-+/g, '-')
+	)
+}
