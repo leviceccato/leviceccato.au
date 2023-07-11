@@ -1,6 +1,14 @@
-import { style, createVar, styleVariants, fontFace } from '@vanilla-extract/css'
+import {
+	style,
+	createVar,
+	fallbackVar,
+	styleVariants,
+	fontFace,
+} from '@vanilla-extract/css'
 
 export const lineHeightVar = createVar()
+
+const defaultLineHeight = '1.4'
 
 const manrope = fontFace([
 	{
@@ -27,14 +35,17 @@ export const root = styleVariants({
 		rootBase,
 		{
 			display: 'block',
-			lineHeight: lineHeightVar,
+			lineHeight: fallbackVar(lineHeightVar, defaultLineHeight),
 			'::before': {
 				content: '',
 				display: 'block',
 				height: 0,
 				width: 0,
 				// 0.75 is specific to the Manrope font
-				marginTop: `calc((0.75 - ${lineHeightVar}) * 0.5em)`,
+				marginTop: `calc((0.75 - ${fallbackVar(
+					lineHeightVar,
+					defaultLineHeight,
+				)}) * 0.5em)`,
 			},
 			'::after': {
 				content: '',
@@ -42,7 +53,10 @@ export const root = styleVariants({
 				height: 0,
 				width: 0,
 				// 1.25 is specific to the Manrope font
-				marginBottom: `calc((1.25 - ${lineHeightVar}) * 0.5em)`,
+				marginBottom: `calc((1.25 - ${fallbackVar(
+					lineHeightVar,
+					defaultLineHeight,
+				)}) * 0.5em)`,
 			},
 		},
 	],
