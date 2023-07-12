@@ -26,21 +26,14 @@ export const Heading: ParentComponent<{
 
 	const [childrenText, setChildenText] = createSignal('')
 
-	const enableLink = () => {
-		return Boolean(props.link)
-	}
+	const enableLink = () => Boolean(props.link)
 
-	const linkText = () => {
-		if (typeof props.link === 'string') {
-			return props.link
-		}
+	const linkText = () =>
+		typeof props.link === 'string' ? props.link : childrenText()
 
-		return childrenText()
-	}
+	const linkId = () => slugify(linkText())
 
-	const linkUrl = () => {
-		return `#${slugify(linkText())}`
-	}
+	const linkUrl = () => `#${linkId()}`
 
 	createEffect(() => {
 		resolvedChildren.toArray().forEach((child) => {
@@ -58,6 +51,7 @@ export const Heading: ParentComponent<{
 				component={`h${props.level}`}
 				class={css.heading}
 				style={props.style}
+				id={linkId()}
 			>
 				<Text variant="block">
 					<Show
