@@ -16,7 +16,8 @@ export default t.route(
 				He's currently working with Orygen to improve mental health in young
 				people and hacking away at various side projects, most of which are
 				viewable on this site. The best way to get in contact with him is by
-				sending an email to mail@levic.com.au.
+				sending an email to{' '}
+				<t.A href="mailto:mail@levic.com.au">mail@levic.com.au</t.A>.
 			</t.P>
 		</>
 	),
