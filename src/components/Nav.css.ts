@@ -1,6 +1,10 @@
 import { clampVw } from '#/utils/misc'
 import { sizes } from '#/data/theme'
 import { style, styleVariants } from '@vanilla-extract/css'
+import {
+	textDecorationThicknessVar,
+	textUnderlineOffsetVar,
+} from '#/components/A.css'
 
 export const root = style({
 	display: 'flex',
@@ -37,4 +41,8 @@ export const link = style({
 	display: 'block',
 	lineHeight: 1.4,
 	paddingBlock: '0.1em',
+	vars: {
+		[textDecorationThicknessVar]: '2px',
+		[textUnderlineOffsetVar]: '2px',
+	},
 })

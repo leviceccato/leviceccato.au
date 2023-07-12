@@ -1,7 +1,6 @@
 import { Show, type ParentComponent, type JSX } from 'solid-js'
 import { Text } from '#/components/Text'
 import { useLocation, useNavigate } from '@solidjs/router'
-import { assignInlineVars } from '@vanilla-extract/dynamic'
 import * as css from './A.css'
 
 export const A: ParentComponent<{
@@ -10,11 +9,6 @@ export const A: ParentComponent<{
 	isInline?: boolean
 	enableActiveIndicator?: boolean
 	class?: string
-	// Allow manually setting underline styles, using ems
-	// is too unpredictable at smaller sizes and lower
-	// pixel densities.
-	underlineThickness?: number
-	underlineOffset?: number
 }> = (props) => {
 	props.class ??= ''
 	props.isInline ??= true
@@ -29,20 +23,6 @@ export const A: ParentComponent<{
 		}
 
 		return pathname.startsWith(props.href)
-	}
-
-	const vars = () => {
-		const vars: Record<string, string> = {}
-
-		if (props.underlineOffset !== undefined) {
-			vars[css.textUnderlineOffsetVar] = `${props.underlineOffset}px`
-		}
-
-		if (props.underlineThickness !== undefined) {
-			vars[css.textDecorationThicknessVar] = `${props.underlineThickness}px`
-		}
-
-		return assignInlineVars(vars)
 	}
 
 	// Based on Devon Govett's framework independent client side router link utility.
@@ -82,7 +62,6 @@ export const A: ParentComponent<{
 			href={props.href}
 			onClick={handleClick}
 			target={props.target}
-			style={vars()}
 		>
 			<Text>
 				<span class={css.main}>{props.children}</span>
