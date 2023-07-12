@@ -2,6 +2,7 @@ import { type Component } from 'solid-js'
 import { Nav, type NavProps } from '#/components/Nav'
 import { VisuallyHidden } from '#/components/VisuallyHidden'
 import { Container } from '#/components/Container'
+import { A } from '#/components/A'
 import * as css from './Header.css'
 
 export const Header: Component<{
@@ -19,7 +20,7 @@ export const Header: Component<{
 		>
 			<Container>
 				<VisuallyHidden isFocusable>
-					<a href={`#${props.skipLinkId}`}>Skip to main content</a>
+					<A href={`#${props.skipLinkId}`}>Skip to main content</A>
 				</VisuallyHidden>
 				<Nav
 					position="start"
