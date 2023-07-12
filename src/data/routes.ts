@@ -77,3 +77,9 @@ export function getNextRoute(
 
 	return route
 }
+
+export function getChildRoutes(path: string): Route[] {
+	return routes.filter(
+		(route) => route.path !== path && route.path.startsWith(path),
+	)
+}
