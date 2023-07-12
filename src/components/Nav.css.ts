@@ -5,6 +5,7 @@ import {
 	textDecorationThicknessVar,
 	textUnderlineOffsetVar,
 } from '#/components/A.css'
+import { lineHeightVar } from '#/components/Text.css'
 
 export const root = style({
 	display: 'flex',
@@ -39,9 +40,9 @@ export const column = styleVariants({
 export const link = style({
 	boxSizing: 'content-box',
 	display: 'block',
-	lineHeight: 1.4,
 	paddingBlock: '0.1em',
 	vars: {
+		[lineHeightVar]: '1.4',
 		[textDecorationThicknessVar]: '2px',
 		[textUnderlineOffsetVar]: '2px',
 	},

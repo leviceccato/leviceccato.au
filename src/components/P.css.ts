@@ -7,11 +7,12 @@ import {
 	hoverStrokeVar,
 	hoverTextDecorationThicknessVar,
 } from '#/components/A.css'
+import { lineHeightVar } from '#/components/Text.css'
 
 export const paragraph = style({
-	lineHeight: 1.5,
 	fontSize: clampVw(16, 17),
 	vars: {
+		[lineHeightVar]: '1.5',
 		[defaultTextDecorationLineVar]: 'underline',
 		[fontWeightVar]: '500',
 		[textDecorationThicknessVar]: '1px',
