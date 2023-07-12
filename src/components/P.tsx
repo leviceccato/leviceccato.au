@@ -6,9 +6,9 @@ import * as css from './P.css'
 export const P: ParentComponent = (props) => {
 	return (
 		<Container>
-			<Text>
-				<p class={css.paragraph}>{props.children}</p>
-			</Text>
+			<p class={css.paragraph}>
+				<Text variant="block">{props.children}</Text>
+			</p>
 		</Container>
 	)
 }
