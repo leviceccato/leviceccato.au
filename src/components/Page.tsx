@@ -5,41 +5,31 @@
 
 import { Show, onMount, type JSX, type Component } from 'solid-js'
 import { LayoutDefault } from '#/components/LayoutDefault'
+import { getRoute } from '#/data/routes'
+import { useLocation } from '@solidjs/router'
 
-// Allow head items with no textContent
-type HeadItem =
-	| [string, Record<string, string | boolean>]
-	| [string, Record<string, string | boolean>, string]
-
-export type RouteProps = {
-	title: string
-	description: string
-	head?: HeadItem[]
-	layout?: 'default' | 'empty'
-	isHidden?: boolean
-}
-
-type Props = RouteProps & {
+export const Page: Component<{
 	children?: JSX.Element
 	headDataAttr?: string
 	routeDataId?: string
-}
-
-export const Page: Component<Props> = (props) => {
-	props.layout ??= 'default'
+}> = (props) => {
 	props.headDataAttr ??= 'route'
 	props.routeDataId ??= 'route'
-	props.head ??= []
-	props.isHidden ??= false
 
-	const head = () => [
-		...props.head!,
-		['title', {}, props.title],
-		['meta', { name: 'description', content: props.description }],
+	const location = useLocation()
+
+	const route = () => getRoute(location.pathname)!
+	const layout = () => route().layout ?? 'default'
+	const head = () => route().head ?? []
+
+	const headAll = () => [
+		...head(),
+		['title', {}, route().title],
+		['meta', { name: 'description', content: route().description }],
 	]
 
 	const headHtml = () => {
-		return head()
+		return headAll()
 			.map(([tag, attrs, content]) => {
 				let html = `<${tag} data-${props.headDataAttr}`
 
@@ -84,8 +74,8 @@ export const Page: Component<Props> = (props) => {
 					head: headHtml(),
 				})}
 			/>
-			<Show when={props.layout === 'empty'}>{props.children}</Show>
-			<Show when={props.layout === 'default'}>
+			<Show when={layout() === 'empty'}>{props.children}</Show>
+			<Show when={layout() === 'default'}>
 				<LayoutDefault>{props.children}</LayoutDefault>
 			</Show>
 		</>

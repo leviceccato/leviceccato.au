@@ -1,24 +1,47 @@
 // This file is responsible for transforming the files in 'routes' to an array
 // of routes that can be utilised by Solid's client and for prerendering
 
-import { lazy, type Component } from 'solid-js'
-import { type RouteDefinition } from '@solidjs/router'
+import { type Component } from 'solid-js'
 
-// Route modules are imported lazily
-const routeModules = import.meta.glob<{ default: Component<any> }>(
-	'../routes/**/*_*.tsx',
-)
+// Allow head items with no textContent
+type HeadItem =
+	| [string, Record<string, string | boolean>]
+	| [string, Record<string, string | boolean>, string]
 
-export type Route = Pick<RouteDefinition, 'component' | 'path'> & {
-	filePath: string
-	isHidden: boolean
+export type Meta = {
+	title: string
+	description: string
+	thumbnail?: string
+	head?: HeadItem[]
+	layout?: 'default' | 'empty'
 }
 
-// First transform into object so that metas can be accessed from a
-// provided route path
-export const routes = Object.entries(routeModules)
+type Page = { default: Component<any> }
+
+// Route metas are imported statically so they can be more
+// easily used in navigation and listings.
+
+const routeMetas = import.meta.glob<Meta>('../routes/**/*_*.tsx', {
+	import: 'meta',
+	eager: true,
+})
+
+// Route pages are imported lazily
+
+const routePages = import.meta.glob<Page>('../routes/**/*_*.tsx')
+
+type Route = Meta & {
+	filePath: string
+	path: string
+	isHidden: boolean
+	page: () => Promise<Page>
+}
+
+export const routes = Object
+	// We can iterate over routeMetas or routePages here
+	.entries(routeMetas)
 	.sort(([a], [b]) => a.localeCompare(b, 'en-AU', { numeric: true }))
-	.map<Route>(([path, mod]) => {
+	.map<Route>(([path, meta]) => {
 		let segments = path.split('/')
 
 		// Get segments relative to 'routes', e.g; ['about', '_index.tsx']
@@ -53,12 +76,17 @@ export const routes = Object.entries(routeModules)
 		})
 
 		return {
+			...meta,
 			filePath: path,
-			isHidden,
 			path: '/' + segments.join('/'),
-			component: lazy(mod),
+			isHidden,
+			page: routePages[path],
 		}
 	})
+
+export function getRoute(path: string): Route | undefined {
+	return routes.find((route) => route.path === path)
+}
 
 export function getNextRoute(
 	path: string,

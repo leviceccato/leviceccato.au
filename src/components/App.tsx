@@ -1,4 +1,4 @@
-import { type Component, Suspense } from 'solid-js'
+import { type Component, Suspense, lazy } from 'solid-js'
 import { useRoutes } from '@solidjs/router'
 import { routes } from '#/data/routes'
 
@@ -7,7 +7,7 @@ export const App: Component = () => {
 	const Routes = useRoutes(
 		routes.map((route) => ({
 			path: route.path,
-			component: route.component,
+			component: lazy(route.page),
 		})),
 	)
 
