@@ -8,12 +8,12 @@ import {
 
 export const root = style({
 	letterSpacing: '-0.03em',
-	marginBlockStart: '3em',
+	marginBlockStart: '2em',
 	marginBlockEnd: '0.9em',
-	fontSize: clampVw(33, 47),
+	fontSize: clampVw(25, 33),
 	vars: {
-		[lineHeightVar]: '1.15',
-		[textDecorationThicknessVar]: '3px',
-		[textUnderlineOffsetVar]: '4px',
+		[lineHeightVar]: '1.2',
+		[textDecorationThicknessVar]: '2px',
+		[textUnderlineOffsetVar]: '3px',
 	},
 })
