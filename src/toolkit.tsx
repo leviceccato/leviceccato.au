@@ -3,6 +3,7 @@ import { type RouteProps } from '#/components/Page'
 import { Page } from '#/components/Page'
 
 export { H1 } from '#/components/H1'
+export { H2 } from '#/components/H2'
 export { A } from '#/components/A'
 export { P } from '#/components/P'
 
