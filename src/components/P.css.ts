@@ -1,11 +1,21 @@
 import { style } from '@vanilla-extract/css'
 import { clampVw } from '#/utils/misc'
-import { defaultTextDecorationLineVar } from '#/components/A.css'
+import {
+	defaultTextDecorationLineVar,
+	fontWeightVar,
+	textDecorationThicknessVar,
+	hoverStrokeVar,
+	hoverTextDecorationThicknessVar,
+} from '#/components/A.css'
 
 export const paragraph = style({
 	lineHeight: 1.5,
 	fontSize: clampVw(16, 17),
 	vars: {
 		[defaultTextDecorationLineVar]: 'underline',
+		[fontWeightVar]: '500',
+		[textDecorationThicknessVar]: '1px',
+		[hoverStrokeVar]: '0.02em currentColor',
+		[hoverTextDecorationThicknessVar]: '2px',
 	},
 })
