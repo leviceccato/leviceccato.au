@@ -62,9 +62,9 @@ export const Heading: ParentComponent<{
 				<Text variant="block">
 					<Show
 						when={enableLink()}
-						fallback={props.children}
+						fallback={resolvedChildren()}
 					>
-						<A href={linkUrl()}>{props.children}</A>
+						<A href={linkUrl()}>{resolvedChildren()}</A>
 					</Show>
 				</Text>
 			</Dynamic>
