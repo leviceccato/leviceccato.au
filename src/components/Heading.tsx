@@ -14,7 +14,7 @@ import { slugify } from '#/utils/misc'
 import * as css from './Heading.css'
 
 export const Heading: ParentComponent<{
-	level: '1' | '2' | '3' | '4' | '5' | '6'
+	level: '1' | '2' | '3'
 	class?: string
 	style?: JSX.CSSProperties
 	link?: boolean | string
