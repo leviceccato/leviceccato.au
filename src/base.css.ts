@@ -17,6 +17,7 @@ g('body', {
 	// Fixes bold looking fonts on macOS in Firefox
 	MozOsxFontSmoothing: 'grayscale',
 	lineHeight: 1.4,
+	overflowY: 'scroll',
 })
 
 g('*', {
@@ -24,6 +25,27 @@ g('*', {
 		`url("${cursors.arrow1X}"), default`,
 		`-webkit-image-set(url("${cursors.arrow1X}") 1x, url("${cursors.arrow1P5X}") 2x), default;`,
 	],
+})
+
+g('::-webkit-scrollbar', {
+	width: 15,
+})
+
+g('::-webkit-scrollbar-track', {
+	border: 'solid 3px transparent',
+	backgroundColor: 'transparent',
+})
+
+g('::-webkit-scrollbar-thumb', {
+	boxShadow: 'inset 0 0 0 2px currentColor',
+	border: 'solid 4px transparent',
+	backgroundColor: colours.bg,
+	backgroundClip: 'content-box',
+	borderRadius: 10,
+})
+
+g('::-webkit-scrollbar-thumb:hover', {
+	border: 'none',
 })
 
 g('a, button', {
