@@ -20,14 +20,12 @@ type Page = { default: Component<any> }
 
 // Route metas are imported statically so they can be more
 // easily used in navigation and listings.
-
 const routeMetas = import.meta.glob<Meta>('../routes/**/*_*.tsx', {
 	import: 'meta',
 	eager: true,
 })
 
 // Route pages are imported lazily
-
 const routePages = import.meta.glob<Page>('../routes/**/*_*.tsx')
 
 type Route = Meta & {
