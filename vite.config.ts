@@ -43,6 +43,31 @@ export default {
 			// This is required to get correct class names when prerendering
 			emitCssInSsr: true,
 		}),
-		imagetools(),
+		imagetools({
+			// Add default directives for common image transformations.
+			// Search params will be expanded.
+			defaultDirectives({ searchParams }) {
+				// &as=metadata will return an object with all image
+				// info instead of just a URL.
+				const params = new URLSearchParams({ as: 'metadata' })
+
+				// Use AVIF and JPG as fallback for lossy images
+				if (searchParams.has('image-lossy')) {
+					params.append('format', 'avif')
+					params.append('format', 'jpg')
+				}
+				// Since AVIF can handle lossy and lossless transparent
+				// compression we are using it for both.
+				else if (
+					searchParams.has('image-lossless') ||
+					searchParams.has('image-transparent')
+				) {
+					params.append('format', 'avif')
+					params.append('format', 'png')
+				}
+
+				return params
+			},
+		}),
 	],
 } satisfies UserConfig
