@@ -19,5 +19,16 @@ export default t.page(() => (
 			sending an email to{' '}
 			<t.A href="mailto:mail@levic.com.au">mail@levic.com.au</t.A>.
 		</t.P>
+		<t.Quote>Hello this is quote</t.Quote>
+		<t.Ul>
+			<t.Uli>Sup 1</t.Uli>
+			<t.Uli>Sup 2</t.Uli>
+			<t.Uli>Sup 3</t.Uli>
+		</t.Ul>
+		<t.Ol>
+			<t.Oli>Test 1</t.Oli>
+			<t.Oli>Test 1</t.Oli>
+			<t.Oli>Test 1</t.Oli>
+		</t.Ol>
 	</>
 ))
