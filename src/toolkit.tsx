@@ -7,6 +7,7 @@ export { H2 } from '#/components/H2'
 export { H3 } from '#/components/H3'
 export { A } from '#/components/A'
 export { P } from '#/components/P'
+export { Quote } from '#/components/Quote'
 
 export function meta(m: Meta): Meta {
 	return m
