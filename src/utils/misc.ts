@@ -46,3 +46,20 @@ export function slugify(text: string): string {
 			.replace(/-+/g, '-')
 	)
 }
+
+// vite-imagetools metadata type, must be manually defined as it isn't exported.
+// see: https://github.com/JonasKruckenberg/imagetools/blob/main/docs/guide/getting-started.md#metadata
+export type Image = {
+	src: string
+	width: number
+	height: number
+	format: string
+	// The following options are the same as sharps input options
+	space: string
+	channels: number
+	density: Number
+	depth: string
+	hasAlpha: boolean
+	hasProfile: boolean
+	isProgressive: boolean
+}

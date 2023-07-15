@@ -1,26 +1,10 @@
 import { For, createMemo, type ParentComponent, Show } from 'solid-js'
 import { assignInlineVars } from '@vanilla-extract/dynamic'
+import { type Image } from '#/utils/misc'
 import * as css from './Figure.css'
 
-// vite-imagetools metadata type, must be manually defined as it isn't exported.
-// see: https://github.com/JonasKruckenberg/imagetools/blob/main/docs/guide/getting-started.md#metadata
-type OutputMetadata = {
-	src: string
-	width: number
-	height: number
-	format: string
-	// The following options are the same as sharps input options
-	space: string
-	channels: number
-	density: Number
-	depth: string
-	hasAlpha: boolean
-	hasProfile: boolean
-	isProgressive: boolean
-}
-
 export const Figure: ParentComponent<{
-	images: OutputMetadata[]
+	images: Image[]
 	alt: string
 }> = (props) => {
 	const images = createMemo(() => {
