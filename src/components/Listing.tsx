@@ -17,6 +17,8 @@ export const Listing: Component = () => {
 	)
 }
 
+// Listing elements must be created like this so they interect properly with
+// Suspend and can therefore be prerendered fully.
 function createListItem(meta: () => Promise<Meta>) {
 	return lazy(async () => {
 		const _meta = await meta()
