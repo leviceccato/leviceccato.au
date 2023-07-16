@@ -12,6 +12,7 @@ export { Ul } from '#/components/Ul'
 export { Uli } from '#/components/Uli'
 export { Ol } from '#/components/Ol'
 export { Oli } from '#/components/Oli'
+export { Figure } from '#/components/Figure'
 
 export function meta(m: Meta): Meta {
 	return m

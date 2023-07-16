@@ -4,11 +4,11 @@ import { type Image } from '#/utils/misc'
 import * as css from './Figure.css'
 
 export const Figure: ParentComponent<{
-	images: Image[]
+	image: Image[]
 	alt: string
 }> = (props) => {
 	const images = createMemo(() => {
-		const [fallbackImage, ...otherImages] = props.images
+		const [fallbackImage, ...otherImages] = props.image
 		return { fallbackImage, otherImages }
 	})
 
@@ -18,14 +18,14 @@ export const Figure: ParentComponent<{
 	}
 
 	return (
-		<figure class={css.root}>
-			<picture
-				class={css.picture}
-				style={assignInlineVars({
-					[css.inlineSizeVar]: `${images().fallbackImage.width}px`,
-					[css.aspectRatioVar]: String(aspectRatio()),
-				})}
-			>
+		<figure
+			class={css.root}
+			style={assignInlineVars({
+				[css.inlineSizeVar]: `${images().fallbackImage.width}px`,
+				[css.aspectRatioVar]: String(aspectRatio()),
+			})}
+		>
+			<picture>
 				<For each={images().otherImages}>
 					{(image) => (
 						<source

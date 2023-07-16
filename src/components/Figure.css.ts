@@ -7,9 +7,6 @@ export const aspectRatioVar = createVar()
 export const root = style({
 	marginInline: 'auto',
 	paddingInline: sizes.pageInlineMargin,
-})
-
-export const picture = style({
 	inlineSize: inlineSizeVar,
 	aspectRatio: aspectRatioVar,
 	position: 'relative',

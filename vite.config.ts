@@ -45,28 +45,25 @@ export default {
 		}),
 		imagetools({
 			// Add default directives for common image transformations.
-			// Search params will be expanded.
+			// Search params will be expanded. The directives should
+			// correspond to the declarations found in './src/index.d.ts'.
+			// This to ensure typescript plays nice with the params.
 			defaultDirectives({ searchParams }) {
 				// &as=metadata will return an object with all image
 				// info instead of just a URL.
-				const params = new URLSearchParams({ as: 'metadata' })
+				searchParams.append('as', 'metadata')
 
 				// Use AVIF and JPG as fallback for lossy images
-				if (searchParams.has('image-lossy')) {
-					params.append('format', 'avif')
-					params.append('format', 'jpg')
+				if (searchParams.has('lossy')) {
+					searchParams.append('format', 'jpg;avif')
 				}
-				// Since AVIF can handle lossy and lossless transparent
-				// compression we are using it for both.
-				else if (
-					searchParams.has('image-lossless') ||
-					searchParams.has('image-transparent')
-				) {
-					params.append('format', 'avif')
-					params.append('format', 'png')
+				// Since AVIF can handle lossy and lossless transparency
+				// you can use 'lossless' for transparent images.
+				else if (searchParams.has('lossless')) {
+					searchParams.append('format', 'png;avif')
 				}
 
-				return params
+				return searchParams
 			},
 		}),
 	],
