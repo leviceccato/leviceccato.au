@@ -3,32 +3,12 @@
 
 import { type Component } from 'solid-js'
 
-// Allow head items with no textContent
-type HeadItem =
-	| [string, Record<string, string | boolean>]
-	| [string, Record<string, string | boolean>, string]
-
-export type Meta = {
-	title: string
-	description: string
-	thumbnail?: string
-	head?: HeadItem[]
-	layout?: 'default' | 'empty'
-}
-
 type Page = { default: Component<any> }
 
-// Route metas are imported statically so they can be more
-// easily used in navigation and listings.
-const routeMetas = import.meta.glob<Meta>('../routes/**/*_*.tsx', {
-	import: 'meta',
-	eager: true,
-})
-
 // Route pages are imported lazily
-const routePages = import.meta.glob<Page>('../routes/**/*_*.tsx')
+const pages = import.meta.glob<Page>('../routes/**/*_*.tsx')
 
-type Route = Meta & {
+type Route = {
 	filePath: string
 	path: string
 	isHidden: boolean
@@ -37,9 +17,9 @@ type Route = Meta & {
 
 export const routes = Object
 	// We can iterate over routeMetas or routePages here
-	.entries(routeMetas)
+	.entries(pages)
 	.sort(([a], [b]) => a.localeCompare(b, 'en-AU', { numeric: true }))
-	.map<Route>(([path, meta]) => {
+	.map<Route>(([path, page]) => {
 		let segments = path.split('/')
 
 		// Get segments relative to 'routes', e.g; ['about', '_index.tsx']
@@ -74,11 +54,10 @@ export const routes = Object
 		})
 
 		return {
-			...meta,
 			filePath: path,
 			path: '/' + segments.join('/'),
 			isHidden,
-			page: routePages[path],
+			page,
 		}
 	})
 

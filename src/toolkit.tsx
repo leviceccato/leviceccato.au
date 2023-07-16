@@ -1,5 +1,4 @@
 import { type JSX, Component } from 'solid-js'
-import { type Meta } from '#/data/routes'
 import { Page } from '#/components/Page'
 
 export { H1 } from '#/components/H1'
@@ -14,10 +13,19 @@ export { Ol } from '#/components/Ol'
 export { Oli } from '#/components/Oli'
 export { Figure } from '#/components/Figure'
 
-export function meta(m: Meta): Meta {
-	return m
+// Allow head items with no textContent
+type HeadItem =
+	| [string, Record<string, string | boolean>]
+	| [string, Record<string, string | boolean>, string]
+
+export type Meta = {
+	title: string
+	description: string
+	thumbnail?: string
+	head?: HeadItem[]
+	layout?: 'default' | 'empty'
 }
 
-export function page(p: () => JSX.Element): Component {
-	return () => <Page>{p()}</Page>
+export function route(meta: Meta, page: () => JSX.Element): Component {
+	return () => <Page {...meta}>{page()}</Page>
 }
