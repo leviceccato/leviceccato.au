@@ -3,24 +3,16 @@
 // serialises this data into the HTML so that the
 // prerendering script can handle updating the head.
 
-import { Show, onMount, type JSX, type Component, createMemo } from 'solid-js'
+import { Show, onMount, type ParentComponent, createMemo } from 'solid-js'
 import { LayoutDefault } from '#/components/LayoutDefault'
+import { type Meta } from '#/data/routes'
 
-// Allow head items with no textContent
-type HeadItem =
-	| [string, Record<string, string | boolean>]
-	| [string, Record<string, string | boolean>, string]
-
-export const Page: Component<{
-	title: string
-	description: string
-	thumbnail?: string
-	head?: HeadItem[]
-	layout?: 'default' | 'empty'
-	children?: JSX.Element
-	headDataAttr?: string
-	routeDataId?: string
-}> = (props) => {
+export const Page: ParentComponent<
+	Meta & {
+		headDataAttr?: string
+		routeDataId?: string
+	}
+> = (props) => {
 	props.headDataAttr ??= 'route'
 	props.routeDataId ??= 'route'
 	props.layout ??= 'default'

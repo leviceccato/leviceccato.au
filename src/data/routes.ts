@@ -3,12 +3,32 @@
 
 import { type Component } from 'solid-js'
 
+// Allow head items with no textContent
+type HeadItem =
+	| [string, Record<string, string | boolean>]
+	| [string, Record<string, string | boolean>, string]
+
+export type Meta = {
+	title: string
+	description: string
+	thumbnail?: string
+	head?: HeadItem[]
+	layout?: 'default' | 'empty'
+}
+
 type Page = { default: Component<any> }
 
-// Route pages are imported lazily
+// Route meta and page are imported separately so they can be
+// tree-shaken separately.
+
+const metas = import.meta.glob<Meta>('../routes/**/*_*.tsx', {
+	import: 'meta',
+})
+
 const pages = import.meta.glob<Page>('../routes/**/*_*.tsx')
 
 type Route = {
+	meta: () => Promise<Meta>
 	filePath: string
 	path: string
 	isHidden: boolean
@@ -17,9 +37,9 @@ type Route = {
 
 export const routes = Object
 	// We can iterate over routeMetas or routePages here
-	.entries(pages)
+	.entries(metas)
 	.sort(([a], [b]) => a.localeCompare(b, 'en-AU', { numeric: true }))
-	.map<Route>(([path, page]) => {
+	.map<Route>(([path, meta]) => {
 		let segments = path.split('/')
 
 		// Get segments relative to 'routes', e.g; ['about', '_index.tsx']
@@ -54,10 +74,11 @@ export const routes = Object
 		})
 
 		return {
+			meta,
 			filePath: path,
 			path: '/' + segments.join('/'),
 			isHidden,
-			page,
+			page: pages[path],
 		}
 	})
 

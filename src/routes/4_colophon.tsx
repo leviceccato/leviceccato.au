@@ -1,10 +1,12 @@
 import * as t from '#/toolkit'
 
-export default () => (
-	<t.Page
-		title="Colophon"
-		description="asd"
-	>
+export const meta = {
+	title: 'Colophon',
+	description: 'asd',
+}
+
+export default t.route(meta, () => (
+	<>
 		<t.H1>Colophon</t.H1>
 		<t.P>
 			Created in July 2023 by Levi Ceccato and continually updated. All content
@@ -17,5 +19,5 @@ export default () => (
 		</t.P>
 		<t.H2>Typography</t.H2>
 		<t.P>Typeset in Manrope by Mikhail Sharanda.</t.P>
-	</t.Page>
-)
+	</>
+))

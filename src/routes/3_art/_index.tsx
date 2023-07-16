@@ -1,11 +1,14 @@
 import * as t from '#/toolkit'
 
-export default () => (
-	<t.Page
-		title="Art"
-		description="asd"
-	>
+export const meta = {
+	title: 'Art',
+	description: 'asd',
+}
+
+export default t.route(meta, () => (
+	<>
 		<t.H1>Art</t.H1>
 		<t.P>Art</t.P>
-	</t.Page>
-)
+		<t.Listing />
+	</>
+))
