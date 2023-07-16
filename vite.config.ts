@@ -49,7 +49,10 @@ export default defineConfig((env) => ({
 		{
 			name: 'imagetools-hack',
 			options() {
-				if (env.ssrBuild) {
+				// Checking mode is the only way of determining if we are using
+				// vite-node to prerender the page. As a result, this setup
+				// does not support running build in watch mode.
+				if (env.mode === 'production') {
 					this.meta.watchMode = false
 				}
 			},
