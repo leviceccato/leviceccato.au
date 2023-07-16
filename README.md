@@ -2,7 +2,7 @@
 
 ## About
 
-Welcome to the repository of Levi Ceccato's portfolio & blog. It’s built as an SPA using [Solid](https://www.solidjs.com) with rudimentary prerendering. Check it the live site at [leviceccato.au](https://leviceccato.au).
+Welcome to the repository of Levi Ceccato's portfolio & blog. It’s built as an SPA using [Solid](https://www.solidjs.com) with full prerendering, essentially making it a static site generator. Check it the live site at [leviceccato.au](https://leviceccato.au).
 
 ### Stack
 
