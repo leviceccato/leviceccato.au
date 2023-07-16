@@ -1,10 +1,10 @@
 import { resolve } from 'node:path'
-import { type UserConfig } from 'vite'
+import { defineConfig } from 'vite'
 import solid from 'vite-plugin-solid'
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
 import { imagetools } from 'vite-imagetools'
 
-export default {
+export default defineConfig((env) => ({
 	root: 'src',
 	clearScreen: false,
 	server: {
@@ -49,7 +49,7 @@ export default {
 		{
 			name: 'imagetools-hack',
 			options() {
-				if (import.meta.env.SSR) {
+				if (env.ssrBuild) {
 					this.meta.watchMode = false
 				}
 			},
@@ -78,4 +78,4 @@ export default {
 			},
 		}),
 	],
-} satisfies UserConfig
+}))
