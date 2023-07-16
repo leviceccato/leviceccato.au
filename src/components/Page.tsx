@@ -5,15 +5,22 @@
 
 import { Show, onMount, type JSX, type Component, createMemo } from 'solid-js'
 import { LayoutDefault } from '#/components/LayoutDefault'
-import { type Meta } from '#/toolkit'
 
-export const Page: Component<
-	Meta & {
-		children?: JSX.Element
-		headDataAttr?: string
-		routeDataId?: string
-	}
-> = (props) => {
+// Allow head items with no textContent
+type HeadItem =
+	| [string, Record<string, string | boolean>]
+	| [string, Record<string, string | boolean>, string]
+
+export const Page: Component<{
+	title: string
+	description: string
+	thumbnail?: string
+	head?: HeadItem[]
+	layout?: 'default' | 'empty'
+	children?: JSX.Element
+	headDataAttr?: string
+	routeDataId?: string
+}> = (props) => {
 	props.headDataAttr ??= 'route'
 	props.routeDataId ??= 'route'
 	props.layout ??= 'default'
