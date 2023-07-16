@@ -43,6 +43,17 @@ export default {
 			// This is required to get correct class names when prerendering
 			emitCssInSsr: true,
 		}),
+		// HACK:
+		// Ensure that rollup's watchMode is set to false during prerendering
+		// to avoid incorrect image URLs from the imagetools plugin.
+		{
+			name: 'imagetools-hack',
+			options() {
+				if (import.meta.env.SSR) {
+					this.meta.watchMode = false
+				}
+			},
+		},
 		imagetools({
 			// Add default directives for common image transformations.
 			// Search params will be expanded. The directives should
