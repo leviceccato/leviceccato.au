@@ -27,7 +27,7 @@ const metas = import.meta.glob<Meta>('../routes/**/*_*.tsx', {
 
 const pages = import.meta.glob<Page>('../routes/**/*_*.tsx')
 
-type Route = {
+export type Route = {
 	meta: () => Promise<Meta>
 	filePath: string
 	path: string

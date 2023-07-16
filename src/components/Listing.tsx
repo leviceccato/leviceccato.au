@@ -1,8 +1,9 @@
 import { type Component, For, lazy } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
+import { A } from '#/components/A'
 import { Container } from '#/components/Container'
 import { useLocation } from '@solidjs/router'
-import { getChildRoutes, type Meta } from '#/data/routes'
+import { getChildRoutes, type Route } from '#/data/routes'
 
 export const Listing: Component = () => {
 	const location = useLocation()
@@ -11,7 +12,7 @@ export const Listing: Component = () => {
 	return (
 		<Container>
 			<For each={childRoutes}>
-				{(route) => <Dynamic component={createListItem(route.meta)} />}
+				{(route) => <Dynamic component={createListItem(route)} />}
 			</For>
 		</Container>
 	)
@@ -19,14 +20,14 @@ export const Listing: Component = () => {
 
 // Listing elements must be created like this so they interect properly with
 // Suspend and can therefore be prerendered fully.
-function createListItem(meta: () => Promise<Meta>) {
+function createListItem(route: Route) {
 	return lazy(async () => {
-		const _meta = await meta()
+		const meta = await route.meta()
 
 		return {
 			default: () => (
 				<>
-					<h1>{JSON.stringify(_meta)}</h1>
+					<A href={route.path}>{meta.title}</A>
 				</>
 			),
 		}
