@@ -1,41 +1,29 @@
-import { For, createMemo, type ParentComponent, Show } from 'solid-js'
-import { assignInlineVars } from '@vanilla-extract/dynamic'
-import { type Image } from '#/utils/misc'
+import { type ParentComponent, Show } from 'solid-js'
 import * as css from './Figure.css'
 
 export const Figure: ParentComponent<{
-	image: Image[]
+	src: string
+	width: number
 	alt: string
 }> = (props) => {
-	const images = createMemo(() => {
-		const [fallbackImage, ...otherImages] = props.image
-		return { fallbackImage, otherImages }
-	})
-
-	const aspectRatio = () => {
-		const { width, height } = images().fallbackImage
-		return height / width
-	}
-
 	return (
-		<figure
-			class={css.root}
-			style={assignInlineVars({
-				[css.inlineSizeVar]: `${images().fallbackImage.width}px`,
-				[css.aspectRatioVar]: String(aspectRatio()),
-			})}
-		>
+		<figure class={css.root}>
+			{/*
+				jampack will post process all picture elements and
+				add all the necessary sources for maximum optimisation
+				it will also add width and height attributes to avoid
+				layout changes
+			*/}
 			<picture>
-				<For each={images().otherImages}>
-					{(image) => (
-						<source
-							srcset={image.src}
-							type={`image/${image.format}`}
-						/>
-					)}
-				</For>
 				<img
-					src={images().fallbackImage.src}
+					src={props.src}
+					// The src will be incorrect after SSR'd by Solid.
+					// data-image is here so we can target and map
+					// this to it's correct version from manifest.json.
+					// You should figure out a way to do this more
+					// generically in the future
+					data-image
+					width={props.width}
 					class={css.image}
 					alt={props.alt}
 				/>

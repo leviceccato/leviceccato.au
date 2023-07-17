@@ -5,11 +5,14 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { load } from 'cheerio'
+import { type Manifest } from 'vite'
 import { renderToStringAsync, generateHydrationScript } from 'solid-js/web'
 import indexHtml from './dist/index.html?raw'
+import manifestJson from './dist/manifest.json'
 import { routes } from '#/data/routes'
 import { createApp } from '#/main'
 
+const manifest = manifestJson as Manifest
 // See https://www.solidjs.com/docs/latest#hydrationscript
 const hydrationScript = generateHydrationScript()
 const dist = resolve('./dist')
@@ -31,6 +34,14 @@ for (const route of routes) {
 		process.exit(1)
 	}
 	dom('head').append(routeData.head)
+
+	// Fix static asset URL references
+	dom('[data-image]').each((_, image) => {
+		// Remove preceding '/'
+		const manifestKey = image.attribs['src'].slice(1)
+		const assetUrl = '/' + manifest[manifestKey].file
+		dom(image).attr('src', assetUrl)
+	})
 
 	const dir = resolve(dist, '.' + route.path)
 	mkdirSync(dir, { recursive: true })
