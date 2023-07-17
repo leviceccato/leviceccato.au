@@ -15,48 +15,63 @@ import { createApp } from '#/main'
 const dist = resolve('./dist')
 const manifest = manifestJson as Manifest
 const templateDom = load(indexHtml)
+
 // See https://www.solidjs.com/docs/latest#hydrationscript
 templateDom('head').append(generateHydrationScript())
 
+const renderPromises: Promise<void>[] = []
+
 for (const route of routes) {
-	const dom = load(templateDom.html())
+	renderPromises.push(
+		new Promise(async (res, rej) => {
+			const dom = load(templateDom.html())
 
-	// renderToStringAsync must be used to ensure lazy routes
-	// are completely loaded
-	const appHtml = await renderToStringAsync(createApp(route.path))
-	dom('body').html(appHtml)
+			// renderToStringAsync must be used to ensure lazy routes
+			// are completely loaded
+			const appHtml = await renderToStringAsync(createApp(route.path))
+			dom('body').html(appHtml)
 
-	// Update head with route tags provided by rendered app
-	let routeData: any
-	try {
-		routeData = JSON.parse(dom('#route').text())
-	} catch (error) {
-		console.error(`Invalid data for route '${route.path}': ${error}`)
-		process.exit(1)
-	}
-	dom('head').append(routeData.head)
+			// Update head with route tags provided by rendered app
+			let routeData: any
+			try {
+				routeData = JSON.parse(dom('#route').text())
+			} catch (error) {
+				return rej(
+					new Error(`Invalid data for route '${route.path}': ${error}`),
+				)
+			}
+			dom('head').append(routeData.head)
 
-	// Fix static asset URL references
-	dom('[data-image]').each((_, image) => {
-		// Remove preceding '/'
-		const manifestKey = image.attribs['src'].slice(1)
-		const assetUrl = '/' + manifest[manifestKey].file
-		dom(image).attr('src', assetUrl)
-	})
+			// Fix static asset URL references
+			dom('[data-image]').each((_, image) => {
+				// Remove preceding '/'
+				const manifestKey = image.attribs['src'].slice(1)
+				const assetUrl = '/' + manifest[manifestKey].file
+				dom(image).attr('src', assetUrl)
+			})
 
-	const dir = resolve(dist, '.' + route.path)
-	mkdirSync(dir, { recursive: true })
-	const path = resolve(dir, './index.html')
+			const dir = resolve(dist, '.' + route.path)
+			mkdirSync(dir, { recursive: true })
+			const path = resolve(dir, './index.html')
 
-	const html = dom.root().html()
-	if (!html) {
-		console.error(
-			`Failed to build index.html file contents for route '${route.path}'`,
-		)
-		process.exit(1)
-	}
+			const html = dom.root().html()
+			if (!html) {
+				return rej(
+					new Error(
+						`Failed to build index.html file contents for route '${route.path}'`,
+					),
+				)
+			}
 
-	writeFileSync(path, html)
+			writeFileSync(path, html)
+			res()
+		}),
+	)
 }
 
+try {
+	Promise.all(renderPromises)
+} catch (error) {
+	console.error(`Failed to render routes: ${error}`)
+}
 console.log('All routes successfully prerendered.')
