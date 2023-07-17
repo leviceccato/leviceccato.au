@@ -1,7 +1,7 @@
 // The purpose of Page is to synchronise route data
 // with the head of the document. Additionally it
 // serialises this data into the HTML so that the
-// prerendering script can handle updating the head.
+// postbuild script can handle updating the head.
 
 import { Show, onMount, type ParentComponent, createMemo } from 'solid-js'
 import { LayoutDefault } from '#/components/LayoutDefault'

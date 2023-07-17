@@ -5,9 +5,8 @@
 	"scripts": {
 		"start": "vite",
 		"check": "tsc --noEmit",
-		"prerender": "vite-node -m production prerender.ts",
-		"index": "pagefind --source dist",
-		"build": "npm run check && vite build && npm run prerender && npm run index",
+		"postbuild": "vite-node -m production postbuild.ts",
+		"build": "npm run check && vite build && npm run postbuild",
 		"preview": "npm run build && vite preview"
 	},
 	"prettier": {
@@ -28,11 +27,11 @@
 		"@vanilla-extract/css": "^1.12.0",
 		"@vanilla-extract/vite-plugin": "^3.8.2",
 		"cheerio": "^1.0.0-rc.12",
-		"pagefind": "^0.12.0",
+		"sharp": "^0.32.3",
 		"typescript": "^5.1.3",
 		"vite": "^4.3.9",
-		"vite-imagetools": "^5.0.4",
 		"vite-node": "^0.32.2",
+		"vite-plugin-image-optimizer": "^1.1.6",
 		"vite-plugin-solid": "^2.7.0"
 	}
 }
