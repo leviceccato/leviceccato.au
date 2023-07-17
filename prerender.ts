@@ -70,5 +70,6 @@ try {
 	Promise.all(renderPromises)
 } catch (error) {
 	console.error(`Failed to render routes: ${error}`)
+	process.exit(1)
 }
 console.log('All routes successfully prerendered.')
