@@ -67,7 +67,7 @@ const renderPromises = routes.map(
 )
 
 try {
-	Promise.all(renderPromises)
+	await Promise.all(renderPromises)
 } catch (error) {
 	console.error(`Failed to render routes: ${error}`)
 	process.exit(1)
