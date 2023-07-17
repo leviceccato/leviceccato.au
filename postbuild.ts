@@ -29,7 +29,9 @@ try {
 	process.exit(1)
 }
 
-console.log(`${routes.length} routes prerendered & images optimised.`)
+console.log(`Postbuild successful:
+- ${routes.length} routes prerendered
+- x images optimised`)
 
 async function routeToDom(route: Route): Promise<CheerioAPI> {
 	const dom = load(templateDom.html())
