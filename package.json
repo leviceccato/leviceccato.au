@@ -1,12 +1,11 @@
 {
 	"name": "leviceccato.au",
 	"private": true,
-	"type": "module",
 	"scripts": {
 		"start": "vite",
 		"check": "tsc --noEmit",
 		"postbuild": "vite-node -m production postbuild.ts",
-		"build": "npm run check && vite build && npm run postbuild",
+		"build": "npm run check && vite build",
 		"preview": "npm run build && vite preview"
 	},
 	"prettier": {
