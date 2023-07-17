@@ -12,20 +12,21 @@ import manifestJson from './dist/manifest.json'
 import { routes } from '#/data/routes'
 import { createApp } from '#/main'
 
-const manifest = manifestJson as Manifest
-// See https://www.solidjs.com/docs/latest#hydrationscript
-const hydrationScript = generateHydrationScript()
 const dist = resolve('./dist')
+const manifest = manifestJson as Manifest
+const templateDom = load(indexHtml)
+// See https://www.solidjs.com/docs/latest#hydrationscript
+templateDom('head').append(generateHydrationScript())
 
 for (const route of routes) {
-	const dom = load(indexHtml)
+	const dom = load(templateDom.html())
+
 	// renderToStringAsync must be used to ensure lazy routes
 	// are completely loaded
 	const appHtml = await renderToStringAsync(createApp(route.path))
-
-	dom('head').append(hydrationScript)
 	dom('body').html(appHtml)
 
+	// Update head with route tags provided by rendered app
 	let routeData: any
 	try {
 		routeData = JSON.parse(dom('#route').text())
