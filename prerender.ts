@@ -19,11 +19,9 @@ const templateDom = load(indexHtml)
 // See https://www.solidjs.com/docs/latest#hydrationscript
 templateDom('head').append(generateHydrationScript())
 
-const renderPromises: Promise<void>[] = []
-
-for (const route of routes) {
-	renderPromises.push(
-		new Promise(async (res, rej) => {
+const renderPromises = routes.map(
+	(route) =>
+		new Promise<void>(async (res, rej) => {
 			const dom = load(templateDom.html())
 
 			// renderToStringAsync must be used to ensure lazy routes
@@ -66,8 +64,7 @@ for (const route of routes) {
 			writeFileSync(path, html)
 			res()
 		}),
-	)
-}
+)
 
 try {
 	Promise.all(renderPromises)
