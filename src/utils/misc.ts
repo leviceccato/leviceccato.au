@@ -47,19 +47,38 @@ export function slugify(text: string): string {
 	)
 }
 
-// vite-imagetools metadata type, must be manually defined as it isn't exported.
-// see: https://github.com/JonasKruckenberg/imagetools/blob/main/docs/guide/getting-started.md#metadata
-export type Image = {
-	src: string
-	width: number
-	height: number
+export function parseImagePath(path: string): {
 	format: string
-	// The following options are the same as sharps input options
-	space: string
-	channels: number
-	density: Number
-	depth: string
-	hasAlpha: boolean
-	hasProfile: boolean
-	isProgressive: boolean
+	width?: number
+	path: string
+} {
+	const pathSegments = path.split('/')
+	const file = pathSegments[pathSegments.length - 1]
+	const [name, ext] = file.split('.')
+
+	if (ext !== 'jpeg' && ext !== 'png') {
+		throw new Error(`Invalid image path: ${path}`)
+	}
+
+	let format = ext
+	let width: undefined | number = undefined
+
+	const [_, ...params] = name.split('_')
+	if (params) {
+		params.forEach((param) => {
+			const [key, value] = param.split('-')
+
+			if (key === 'f') {
+				format = value
+			} else if (key === 'w') {
+				width = Number(value)
+			}
+		})
+	}
+
+	return {
+		format,
+		width,
+		path: `${pathSegments.slice(0, -1).join('/')}/${name}`,
+	}
 }

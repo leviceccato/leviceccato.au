@@ -2,7 +2,6 @@ import { resolve } from 'node:path'
 import { type UserConfig } from 'vite'
 import solid from 'vite-plugin-solid'
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
-import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
 export default {
 	root: 'src',
@@ -45,11 +44,6 @@ export default {
 		vanillaExtractPlugin({
 			// This is required to get correct class names when prerendering
 			emitCssInSsr: true,
-		}),
-		ViteImageOptimizer({
-			jpeg: {
-				mozjpeg: true,
-			},
 		}),
 	],
 } satisfies UserConfig

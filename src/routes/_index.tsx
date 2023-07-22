@@ -1,5 +1,5 @@
 import * as t from '#/toolkit'
-import image from './image.jpeg?w=100&lossless'
+import image from './image_w-800.jpeg'
 
 export const meta = {
 	title: 'Home',
@@ -32,7 +32,7 @@ export default t.route(meta, () => (
 			<t.Oli>Test 1</t.Oli>
 		</t.Ol>
 		<t.Figure
-			image={image}
+			src={image}
 			alt="hello"
 		/>
 	</>
