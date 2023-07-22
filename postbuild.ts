@@ -1,6 +1,7 @@
 // This script will generate index.html files corresponding
 // to the routes defined for the app. It must be run with
 // vite-node as it utilises it's config and environment.
+// It will also fix asset URLs and optimise them.
 
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
