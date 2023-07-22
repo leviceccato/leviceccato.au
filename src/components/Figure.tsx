@@ -2,8 +2,6 @@ import { createMemo, type ParentComponent, Show } from 'solid-js'
 import { parseImagePath } from '#/utils/misc'
 import * as css from './Figure.css'
 
-const isDev = import.meta.env.DEV
-
 export const Figure: ParentComponent<{
 	src: string
 	alt: string
@@ -17,7 +15,7 @@ export const Figure: ParentComponent<{
 					// srcset is only the same during development. After
 					// prerendering, this is updated to the path of the
 					// optimised AVIF
-					srcset={isDev ? props.src : `${data().path}.avif`}
+					srcset={import.meta.env.DEV ? props.src : `${data().path}.avif`}
 					type="image/avif"
 				/>
 				<img
