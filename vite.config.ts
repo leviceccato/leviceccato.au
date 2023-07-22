@@ -1,6 +1,6 @@
 import { resolve } from 'node:path'
 import { type UserConfig } from 'vite'
-import solid from 'vite-plugin-solid'
+import solidPlugin from 'vite-plugin-solid'
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
 
 export default {
@@ -34,7 +34,7 @@ export default {
 		},
 	},
 	plugins: [
-		solid({
+		solidPlugin({
 			// Solid hot reloading requires specific syntax, we have disabled to avoid
 			// changing code style, plus Solid is fast enough any way.
 			hot: false,
