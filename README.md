@@ -42,11 +42,15 @@ npm run preview
 
 See `package.json#scripts` for more commands.
 
-### Creating content
+## Creating content
 
 Pages in this project live in `src/routes` and are defined as Solid components. The structure of files and folders will map to the route structure of the app. Folders with an `_index.tsx` at their root will indicate a new folder in the URL, e.g. `src/routes/about/_index.tsx` will correspond to `https://leviceccato.au/about`. All files and folders should begin with optionally a number and then an underscore. Those with no number will not be treated as part of the navigation structure of the site for the purpose of listings or automated previous/next functionality. Index files will inherit this behaviour from their containing folder. Numbers will designate the position of the route in that order.
 
 The `src/toolkit.tsx` module defines helpers for creating route components and other commonly used components. If a common component is made, it should be reexported from that module.
+
+### Images
+
+Images should be added in the same folder as it's associated route file. They will be automatically optimised during build. You can also specify a new width for the image and it will be resized with it's ratio kept intact. To do this you need to add the information into the file name, e.g. `my-image-file_w-100.jpeg`. Note that is important for actual name section to use kebab case, then to separate the width definition with an underscore. In this example, the image will changed to 100 pixels wide (this will only be intrinsicly resized during build).
 
 ## Deployment
 
