@@ -17,6 +17,7 @@ export { Ol } from '#/components/Ol'
 export { Oli } from '#/components/Oli'
 export { Figure } from '#/components/Figure'
 export { Listing } from '#/components/Listing'
+export { Logo } from '#/components/Logo'
 
 export function route(meta: Meta, pageContent: () => JSX.Element): Component {
 	return () => <Page {...meta}>{pageContent()}</Page>
