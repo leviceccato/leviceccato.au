@@ -91,21 +91,21 @@ for (const route of routes) {
 		})
 	})
 
-	Promise.all(imageOperations).then(() => {
-		const dir = resolve(dist, '.' + route.path)
-		mkdirSync(dir, { recursive: true })
-		const path = resolve(dir, './index.html')
+	await Promise.all(imageOperations)
 
-		const html = dom.root().html()
-		if (!html) {
-			console.error(
-				`Failed to build index.html file contents for route '${route.path}'`,
-			)
-			process.exit(1)
-		}
+	const dir = resolve(dist, '.' + route.path)
+	mkdirSync(dir, { recursive: true })
+	const path = resolve(dir, './index.html')
 
-		writeFileSync(path, html)
-	})
+	const html = dom.root().html()
+	if (!html) {
+		console.error(
+			`Failed to build index.html file contents for route '${route.path}'`,
+		)
+		process.exit(1)
+	}
+
+	writeFileSync(path, html)
 }
 
 console.log(`${routes.length} routes prerendered.
