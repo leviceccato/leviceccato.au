@@ -21,6 +21,8 @@ const templateDom = load(indexHtml)
 // See https://www.solidjs.com/docs/latest#hydrationscript
 templateDom('head').append(generateHydrationScript())
 
+let assetCount = 0
+
 for (const route of routes) {
 	const dom = load(templateDom.html())
 
@@ -65,6 +67,8 @@ for (const route of routes) {
 
 		// Optimise images
 		;[assetPath1, assetPath2].forEach((path) => {
+			assetCount++
+
 			sharp(filePath)
 				.resize({ width: parsedAssetPath.width })
 				.toFile(resolve(dist, '.' + path))
@@ -90,4 +94,5 @@ for (const route of routes) {
 	writeFileSync(path, html)
 }
 
-console.log(`${routes.length} routes prerendered.`)
+console.log(`${routes.length} routes prerendered.
+${assetCount} assets optimised.`)
