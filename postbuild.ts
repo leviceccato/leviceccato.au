@@ -75,6 +75,7 @@ for (const route of routes) {
 					.toFile(resolve(dist, '.' + outputPath))
 					.then((data) => {
 						if (sourceDom.is('img')) {
+							sourceDom.attr('width', String(data.width))
 							sourceDom.attr('height', String(data.height))
 							sourceDom.attr('src', outputPath)
 						} else {
