@@ -68,9 +68,7 @@ export function parseImagePath(path: string): {
 		params.forEach((param) => {
 			const [key, value] = param.split('-')
 
-			if (key === 'f') {
-				format = value
-			} else if (key === 'w') {
+			if (key === 'w') {
 				width = Number(value)
 			}
 		})
