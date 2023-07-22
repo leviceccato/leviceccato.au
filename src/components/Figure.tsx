@@ -11,6 +11,13 @@ export const Figure: ParentComponent<{
 	return (
 		<figure class={css.root}>
 			<picture>
+				<source
+					// srcset is only the same during development. After
+					// prerendering, this is updated to the path of the
+					// optimised AVIF
+					srcset={props.src}
+					type="image/avif"
+				/>
 				<img
 					src={props.src}
 					// During development we don't know the size of the

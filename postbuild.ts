@@ -41,57 +41,69 @@ for (const route of routes) {
 	}
 	dom('head').append(routeData.head)
 
+	let imageOperations: Promise<void>[] = []
+
 	// Fix static asset URL references, add corresponding source elements
 	// then optimise images
 	dom('picture').each((_, picture) => {
 		const pictureDom = dom(picture)
-		const image = pictureDom.find('img')
-		const imageDom = dom(image)
-		const imageSrc = imageDom.attr('src')
-		if (!imageSrc) {
-			return
-		}
+		const sources = pictureDom.find('img, source')
+		const image = sources[sources.length - 1]
+		const imageSrc = image.attribs['src']
 
 		// Construct paths
 		const manifestKey = imageSrc.slice(1)
 		const assetPath = '/' + manifest[manifestKey].file
 		const parsedAssetPath = parseImagePath(assetPath)
-		const assetPath1 = `${parsedAssetPath.path}_o.${parsedAssetPath.format}`
-		const assetPath2 = `${parsedAssetPath.path}_o.avif`
 		const filePath = resolve(dist, '.' + assetPath)
 
-		// Update DOM
-		imageDom.attr('src', assetPath1)
-		imageDom.attr('width', String(parsedAssetPath.width))
-		pictureDom.prepend(`<source srcset="${assetPath2}" type="image/avif" />`)
-
-		// Optimise images
-		;[assetPath1, assetPath2].forEach((path) => {
+		// Optimize images and update dom
+		sources.each((_, source) => {
 			assetCount++
 
-			sharp(filePath)
-				.resize({ width: parsedAssetPath.width })
-				.toFile(resolve(dist, '.' + path))
-				.catch((error) => {
-					console.error(`Failed to process image '${path}': ${error}`)
-					process.exit(1)
-				})
+			const sourceDom = dom(source)
+			const type = sourceDom.attr('type')
+			// In the case of source, get format from the type attribute
+			// otherwise use unoptimised image format
+			const format = type ? type.split('/')[1] : parsedAssetPath.format
+			// The output path must be different for sharp
+			const outputPath = `${parsedAssetPath.path}_o.${format}`
+
+			imageOperations.push(
+				sharp(filePath)
+					.resize({ width: parsedAssetPath.width })
+					.toFile(resolve(dist, '.' + outputPath))
+					.then((data) => {
+						if (sourceDom.is('img')) {
+							sourceDom.attr('height', String(data.height))
+							sourceDom.attr('src', outputPath)
+						} else {
+							sourceDom.attr('srcset', outputPath)
+						}
+					})
+					.catch((error) => {
+						console.error(`Failed to process image '${outputPath}': ${error}`)
+						process.exit(1)
+					}),
+			)
 		})
 	})
 
-	const dir = resolve(dist, '.' + route.path)
-	mkdirSync(dir, { recursive: true })
-	const path = resolve(dir, './index.html')
+	Promise.all(imageOperations).then(() => {
+		const dir = resolve(dist, '.' + route.path)
+		mkdirSync(dir, { recursive: true })
+		const path = resolve(dir, './index.html')
 
-	const html = dom.root().html()
-	if (!html) {
-		console.error(
-			`Failed to build index.html file contents for route '${route.path}'`,
-		)
-		process.exit(1)
-	}
+		const html = dom.root().html()
+		if (!html) {
+			console.error(
+				`Failed to build index.html file contents for route '${route.path}'`,
+			)
+			process.exit(1)
+		}
 
-	writeFileSync(path, html)
+		writeFileSync(path, html)
+	})
 }
 
 console.log(`${routes.length} routes prerendered.
