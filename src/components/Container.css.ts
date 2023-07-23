@@ -1,8 +1,20 @@
-import { style } from '@vanilla-extract/css'
+import { style, createVar, fallbackVar } from '@vanilla-extract/css'
 import { sizes } from '#/data/theme'
+
+const containerVar = createVar()
 
 export const root = style({
 	marginInline: 'auto',
 	maxInlineSize: sizes.maxContainerInlineSize,
-	paddingInline: sizes.pageInlineMargin,
+	// Only allow padding on the root Container
+	paddingInline: `calc(${sizes.pageInlineMargin} * ${fallbackVar(
+		containerVar,
+		'1',
+	)})`,
+})
+
+export const wrapper = style({
+	vars: {
+		[containerVar]: '0',
+	},
 })

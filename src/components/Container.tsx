@@ -6,5 +6,9 @@ export const Container: ParentComponent<{
 }> = (props) => {
 	props.class ??= ''
 
-	return <div class={`${css.root} ${props.class}`}>{props.children}</div>
+	return (
+		<div class={`${css.root} ${props.class}`}>
+			<div class={css.wrapper}>{props.children}</div>
+		</div>
+	)
 }
