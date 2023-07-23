@@ -1,5 +1,5 @@
 import { For, Show, type Component } from 'solid-js'
-import { A } from '#/components/A'
+import { A, type ClickHandler } from '#/components/A'
 import * as css from './Nav.css'
 
 export type Column =
@@ -7,6 +7,7 @@ export type Column =
 			url: string
 			text: string
 			disableIndicator?: boolean
+			onClick?: ClickHandler
 	  }[]
 	| null
 
