@@ -7,7 +7,7 @@ export const root = style({
 	marginInline: 'auto',
 	maxInlineSize: sizes.maxContainerInlineSize,
 	// Only allow padding on the root Container
-	paddingInline: `calc(${sizes.pageInlineMargin} * ${fallbackVar(
+	paddingInline: `calc(${sizes.pageInlineMargin}px * ${fallbackVar(
 		containerVar,
 		'1',
 	)})`,
