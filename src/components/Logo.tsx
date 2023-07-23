@@ -13,6 +13,7 @@ export const Logo: Component<{
 		<Container class={css.root}>
 			<div class={css.main}>
 				<img
+					class={css.image}
 					style={{ transform: `scale(${props.scale})` }}
 					src={props.src}
 					alt={props.alt}

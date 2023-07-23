@@ -17,7 +17,13 @@ export const root = style({
 
 export const main = style({
 	backgroundColor: colours.fg,
+	position: 'relative',
 	aspectRatio: '1',
-	display: 'flex',
-	placeItems: 'center',
+})
+
+export const image = style({
+	position: 'absolute',
+	inset: 0,
+	width: '100%',
+	height: '100%',
 })
