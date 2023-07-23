@@ -42,7 +42,7 @@ export default t.route(meta, () => (
 		/>
 		<t.Logo
 			svg={rubixLogo}
-			padding="35%"
+			padding="37%"
 		/>
 		<t.Logo
 			svg={addMyLogoLogo}
