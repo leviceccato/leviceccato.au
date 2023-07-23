@@ -7,10 +7,10 @@ export const root = style({
 	paddingBlockEnd: clampVw(50, 175),
 })
 
-globalStyle(`${root} > *:first-child`, {
+globalStyle(`${root}${root} > *:first-child`, {
 	marginBlockStart: 0,
 })
 
-globalStyle(`${root} > *:last-child`, {
+globalStyle(`${root}${root} > *:last-child`, {
 	marginBlockEnd: 0,
 })
