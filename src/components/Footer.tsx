@@ -13,7 +13,18 @@ export const Footer: Component<{
 	const columns = () => {
 		const c: Column[] = [
 			null,
-			[{ url: props.backToTopLinkUrl, text: 'Back to top' }],
+			[
+				{
+					url: props.backToTopLinkUrl,
+					text: 'Back to top',
+					onClick: () => {
+						// The hash URL will ensure scrolling to top without JavaScript works
+						// but this will only work on the first click. Subsequent clicks
+						// require this supplementary code.
+						window.scrollTo({ top: 0 })
+					},
+				},
+			],
 			null,
 		]
 
