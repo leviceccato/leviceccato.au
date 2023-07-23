@@ -31,6 +31,7 @@ export const Nav: Component<NavProps> = (props) => {
 										class={css.link}
 										href={link.url}
 										enableActiveIndicator={!link.disableIndicator}
+										onClick={link.onClick}
 									>
 										{link.text}
 									</A>
