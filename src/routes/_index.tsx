@@ -1,5 +1,4 @@
 import * as t from '#/toolkit'
-import image from './image_w-800.jpeg'
 
 export const meta = {
 	title: 'Home',
@@ -12,28 +11,13 @@ export default t.route(meta, () => (
 			Levi is a <t.A href="/logos">designer</t.A>—
 			<t.A href="/blog">developer</t.A> and <t.A href="/art">illustrator</t.A>.
 		</t.H1>
-		<t.H2>Test</t.H2>
 		<t.P>
-			He's currently working with Orygen to improve mental health in young
-			people and hacking away at various side projects, most of which are
-			viewable on this site. The best way to get in contact with him is by
-			sending an email to{' '}
-			<t.A href="mailto:mail@levic.com.au">mail@levic.com.au</t.A>.
+			He's currently working at{' '}
+			<t.A href="https://www.orygen.org.au">Orygen</t.A> to improve mental
+			health in young people with the <t.A href="https://most.org.au">MOST</t.A>{' '}
+			platform. In his free time he likes to hack away at various side projects
+			and artistic endevours. Send him an email{' '}
+			<t.A href="mailto:mail@levic.com.au">hi@leviceccato.au</t.A>.
 		</t.P>
-		<t.Quote>Hello this is quote</t.Quote>
-		<t.Ul>
-			<t.Uli>Sup 1</t.Uli>
-			<t.Uli>Sup 2</t.Uli>
-			<t.Uli>Sup 3</t.Uli>
-		</t.Ul>
-		<t.Ol>
-			<t.Oli>Test 1</t.Oli>
-			<t.Oli>Test 1</t.Oli>
-			<t.Oli>Test 1</t.Oli>
-		</t.Ol>
-		<t.Figure
-			src={image}
-			alt="hello"
-		/>
 	</>
 ))
