@@ -10,9 +10,9 @@ export const Logo: Component<{
 	props.class ??= ''
 
 	return (
-		<Container>
+		<Container class={`${css.root} ${props.class}`}>
 			<div
-				class={`${css.root} ${props.class}`}
+				class={css.main}
 				style={{ padding: props.padding }}
 				innerHTML={props.svg}
 			/>
