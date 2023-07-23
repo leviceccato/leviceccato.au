@@ -11,6 +11,8 @@ import { lineHeightVar } from '#/components/Text.css'
 
 export const paragraph = style({
 	fontSize: clampVw(16, 17),
+	marginBlockStart: '1em',
+	marginBlockEnd: '1em',
 	vars: {
 		[lineHeightVar]: '1.5',
 		[defaultTextDecorationLineVar]: 'underline',
