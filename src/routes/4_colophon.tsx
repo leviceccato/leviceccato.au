@@ -24,7 +24,7 @@ export default t.route(meta, () => (
 		</t.P>
 		<t.H2>Typography</t.H2>
 		<t.P>
-			Typeset in <t.A href="https://www.gent.media/manrope">Manrope</t.A> by
+			Typeset in <t.A href="https://www.gent.media/manrope">Manrope</t.A> by{' '}
 			<t.A href="https://www.gent.media">Mikhail Sharanda</t.A>.
 		</t.P>
 	</>
