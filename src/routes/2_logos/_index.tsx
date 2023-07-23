@@ -1,16 +1,16 @@
 import * as t from '#/toolkit'
-import getSmartLogo from './get-smart.svg?raw'
-import brookesLogo from './brookes.svg?raw'
-import rxEliteLogo from './rx-elite.svg?raw'
-import arcLogo from './arc.svg?raw'
-import rubixLogo from './rubix.svg?raw'
-import addMyLogoLogo from './add-my-logo.svg?raw'
-import diceRollerLogo from './dice-roller.svg?raw'
-import cityOfNewcastleLogo from './city-of-newcastle.svg?raw'
-import newcastleFringeLogo from './newcastle-fringe.svg?raw'
-import walkOfTheWanderingManLogo from './walk-of-the-wandering-man.svg?raw'
-import arcadiaLogo from './arcadia.svg?raw'
-import designWithDevLogo from './design-with-dev.svg?raw'
+import getSmartUrl from './get-smart.svg'
+import brookesUrl from './brookes.svg'
+import rxEliteUrl from './rx-elite.svg'
+import arcUrl from './arc.svg'
+import rubixUrl from './rubix.svg'
+import addMyLogoUrl from './add-my-logo.svg'
+import diceRollerUrl from './dice-roller.svg'
+import cityOfNewcastleUrl from './city-of-newcastle.svg'
+import newcastleFringeUrl from './newcastle-fringe.svg'
+import walkOfTheWanderingManUrl from './walk-of-the-wandering-man.svg'
+import arcadiaUrl from './arcadia.svg'
+import designWithDevUrl from './design-with-dev.svg'
 
 export const meta = {
 	title: 'Logos',
@@ -25,52 +25,64 @@ export default t.route(meta, () => (
 			projects.
 		</t.P>
 		<t.Logo
-			svg={getSmartLogo}
-			padding="30%"
+			src={getSmartUrl}
+			alt="Get Smart Promo logo"
+			scale={0.5}
 		/>
 		<t.Logo
-			svg={brookesLogo}
-			padding="30%"
+			src={brookesUrl}
+			alt="Brookes Beer logo"
+			scale={0.5}
 		/>
 		<t.Logo
-			svg={rxEliteLogo}
-			padding="35%"
+			src={rxEliteUrl}
+			alt="RX Elite logo"
+			scale={0.5}
 		/>
 		<t.Logo
-			svg={arcLogo}
-			padding="38%"
+			src={arcUrl}
+			alt="ARC logo"
+			scale={0.5}
 		/>
 		<t.Logo
-			svg={rubixLogo}
-			padding="37%"
+			src={rubixUrl}
+			alt="Rubix logo"
+			scale={0.5}
 		/>
 		<t.Logo
-			svg={addMyLogoLogo}
-			padding="35%"
+			src={addMyLogoUrl}
+			alt="Add My Logo logo"
+			scale={0.5}
 		/>
 		<t.Logo
-			svg={diceRollerLogo}
-			padding="27%"
+			src={diceRollerUrl}
+			alt="Dice Roller logo"
+			scale={0.5}
 		/>
 		<t.Logo
-			svg={cityOfNewcastleLogo}
-			padding="27%"
+			src={cityOfNewcastleUrl}
+			alt="City of Newcastle logo"
+			scale={0.5}
 		/>
 		<t.Logo
-			svg={newcastleFringeLogo}
-			padding="27%"
+			src={newcastleFringeUrl}
+			alt="Newcastle Fringe logo"
+			scale={0.5}
 		/>
 		<t.Logo
-			svg={walkOfTheWanderingManLogo}
-			padding="25%"
+			src={walkOfTheWanderingManUrl}
+			alt="Walk of the Wandering Man logo"
+			scale={0.5}
 		/>
 		<t.Logo
-			svg={arcadiaLogo}
-			padding="32%"
+			src={arcadiaUrl}
+			alt="Arcadia logo"
+			scale={0.5}
 		/>
 		<t.Logo
-			svg={designWithDevLogo}
-			padding="28%"
+			src={designWithDevUrl}
+			alt="Design with Dev logo"
+			scale={0.5}
 		/>
 	</>
 ))

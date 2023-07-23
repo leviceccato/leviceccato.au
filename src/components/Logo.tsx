@@ -3,19 +3,21 @@ import { Container } from '#/components/Container'
 import * as css from './Logo.css'
 
 export const Logo: Component<{
-	class?: string
-	svg: string
-	padding: string
+	src: string
+	alt: string
+	scale?: number
 }> = (props) => {
-	props.class ??= ''
+	props.scale ??= 1
 
 	return (
-		<Container class={`${css.root} ${props.class}`}>
-			<div
-				class={css.main}
-				style={{ padding: props.padding }}
-				innerHTML={props.svg}
-			/>
+		<Container class={css.root}>
+			<div class={css.main}>
+				<img
+					style={{ transform: `scale(${props.scale})` }}
+					src={props.src}
+					alt={props.alt}
+				/>
+			</div>
 		</Container>
 	)
 }
