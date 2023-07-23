@@ -13,7 +13,7 @@ export default t.route(meta, () => (
 		</t.H1>
 		<t.P>
 			He's currently working at{' '}
-			<t.A href="https://www.orygen.org.au">Orygen</t.A> to improve mental
+			<t.A href="https://www.orygen.org.au">Orygen</t.A> helping improve mental
 			health in young people with the <t.A href="https://most.org.au">MOST</t.A>{' '}
 			platform. In his free time he likes to hack away at various side projects
 			and artistic endevours. Send him an email{' '}
