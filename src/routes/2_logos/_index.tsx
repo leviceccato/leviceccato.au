@@ -27,47 +27,47 @@ export default t.route(meta, () => (
 		<t.Logo
 			src={getSmartUrl}
 			alt="Get Smart Promo logo"
-			scale={0.5}
+			scale={0.4}
 		/>
 		<t.Logo
 			src={brookesUrl}
 			alt="Brookes Beer logo"
-			scale={0.5}
+			scale={0.4}
 		/>
 		<t.Logo
 			src={rxEliteUrl}
 			alt="RX Elite logo"
-			scale={0.5}
+			scale={0.35}
 		/>
 		<t.Logo
 			src={arcUrl}
 			alt="ARC logo"
-			scale={0.5}
+			scale={0.4}
 		/>
 		<t.Logo
 			src={rubixUrl}
 			alt="Rubix logo"
-			scale={0.5}
+			scale={0.35}
 		/>
 		<t.Logo
 			src={addMyLogoUrl}
 			alt="Add My Logo logo"
-			scale={0.5}
+			scale={0.34}
 		/>
 		<t.Logo
 			src={diceRollerUrl}
 			alt="Dice Roller logo"
-			scale={0.5}
+			scale={0.45}
 		/>
 		<t.Logo
 			src={cityOfNewcastleUrl}
 			alt="City of Newcastle logo"
-			scale={0.5}
+			scale={0.45}
 		/>
 		<t.Logo
 			src={newcastleFringeUrl}
 			alt="Newcastle Fringe logo"
-			scale={0.5}
+			scale={0.45}
 		/>
 		<t.Logo
 			src={walkOfTheWanderingManUrl}
@@ -77,12 +77,12 @@ export default t.route(meta, () => (
 		<t.Logo
 			src={arcadiaUrl}
 			alt="Arcadia logo"
-			scale={0.5}
+			scale={0.35}
 		/>
 		<t.Logo
 			src={designWithDevUrl}
 			alt="Design with Dev logo"
-			scale={0.5}
+			scale={0.4}
 		/>
 	</>
 ))
