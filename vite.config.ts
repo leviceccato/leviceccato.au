@@ -23,9 +23,6 @@ export default {
 		emptyOutDir: true,
 		// Bleeding edge
 		target: 'esnext',
-		// It is necessary for us to retrieve static asset names from a build
-		// manifest as prerendering will otherwise use incorrect URLs.
-		manifest: true,
 	},
 	resolve: {
 		alias: {

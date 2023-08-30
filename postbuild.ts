@@ -6,23 +6,16 @@
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { load } from 'cheerio'
-import { type Manifest } from 'vite'
-import sharp from 'sharp'
 import { renderToStringAsync, generateHydrationScript } from 'solid-js/web'
-import { parseImagePath } from '#/utils/misc'
 import { routes } from '#/data/routes'
 import { createApp } from '#/main'
 
 const dist = resolve('./dist')
 const indexHtml = readFileSync(resolve(dist, './index.html'), 'utf-8')
-const manifestJson = readFileSync(resolve(dist, './manifest.json'), 'utf-8')
-const manifest = JSON.parse(manifestJson) as Manifest
 const templateDom = load(indexHtml)
 
 // See https://www.solidjs.com/docs/latest#hydrationscript
 templateDom('head').append(generateHydrationScript())
-
-let assetCount = 0
 
 for (const route of routes) {
 	const dom = load(templateDom.html())
@@ -42,57 +35,6 @@ for (const route of routes) {
 	}
 	dom('head').append(routeData.head)
 
-	let imageOperations: Promise<void>[] = []
-
-	// Fix static asset URL references, add corresponding source elements
-	// then optimise images
-	dom('picture').each((_, picture) => {
-		const pictureDom = dom(picture)
-		const sources = pictureDom.find('img, source')
-		const image = sources[sources.length - 1]
-		const imageSrc = image.attribs['src']
-
-		// Construct paths
-		const manifestKey = imageSrc.slice(1)
-		const assetPath = '/' + manifest[manifestKey].file
-		const parsedAssetPath = parseImagePath(assetPath)
-		const filePath = resolve(dist, '.' + assetPath)
-
-		// Optimize images and update dom
-		sources.each((_, source) => {
-			assetCount++
-
-			const sourceDom = dom(source)
-			const type = sourceDom.attr('type')
-			// In the case of source, get format from the type attribute
-			// otherwise use unoptimised image format
-			const format = type ? type.split('/')[1] : parsedAssetPath.format
-			// The output path must be different for sharp
-			const outputPath = `${parsedAssetPath.path}_o.${format}`
-
-			imageOperations.push(
-				sharp(filePath)
-					.resize({ width: parsedAssetPath.width })
-					.toFile(resolve(dist, '.' + outputPath))
-					.then((data) => {
-						if (sourceDom.is('img')) {
-							sourceDom.attr('width', String(data.width))
-							sourceDom.attr('height', String(data.height))
-							sourceDom.attr('src', outputPath)
-						} else {
-							sourceDom.attr('srcset', outputPath)
-						}
-					})
-					.catch((error) => {
-						console.error(`Failed to process image '${outputPath}': ${error}`)
-						process.exit(1)
-					}),
-			)
-		})
-	})
-
-	await Promise.all(imageOperations)
-
 	const dir = resolve(dist, '.' + route.path)
 	mkdirSync(dir, { recursive: true })
 	const path = resolve(dir, './index.html')
@@ -108,5 +50,4 @@ for (const route of routes) {
 	writeFileSync(path, html)
 }
 
-console.log(`${routes.length} routes prerendered.
-${assetCount} assets optimised.`)
+console.log(`${routes.length} routes prerendered.`)
