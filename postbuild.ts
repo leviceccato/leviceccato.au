@@ -26,13 +26,7 @@ for (const route of routes) {
 	dom('body').html(appHtml)
 
 	// Update head with route tags provided by rendered app
-	let routeData: any
-	try {
-		routeData = JSON.parse(dom('#route').text())
-	} catch (error) {
-		console.error(`Invalid data for route '${route.path}': ${error}`)
-		process.exit(1)
-	}
+	const routeData = JSON.parse(dom('#route').text())
 	dom('head').append(routeData.head)
 
 	const dir = resolve(dist, '.' + route.path)
@@ -40,14 +34,7 @@ for (const route of routes) {
 	const path = resolve(dir, './index.html')
 
 	const html = dom.root().html()
-	if (!html) {
-		console.error(
-			`Failed to build index.html file contents for route '${route.path}'`,
-		)
-		process.exit(1)
-	}
-
-	writeFileSync(path, html)
+	writeFileSync(path, html!)
 }
 
 console.log(`${routes.length} routes prerendered.`)
