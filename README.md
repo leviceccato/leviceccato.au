@@ -50,7 +50,7 @@ The `src/toolkit.tsx` module defines helpers for creating route components and o
 
 ### Images
 
-Images should be added in the same folder as it's associated route file. They will be automatically optimised during build. You can also specify a new width for the image and it will be resized with it's ratio kept intact. To do this you need to add the information into the file name, e.g. `my-image-file_w-100.jpeg`. Note that is important for actual name section to use kebab case, then to separate the width definition with an underscore. In this example, the image will changed to 100 pixels wide (this will only be intrinsicly resized during build).
+Images should be added to `src/public/images`. They do not get transformed during build so any optimisations must be manual.
 
 ## Deployment
 
