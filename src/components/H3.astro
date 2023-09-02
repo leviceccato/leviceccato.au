@@ -1,0 +1,27 @@
+---
+import { clampVw } from '../utils/misc'
+import Heading from './Heading.astro'
+---
+
+<Heading
+	level="3"
+	class="root"
+	isAnchor
+	style={{
+		'--h3FontSize': clampVw(19, 24),
+	}}
+>
+	<slot />
+</Heading>
+
+<style>
+	.root {
+		letter-spacing: -0.03em;
+		margin-block-start: 2em;
+		margin-block-end: 0.9em;
+		font-size: var(--h2FontSize);
+		--textLineHeight: 1.2;
+		--aTextDecorationThickness: 2px;
+		--aTextUnderlineOffset: 3px;
+	}
+</style>

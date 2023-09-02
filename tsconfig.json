@@ -1,25 +1,8 @@
 {
-	"exclude": ["dist", "node_modules"],
+	"extends": "astro/tsconfigs/strictest",
 	"compilerOptions": {
-		"strict": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"target": "ESNext",
-		"module": "ESNext",
-		"moduleResolution": "node",
-		"allowSyntheticDefaultImports": true,
-		"resolveJsonModule": true,
-		"esModuleInterop": true,
 		"jsx": "preserve",
-		"jsxImportSource": "solid-js",
-		"noEmit": true,
-		"skipLibCheck": true,
-		"isolatedModules": true,
-		"typeRoots": ["./node_modules", "./src"],
-		"types": ["vite/client"],
-		"baseUrl": ".",
-		"paths": {
-			"#/*": ["./src/*"]
-		}
+		"exactOptionalPropertyTypes": false,
+		"noUncheckedIndexedAccess": false
 	}
 }

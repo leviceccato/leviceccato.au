@@ -1,0 +1,54 @@
+---
+import { type HTMLTag } from 'astro/types'
+import { slugify } from '../utils/misc'
+import Container from './Container.astro'
+import Text from './Text.astro'
+import A from './A.astro'
+
+interface Props {
+	level: '1' | '2' | '3'
+	class?: astroHTML.JSX.HTMLAttributes['class']
+	style?: astroHTML.JSX.HTMLAttributes['style']
+	isAnchor?: boolean
+}
+
+Astro.props.isAnchor ??= false
+
+const content = await Astro.slots.render('default')
+
+const id = slugify(content)
+
+const href = `#${id}`
+
+const Tag = `h${Astro.props.level}` as HTMLTag
+---
+
+<Container
+	class={Astro.props.class}
+	style={Astro.props.style}
+>
+	<Tag
+		class="heading"
+		id={id}
+	>
+		<Text variant="block">
+			{
+				Astro.props.isAnchor ? (
+					<A href={href}>
+						{' '}
+						<span set:html={content} />
+					</A>
+				) : (
+					<span set:html={content} />
+				)
+			}
+		</Text>
+	</Tag>
+</Container>
+
+<style>
+	.heading {
+		display: block;
+		font-weight: 700;
+	}
+</style>

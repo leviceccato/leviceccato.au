@@ -1,0 +1,23 @@
+---
+import { clampVw } from '../utils/misc'
+import Container from './Container.astro'
+---
+
+<Container>
+	<ul
+		class="list"
+		style={{
+			'--ulGap': clampVw(7, 15),
+		}}
+	>
+		<slot />
+	</ul>
+</Container>
+
+<style>
+	.list {
+		display: flex;
+		flex-direction: column;
+		gap: var(--ulGap);
+	}
+</style>

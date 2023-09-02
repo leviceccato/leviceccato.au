@@ -1,0 +1,23 @@
+---
+interface Props {
+	isFocusable?: boolean
+}
+---
+
+<span class:list={['root', { focusable: Astro.props.isFocusable }]}>
+	<slot />
+</span>
+
+<style>
+	.root:not(.focusable),
+	.root.focusable:not(:focus-within) {
+		border: 0;
+		clip: rect(0 0 0 0);
+		block-size: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		inline-size: 1px;
+	}
+</style>

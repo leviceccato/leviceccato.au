@@ -1,0 +1,31 @@
+---
+import { clampVw } from '../utils/misc'
+import Container from './Container.astro'
+import Text from './Text.astro'
+---
+
+<Container
+	style={{
+		'--pFontSize': clampVw(16, 17),
+	}}
+>
+	<p class="paragraph">
+		<Text variant="block">
+			<slot />
+		</Text>
+	</p>
+</Container>
+
+<style>
+	.paragraph {
+		font-size: var(--pFontSize);
+		margin-block-start: 1em;
+		margin-block-end: 1em;
+		--textLineHeight: 1.5;
+		--aDefaultTextDecorationLine: underline;
+		--aFontWeight: 500;
+		--aTextDecorationThickness: 1px;
+		--aHoverStroke: 0.02em currentColor;
+		--aHoverTextDecorationThickness: 2px;
+	}
+</style>

@@ -1,0 +1,33 @@
+---
+interface Props {
+	class?: astroHTML.JSX.HTMLAttributes['class']
+	style?: astroHTML.JSX.HTMLAttributes['style']
+}
+---
+
+<div
+	id="Container"
+	style={Astro.props.style}
+	class:list={['root', Astro.props.class]}
+>
+	<div class="wrapper"><slot /></div>
+</div>
+
+<style>
+	.root {
+		margin-inline: auto;
+		max-inline-size: calc(1px * var(--sizeMaxContainerInline));
+		/* Only add padding on root Container, see class below */
+		padding-inline: calc(
+			1px * var(--sizePageInlineMargin) * var(--container, 1)
+		);
+	}
+
+	.root.open {
+		background-color: red;
+	}
+
+	.wrapper {
+		--container: 0;
+	}
+</style>

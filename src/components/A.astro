@@ -1,0 +1,71 @@
+---
+import Text from './Text.astro'
+
+export type Props = {
+	href: astroHTML.JSX.AnchorHTMLAttributes['href']
+	target?: astroHTML.JSX.AnchorHTMLAttributes['target']
+	class?: astroHTML.JSX.HTMLAttributes['class']
+	style?: astroHTML.JSX.HTMLAttributes['style']
+	onclick?: astroHTML.JSX.HTMLAttributes['onclick']
+	isInline?: boolean
+	hasActiveIndicator?: boolean
+}
+
+Astro.props.href ??= ''
+Astro.props.isInline ??= true
+Astro.props.hasActiveIndicator ??= true
+
+const isActive =
+	Astro.url.pathname === '/'
+		? Astro.props.href === '/'
+		: Astro.url.pathname.startsWith(String(Astro.props.href))
+---
+
+<a
+	class:list={['root', Astro.props.class, { active: isActive }]}
+	aria-current={isActive && 'page'}
+	href={Astro.props.href}
+	target={Astro.props.target}
+	onclick={Astro.props.onclick}
+	style={Astro.props.style}
+>
+	<Text>
+		<span class="main"><slot /></span>
+		{
+			Astro.props.hasActiveIndicator && isActive && (
+				<span
+					aria-hidden="true"
+					class="active-indicator"
+					set:text=" •"
+				/>
+			)
+		}
+	</Text>
+</a>
+
+<style>
+	.root {
+		font-weight: var(--aFontWeight, 700);
+		letter-spacing: -0.02em;
+	}
+
+	.main {
+		pointer-events: none;
+		text-decoration-thickness: var(--aTextDecorationThickness, 0.09em);
+		text-decoration-line: var(--aDefaultTextDecorationLine, none);
+		text-underline-offset: var(--aTextUnderlineOffset, 0.1em);
+	}
+
+	.root:hover .main {
+		text-decoration-line: underline;
+		-webkit-text-stroke: var(--aHoverStroke, 0 currentColor);
+		text-decoration-thickness: var(
+			--aHoverTextDecorationThickness,
+			var(--aTextDecorationThickness, 0.09em)
+		);
+	}
+
+	.active-indicator {
+		pointer-events: none;
+	}
+</style>

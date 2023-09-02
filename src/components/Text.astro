@@ -1,0 +1,65 @@
+---
+import { improveTypography } from '../utils/misc'
+
+interface Props {
+	variant?: 'block' | 'inline'
+}
+
+Astro.props.variant ??= 'inline'
+
+const formattedContent = improveTypography(await Astro.slots.render('default'))
+---
+
+<span
+	class:list={['root', Astro.props.variant]}
+	set:html={formattedContent}
+/>
+
+<style>
+	@font-face {
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: 500;
+		src:
+			url('/fonts/manrope-medium.woff2') format('woff2'),
+			url('/fonts/manrope-medium.woff') format('woff');
+	}
+
+	@font-face {
+		font-family: Manrope;
+		font-style: normal;
+		font-weight: 700;
+		src:
+			url('/fonts/manrope-bold.woff2') format('woff2'),
+			url('/fonts/manrope-bold.woff') format('woff');
+	}
+
+	.root {
+		font-size: inherit;
+		cursor: inherit;
+		font-family: Manrope;
+	}
+
+	.root.block {
+		line-height: var(--textLineHeight, 1.4);
+		display: block;
+	}
+
+	.root.block::before,
+	.root.block::after {
+		content: '';
+		display: block;
+		block-size: 0;
+		inline-size: 0;
+	}
+
+	.root.block::before {
+		/* 0.75 is specific to the Manrope font */
+		margin-block-start: calc((0.75 - var(--textLineHeight, 1.4)) * 0.5em);
+	}
+
+	.root.block::after {
+		/* 1.25 is specific to the Manrope font */
+		margin-block-end: calc((1.25 - var(--textLineHeight, 1.4)) * 0.5em);
+	}
+</style>

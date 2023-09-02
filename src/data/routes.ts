@@ -1,86 +1,47 @@
-// This file is responsible for transforming the files in 'routes' to an array
-// of routes that can be utilised by Solid's client and for prerendering
-
-import { type Component } from 'solid-js'
-
-// Allow head items with no textContent
-type HeadItem =
-	| [string, Record<string, string | boolean>]
-	| [string, Record<string, string | boolean>, string]
-
-export type Meta = {
-	title: string
-	description: string
-	thumbnail?: string
-	head?: HeadItem[]
-	layout?: 'default' | 'empty'
-}
-
-type Page = { default: Component<any> }
-
-// Route meta and page are imported separately so they can be
-// tree-shaken separately.
-
-const metas = import.meta.glob<Meta>('../routes/**/*_*.tsx', {
-	import: 'meta',
-})
-
-const pages = import.meta.glob<Page>('../routes/**/*_*.tsx')
+const pages = import.meta.glob(['../pages/**/*.astro', '!**/_*.astro'])
 
 export type Route = {
-	meta: () => Promise<Meta>
 	filePath: string
 	path: string
 	isHidden: boolean
-	page: () => Promise<Page>
 }
 
-export const routes = Object
-	// We can iterate over routeMetas or routePages here
-	.entries(metas)
-	.sort(([a], [b]) => a.localeCompare(b, 'en-AU', { numeric: true }))
-	.map<Route>(([path, meta]) => {
-		let segments = path.split('/')
+export const routes = Object.keys(pages).map<Route>((path) => {
+	let segments = path.split('/')
 
-		// Get segments relative to 'routes', e.g; ['about', '_index.tsx']
-		segments = segments.slice(
-			segments.indexOf('routes') + 1,
-			segments.length + 1,
-		)
+	// Get segments relative to 'pages', e.g; ['about', 'index.astro']
+	segments = segments.slice(segments.indexOf('pages') + 1, segments.length + 1)
 
-		let isHidden = false
+	let isHidden = false
 
-		segments = segments.flatMap((segment, segmentIndex) => {
-			let [number, segmentName] = segment.split('_')
-
-			// Remove file extension
-			if (segmentIndex === segments.length - 1) {
-				segmentName = segmentName.split('.')[0]
-			}
-
-			// Ignore indexes
-			if (segmentName === 'index') {
-				return []
-			}
-
-			// If not an index and with a number, then treat
-			// as a hidden page, which means that it is removed
-			// from navigation order
-			if (!number) {
-				isHidden = true
-			}
-
-			return [segmentName]
-		})
-
-		return {
-			meta,
-			filePath: path,
-			path: '/' + segments.join('/'),
-			isHidden,
-			page: pages[path],
+	segments = segments.flatMap((segment, index) => {
+		// Any pages beginning with an underscore or
+		// pages within folders beginning with an
+		// underscore are hidden and removed from
+		// navigation order
+		if (segment.startsWith('_')) {
+			isHidden = true
 		}
+
+		// Remove file extension
+		if (index === segments.length - 1) {
+			;[segment] = segment.split('.')
+		}
+
+		// Ignore indexes
+		if (segment === 'index') {
+			return []
+		}
+
+		return [segment]
 	})
+
+	return {
+		path: '/' + segments.join('/'),
+		filePath: path,
+		isHidden,
+	}
+})
 
 export function getRoute(path: string): Route | undefined {
 	return routes.find((route) => route.path === path)

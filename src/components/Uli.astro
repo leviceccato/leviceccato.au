@@ -1,0 +1,26 @@
+---
+import Text from './Text.astro'
+---
+
+<li class="root">
+	<Text><slot /></Text>
+</li>
+
+<style>
+	.root {
+		padding-inline-start: 1.1em;
+		position: relative;
+	}
+
+	.root::before {
+		content: '';
+		position: absolute;
+		inset-block-start: 0.6em;
+		inset-inline-start: 0.05em;
+		inline-size: 5px;
+		block-size: 5px;
+		display: inline-block;
+		border-radius: 50%;
+		background-color: currentColor;
+	}
+</style>

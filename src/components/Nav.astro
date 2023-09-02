@@ -1,0 +1,71 @@
+---
+import { clampVw } from '../utils/misc'
+import A, { type Props as AProps } from './A.astro'
+
+export type Items = (AProps & {
+	text: string
+})[][]
+
+type Props = {
+	items: Items
+	position: 'start' | 'end'
+}
+
+const borderClassMap = { start: 'border-end', end: 'border-start' } as const
+---
+
+<nav
+	class="root"
+	style={{ '--columnFontSize': clampVw(16, 18) }}
+>
+	{
+		Astro.props.items.map((column) => (
+			<div class:list={['column', borderClassMap[Astro.props.position]]}>
+				{column.map((a) => (
+					<A
+						class={a.class}
+						href={a.href}
+						hasActiveIndicator={a.hasActiveIndicator}
+						onclick={a.onclick}
+					>
+						{a.text}
+					</A>
+				))}
+			</div>
+		))
+	}
+</nav>
+
+<style>
+	.root {
+		display: flex;
+		justify-content: space-between;
+		gap: var(--sizesColumnGap);
+	}
+
+	.column {
+		inline-size: 100%;
+		font-size: var(--columnFontSize);
+		padding-block: 0.4em;
+		border-block: 2px solid;
+	}
+
+	.column.border-start {
+		border-block-start-color: currentColor;
+		border-block-end-color: transparent;
+	}
+
+	.column.border-end {
+		border-block-start-color: transparent;
+		border-block-end-color: currentColor;
+	}
+
+	.link {
+		box-sizing: content-box;
+		display: block;
+		padding-block: 0.1em;
+		--textLineHeight: 1.4;
+		--aTextDecorationThickness: 2px;
+		--aTextUnderlineOffset: 2px;
+	}
+</style>

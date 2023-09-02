@@ -1,0 +1,422 @@
+---
+import * as theme from '../data/theme'
+import { getNextRoute } from '../data/routes'
+import { clampVw } from '../utils/misc'
+import Container from './Container.astro'
+import VisuallyHidden from './VisuallyHidden.astro'
+import Nav, { type Items as NavItems } from './Nav.astro'
+import A from './A.astro'
+
+interface Props {
+	title: string
+	description: string
+}
+
+const _theme = Object.fromEntries(
+	Object.entries(theme).map(([name, value]) => ['--' + name, value]),
+)
+
+const headerItems: NavItems = [
+	[
+		{ text: 'Home', href: '/' },
+		{ text: 'Blog', href: '/blog' },
+	],
+	[
+		{ text: 'Logos', href: '/logos' },
+		{ text: 'Art', href: '/art' },
+	],
+	[
+		{ text: 'Colophon', href: '/colophon' },
+		{ text: 'Links', href: '/links' },
+	],
+]
+
+const footerItems: NavItems = [
+	[],
+	[
+		{
+			text: 'Back to top',
+			href: '#header',
+			// The hash URL will ensure scrolling to top without JavaScript works
+			// but this will only work on the first click, or while the hash
+			// isn't set. Subsequent clicks require this supplementary code.
+			onclick: 'scrollTo({ top: 0 })',
+		},
+	],
+	[],
+]
+
+const previousRoute = getNextRoute(Astro.url.pathname, -1)
+if (previousRoute) {
+	footerItems[0] = [
+		{
+			href: previousRoute.path,
+			text: 'Previous',
+			hasActiveIndicator: false,
+		},
+	]
+}
+
+const nextRoute = getNextRoute(Astro.url.pathname, 1)
+if (nextRoute) {
+	footerItems[2] = [
+		{
+			href: nextRoute.path,
+			text: 'Next',
+			hasActiveIndicator: false,
+		},
+	]
+}
+---
+
+<!doctype html>
+<html lang="en-AU">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link
+			rel="icon"
+			href="/favicon.ico"
+			sizes="any"
+		/>
+		<link
+			rel="icon"
+			href="/icon.svg"
+			type="image/svg+xml"
+		/>
+		<link
+			rel="apple-touch-icon"
+			href="/apple-touch-icon.png"
+		/>
+		<meta
+			property="og:image"
+			content="/open-graph-image.png"
+		/>
+		<link
+			rel="manifest"
+			href="/manifest.webmanifest"
+		/>
+		<link
+			rel="preload"
+			href="/fonts/manrope-medium.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<link
+			rel="preload"
+			href="/fonts/manrope-bold.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin
+		/>
+		<title>{Astro.props.title}</title>
+		<meta
+			name="description"
+			content={Astro.props.description}
+		/>
+	</head>
+	<body style={_theme}>
+		<header
+			id="header"
+			class="header"
+			style={{
+				'--headerPaddingBlockStart': clampVw(0, 70),
+			}}
+		>
+			<Container>
+				<VisuallyHidden isFocusable>
+					<A
+						class="skip-link"
+						style={{ '--skipLinkFontSize': clampVw(16, 18) }}
+						href="#main"
+					>
+						Skip to main content
+					</A>
+				</VisuallyHidden>
+				<Nav
+					position="start"
+					items={headerItems}
+				/>
+			</Container>
+		</header>
+		<main
+			id="main"
+			class="main"
+			style={{
+				'--mainPaddingBlockStart': clampVw(35, 85),
+				'--mainPaddingBlockEnd': clampVw(50, 175),
+			}}
+		>
+			<slot />
+		</main>
+		<footer
+			class="footer"
+			style={{
+				'--footerPaddingBlockEnd': clampVw(0, 70),
+			}}
+		>
+			<Container>
+				<Nav
+					position="end"
+					items={footerItems}
+				/>
+			</Container>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	@import url('modern-normalize/modern-normalize.css');
+
+	html {
+		height: 100%;
+	}
+
+	body {
+		margin: 0;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		background-color: var(--colorBg);
+		color: var(--colorFg);
+		/* Fixes bold looking fonts on macOS in Chrome & Safari */
+		-webkit-font-smoothing: antialiased;
+		/* Fixes bold looking fonts on macOS in Firefox */
+		-moz-osx-font-smoothing: grayscale;
+		line-height: 1.4;
+		overflow-y: scroll;
+	}
+
+	* {
+		cursor: var(--cursorArrow1X), default;
+		cursor: -webkit-image-set(
+				var(--cursorArrow1X) 1x,
+				var(--cursorArrow1P5X) 2x
+			),
+			default;
+	}
+
+	::-webkit-scrollbar {
+		width: 15px;
+	}
+
+	::-webkit-scrollbar-track {
+		border: solid 3px transparent;
+		background-color: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		box-shadow: inset 0 0 0 2px currentColor;
+		border: solid 4px transparent;
+		background-color: var(--colorBg);
+		background-clip: content-box;
+		border-radius: 10;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		border: none;
+	}
+
+	a,
+	button {
+		cursor: var(--cursorPointer1X), default;
+		cursor: -webkit-image-set(
+				var(--cursorPointer1X) 1x,
+				var(--cursorPointer1P5X) 2x
+			),
+			default;
+	}
+
+	::selection {
+		background-color: var(--colorFg);
+		color: var(--colorBg);
+	}
+
+	blockquote,
+	dl,
+	dd,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	hr,
+	figure,
+	p,
+	pre {
+		margin: 0;
+	}
+
+	iframe {
+		border: none;
+		width: 100%;
+	}
+
+	ol,
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-size: inherit;
+		font-weight: inherit;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: inherit;
+	}
+
+	input {
+		font-family: inherit;
+		font-size: inherit;
+		color: inherit;
+	}
+
+	input::-webkit-input-placeholder {
+		color: inherit;
+	}
+
+	input::placeholder {
+		color: inherit;
+		opacity: inherit;
+	}
+
+	input::-ms-clear {
+		display: none;
+		width: 0;
+		height: 0;
+	}
+
+	/* Clears the 'X' from Chrome */
+	input[type='search']::-webkit-search-decoration,
+	input[type='search']::-webkit-search-cancel-button,
+	input[type='search']::-webkit-search-results-button,
+	input[type='search']::-webkit-search-results-decoration {
+		display: none;
+	}
+
+	input[type='range'] {
+		-webkit-appearance: none;
+		width: 100%;
+		display: block;
+	}
+
+	input[type='range']::-webkit-slider-thumb {
+		-webkit-appearance: none;
+	}
+
+	:where(input[type='range']:focus) {
+		outline: none;
+	}
+
+	input[type='range']::-ms-track {
+		width: 100%;
+		background: transparent;
+		cursor: pointer;
+		border-color: transparent;
+		color: transparent;
+	}
+
+	button,
+	textarea,
+	input,
+	select,
+	a {
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	button {
+		display: inline-flex;
+		color: inherit;
+		background: none;
+		border: none;
+		font-family: inherit;
+		text-align: inherit;
+		font-size: inherit;
+		letter-spacing: inherit;
+		line-height: inherit;
+		padding: 0;
+	}
+
+	button:focus {
+		outline: none;
+	}
+
+	button:enabled {
+		cursor: pointer;
+	}
+
+	button:disabled {
+		cursor: not-allowed;
+	}
+
+	img,
+	svg,
+	video,
+	canvas,
+	audio,
+	iframe,
+	embed,
+	object {
+		max-width: 100%;
+		display: block;
+		vertical-align: middle;
+	}
+
+	svg {
+		fill: currentColor;
+	}
+</style>
+
+<style>
+	.header {
+		padding-block-start: var(--headerPaddingBlockStart);
+	}
+
+	.skip-link {
+		margin-inline: auto;
+		inline-size: 100%;
+		max-inline-size: var(--sizeMaxContainerInlineSize);
+		padding: var(--sizePageInlineMargin);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		font-size: var(--skipLinkFontSize);
+	}
+
+	.skip-link:focus,
+	.skip-link:hover {
+		text-decoration: underline;
+	}
+
+	.main {
+		flex: 1 0 auto;
+		padding-block-start: var(--mainPaddingBlockStart);
+		padding-block-end: var(--mainPaddingBlockEnd);
+	}
+
+	.main > :global(*:first-child) {
+		margin-block-start: 0;
+	}
+
+	.main > :global(*:last-child) {
+		margin-block-end: 0;
+	}
+
+	.footer {
+		flex-shrink: 0;
+		padding-block-end: var(--footerPaddingBlockEnd);
+	}
+</style>
