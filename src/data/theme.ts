@@ -2,7 +2,7 @@ import { svgEncode } from '../utils/misc'
 
 // Colours
 export const colorFg = 'black'
-export const colorBg = '#ebebeb'
+export const colorBg = '#e6e6e6'
 
 // Breakpoints
 export const breakpoint0 = 320
