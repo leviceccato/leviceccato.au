@@ -26,7 +26,7 @@ Run development server.
 npm start
 ```
 
-Build and preview the site in production mode.
+Preview the site in production mode.
 
 ```shell
 npm run preview
