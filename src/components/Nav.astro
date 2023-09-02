@@ -23,7 +23,7 @@ const borderClassMap = { start: 'border-end', end: 'border-start' } as const
 			<div class:list={['column', borderClassMap[Astro.props.position]]}>
 				{column.map((a) => (
 					<A
-						class={a.class}
+						class="link"
 						href={a.href}
 						hasActiveIndicator={a.hasActiveIndicator}
 						onclick={a.onclick}
@@ -40,7 +40,7 @@ const borderClassMap = { start: 'border-end', end: 'border-start' } as const
 	.root {
 		display: flex;
 		justify-content: space-between;
-		gap: var(--sizesColumnGap);
+		gap: calc(1px * var(--sizeColumnGap));
 	}
 
 	.column {
