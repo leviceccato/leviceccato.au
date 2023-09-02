@@ -19,6 +19,8 @@ const isActive =
 	Astro.url.pathname === '/'
 		? Astro.props.href === '/'
 		: String(Astro.props.href).startsWith(Astro.url.pathname)
+
+const defaultSlot = await Astro.slots.render('default')
 ---
 
 <a
@@ -30,7 +32,10 @@ const isActive =
 	style={Astro.props.style}
 >
 	<Text>
-		<span class="main"><slot /></span>
+		<span
+			class="main"
+			set:text={defaultSlot.trim()}
+		/>
 		{
 			Astro.props.hasActiveIndicator && isActive && (
 				<span
