@@ -2,18 +2,18 @@ const pages = import.meta.glob(
 	['../pages/**/*.astro', '!**/_*', '!**/_*.astro'],
 	{
 		eager: true,
-		import: 'isHidden',
 	},
-)
+) as Record<string, { isHidden?: boolean; posted?: string }>
 
 export type Route = {
 	filePath: string
 	path: string
 	isHidden: boolean
+	posted?: string
 }
 
 export const routes = Object.entries(pages)
-	.map<Route>(([path, isHidden]) => {
+	.map<Route>(([path, page]) => {
 		let segments = path.split('/')
 
 		// Get segments relative to 'pages', e.g; ['about', 'index.astro']
@@ -39,10 +39,17 @@ export const routes = Object.entries(pages)
 		return {
 			path: '/' + segments.join('/'),
 			filePath: path,
-			isHidden: Boolean(isHidden),
+			isHidden: Boolean(page.isHidden),
+			posted: page.posted,
 		}
 	})
-	.sort((a, b) => a.path.localeCompare(b.path, 'en-AU', { numeric: true }))
+	.sort((a, b) => {
+		if (a.posted && b.posted) {
+			return Date.parse(b.posted) - Date.parse(a.posted)
+		}
+
+		return a.path.localeCompare(b.path, 'en-AU', { numeric: true })
+	})
 
 export function getRoute(path: string): Route | undefined {
 	return routes.find((route) => route.path === path)
