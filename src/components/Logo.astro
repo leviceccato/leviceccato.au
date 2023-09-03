@@ -1,0 +1,31 @@
+---
+interface Props {
+	src: string
+	alt: string
+	scale?: string
+}
+---
+
+<div class="root">
+    <img
+        class="image"
+        src={Astro.props.src}
+        alt={Astro.props.alt}
+        style={{ '--logoScale': Astro.props.scale }}
+    />
+</div>
+
+<style>
+    .root {
+        background-color: var(--colorFg);
+        position: relative;
+        aspect-ratio: 1;
+    }
+    
+    .image {
+        position: absolute;
+        inset: 0;
+        inline-size: 100%;
+        block-size: 100%;
+    }
+</style>
