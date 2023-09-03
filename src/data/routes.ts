@@ -1,80 +1,106 @@
-const pages = import.meta.glob(
-	['../pages/**/*.astro', '!**/_*', '!**/_*.astro'],
-	{
-		eager: true,
-	},
-) as Record<string, { isHidden?: boolean; posted?: string }>
-
-export type Route = {
-	filePath: string
-	path: string
-	isHidden: boolean
+export type Meta = {
+	title: string
+	description: string
+	isHidden?: boolean
 	posted?: string
+	updated?: string
 }
 
-export const routes = Object.entries(pages)
-	.map<Route>(([path, page]) => {
-		let segments = path.split('/')
+export type ResolvedPage = { meta: Meta }
 
-		// Get segments relative to 'pages', e.g; ['about', 'index.astro']
-		segments = segments.slice(
-			segments.indexOf('pages') + 1,
-			segments.length + 1,
-		)
+export type Page = () => Promise<ResolvedPage>
 
-		segments = segments.flatMap((segment, index) => {
-			// Remove file extension
-			if (index === segments.length - 1) {
-				;[segment] = segment.split('.')
-			}
+const pages = import.meta.glob('../pages/**/*.astro') as Record<string, Page>
 
-			// Ignore indexes
-			if (segment === 'index') {
-				return []
-			}
-
-			return [segment]
-		})
-
-		return {
-			path: '/' + segments.join('/'),
-			filePath: path,
-			isHidden: Boolean(page.isHidden),
-			posted: page.posted,
-		}
-	})
-	.sort((a, b) => {
-		if (a.posted && b.posted) {
-			return Date.parse(b.posted) - Date.parse(a.posted)
-		}
-
-		return a.path.localeCompare(b.path, 'en-AU', { numeric: true })
-	})
-
-export function getRoute(path: string): Route | undefined {
-	return routes.find((route) => route.path === path)
+export type Route<TPage> = {
+	file: string
+	url: string
+	page: TPage
 }
 
-export function getNextRoute(
-	path: string,
+export const routes = Object.entries(pages).map<Route<Page>>(([path, page]) => {
+	let segments = path.split('/')
+
+	// Get segments relative to 'pages', e.g; ['about', 'index.astro']
+	segments = segments.slice(segments.indexOf('pages') + 1, segments.length + 1)
+
+	segments = segments.flatMap((segment, index) => {
+		// Remove file extension
+		if (index === segments.length - 1) {
+			;[segment] = segment.split('.')
+		}
+
+		// Ignore indexes
+		if (segment === 'index') {
+			return []
+		}
+
+		return [segment]
+	})
+
+	return {
+		file: path,
+		url: '/' + segments.join('/'),
+		page,
+	}
+})
+
+export async function sortRoutes(
+	routes: Route<Page>[],
+): Promise<Route<ResolvedPage>[]> {
+	const resolvedRoutes = await resolveRoutes(routes)
+
+	return resolvedRoutes.sort((a, b) => {
+		if (a.page.meta?.posted && b.page.meta?.posted) {
+			return Date.parse(b.page.meta.posted) - Date.parse(a.page.meta.posted)
+		}
+
+		return a.url.localeCompare(b.url, 'en-AU', { numeric: true })
+	})
+}
+
+export async function resolveRoutes(
+	routes: Route<Page>[],
+): Promise<Route<ResolvedPage>[]> {
+	const pages = routes.map((route) => route.page)
+	const resolvedPages = await Promise.all(pages.map((page) => page()))
+
+	return routes.map((route, index) => ({
+		...route,
+		page: resolvedPages[index],
+	}))
+}
+
+export async function getRoute(
+	url: string,
+): Promise<Route<ResolvedPage> | undefined> {
+	return (await sortRoutes(routes)).find((route) => route.url === url)
+}
+
+export async function getNextRoute(
+	url: string,
 	direction: number,
-): Route | undefined {
-	const routeIndex = routes.findIndex((route) => route.path === path)
+): Promise<Route<ResolvedPage> | undefined> {
+	const resolvedRoutes = await sortRoutes(routes)
+	const routeIndex = resolvedRoutes.findIndex((route) => route.url === url)
 	if (routeIndex === -1) {
 		return undefined
 	}
 
-	let route = routes[routeIndex + direction]
-	while (route?.isHidden) {
+	let route = resolvedRoutes[routeIndex + direction]
+	while (route?.page.meta?.isHidden) {
 		direction += direction
-		route = routes[routeIndex + direction]
+		route = resolvedRoutes[routeIndex + direction]
 	}
 
 	return route
 }
 
-export function getChildRoutes(path: string): Route[] {
-	return routes.filter(
-		(route) => route.path !== path && route.path.startsWith(path),
+export async function getChildRoutes(
+	url: string,
+): Promise<Route<ResolvedPage>[]> {
+	const resolvedRoutes = await sortRoutes(routes)
+	return resolvedRoutes.filter(
+		(route) => route.url !== url && route.url.startsWith(url),
 	)
 }

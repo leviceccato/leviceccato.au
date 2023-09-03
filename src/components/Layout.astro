@@ -1,6 +1,6 @@
 ---
 import * as theme from '../data/theme'
-import { getNextRoute } from '../data/routes'
+import { getNextRoute, type Meta } from '../data/routes'
 import { clampVw, formatDate } from '../utils/misc'
 import Container from './Container.astro'
 import VisuallyHidden from './VisuallyHidden.astro'
@@ -9,21 +9,18 @@ import A from './A.astro'
 import P from './P.astro'
 
 interface Props {
-	title: string
-	description: string
-	posted?: string
-	updated?: string
+	meta: Meta
 }
 
 const _theme = Object.fromEntries(
 	Object.entries(theme).map(([name, value]) => ['--' + name, value]),
 )
 
-const postedDate = Astro.props.posted
-	? formatDate(new Date(Astro.props.posted))
+const postedDate = Astro.props.meta.posted
+	? formatDate(new Date(Astro.props.meta.posted))
 	: null
-const updatedDate = Astro.props.updated
-	? formatDate(new Date(Astro.props.updated))
+const updatedDate = Astro.props.meta.updated
+	? formatDate(new Date(Astro.props.meta.updated))
 	: null
 
 const headerItems: NavItems = [
@@ -56,22 +53,22 @@ const footerItems: NavItems = [
 	[],
 ]
 
-const previousRoute = getNextRoute(Astro.url.pathname, -1)
+const previousRoute = await getNextRoute(Astro.url.pathname, -1)
 if (previousRoute) {
 	footerItems[0] = [
 		{
-			href: previousRoute.path,
+			href: previousRoute.url,
 			text: 'Previous',
 			hasActiveIndicator: false,
 		},
 	]
 }
 
-const nextRoute = getNextRoute(Astro.url.pathname, 1)
+const nextRoute = await getNextRoute(Astro.url.pathname, 1)
 if (nextRoute) {
 	footerItems[2] = [
 		{
-			href: nextRoute.path,
+			href: nextRoute.url,
 			text: 'Next',
 			hasActiveIndicator: false,
 		},
@@ -123,10 +120,10 @@ if (nextRoute) {
 			type="font/woff2"
 			crossorigin
 		/>
-		<title>{Astro.props.title}</title>
+		<title>{Astro.props.meta.title}</title>
 		<meta
 			name="description"
-			content={Astro.props.description}
+			content={Astro.props.meta.description}
 		/>
 	</head>
 	<body style={_theme}>
