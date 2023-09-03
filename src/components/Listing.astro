@@ -1,0 +1,11 @@
+---
+import Container from './Container.astro'
+import A from './A.astro'
+import { getChildRoutes } from '../data/routes'
+
+const childRoutes = await getChildRoutes(Astro.url.pathname)
+---
+
+<Container>
+	{childRoutes.map((route) => <A href={route.url}>{route.page.meta?.title}</A>)}
+</Container>

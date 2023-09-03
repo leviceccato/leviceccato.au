@@ -38,3 +38,5 @@ export { default as Figure } from './components/Figure.astro'
 export { default as Grid } from './components/Grid.astro'
 // @ts-ignore
 export { default as Logo } from './components/Logo.astro'
+// @ts-ignore
+export { default as Listing } from './components/Listing.astro'
