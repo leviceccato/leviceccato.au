@@ -16,9 +16,9 @@ Astro.props.isInline ??= true
 Astro.props.hasActiveIndicator ??= true
 
 const isActive =
-	Astro.url.pathname === '/'
-		? Astro.props.href === '/'
-		: String(Astro.props.href).startsWith(Astro.url.pathname)
+	Astro.props.href === '/'
+		? Astro.url.pathname === '/'
+		: Astro.url.pathname.startsWith(String(Astro.props.href))
 
 const defaultSlot = await Astro.slots.render('default')
 ---
