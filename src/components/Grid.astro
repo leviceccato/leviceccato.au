@@ -1,0 +1,21 @@
+---
+import Container from './Container.astro'
+
+interface Props {
+	columns: number
+}
+---
+
+<Container>
+	<div class="grid">
+		<slot />
+	</div>
+</Container>
+
+<style>
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--sizeColumnGap);
+	}
+</style>
