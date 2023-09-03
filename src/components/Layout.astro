@@ -1,20 +1,30 @@
 ---
 import * as theme from '../data/theme'
 import { getNextRoute } from '../data/routes'
-import { clampVw } from '../utils/misc'
+import { clampVw, formatDate } from '../utils/misc'
 import Container from './Container.astro'
 import VisuallyHidden from './VisuallyHidden.astro'
 import Nav, { type Items as NavItems } from './Nav.astro'
 import A from './A.astro'
+import P from './P.astro'
 
 interface Props {
 	title: string
 	description: string
+	posted?: string
+	updated?: string
 }
 
 const _theme = Object.fromEntries(
 	Object.entries(theme).map(([name, value]) => ['--' + name, value]),
 )
+
+const postedDate = Astro.props.posted
+	? formatDate(new Date(Astro.props.posted))
+	: null
+const updatedDate = Astro.props.updated
+	? formatDate(new Date(Astro.props.updated))
+	: null
 
 const headerItems: NavItems = [
 	[
@@ -151,6 +161,14 @@ if (nextRoute) {
 				'--mainPaddingBlockEnd': clampVw(50, 175),
 			}}
 		>
+			{
+				(postedDate || updatedDate) && (
+					<Container>
+						{postedDate && <P>Posted {postedDate}</P>}
+						{updatedDate && <P>Updated {updatedDate}</P>}
+					</Container>
+				)
+			}
 			<slot />
 		</main>
 		<footer
