@@ -34,3 +34,7 @@ export { default as Uli } from './components/Uli.astro'
 export { default as Quote } from './components/Quote.astro'
 // @ts-ignore
 export { default as Figure } from './components/Figure.astro'
+// @ts-ignore
+export { default as Grid } from './components/Grid.astro'
+// @ts-ignore
+export { default as Logo } from './components/Logo.astro'
