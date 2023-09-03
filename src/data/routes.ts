@@ -1,4 +1,7 @@
-const pages = import.meta.glob(['../pages/**/*.astro', '!**/_*.astro'])
+const pages = import.meta.glob('../pages/**/*.astro', {
+	eager: true,
+	import: 'isHidden',
+})
 
 export type Route = {
 	filePath: string
@@ -6,23 +9,13 @@ export type Route = {
 	isHidden: boolean
 }
 
-export const routes = Object.keys(pages).map<Route>((path) => {
+export const routes = Object.entries(pages).map<Route>(([path, isHidden]) => {
 	let segments = path.split('/')
 
 	// Get segments relative to 'pages', e.g; ['about', 'index.astro']
 	segments = segments.slice(segments.indexOf('pages') + 1, segments.length + 1)
 
-	let isHidden = false
-
 	segments = segments.flatMap((segment, index) => {
-		// Any pages beginning with an underscore or
-		// pages within folders beginning with an
-		// underscore are hidden and removed from
-		// navigation order
-		if (segment.startsWith('_')) {
-			isHidden = true
-		}
-
 		// Remove file extension
 		if (index === segments.length - 1) {
 			;[segment] = segment.split('.')
@@ -39,7 +32,7 @@ export const routes = Object.keys(pages).map<Route>((path) => {
 	return {
 		path: '/' + segments.join('/'),
 		filePath: path,
-		isHidden,
+		isHidden: Boolean(isHidden),
 	}
 })
 
