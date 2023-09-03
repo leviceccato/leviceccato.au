@@ -43,7 +43,11 @@ export function slugify(text: string): string {
 
 // Format Date to string for use in blog
 export function formatDate(date: Date): string {
-	return `${date.getUTCDay()} ${new Intl.DateTimeFormat('en-AU', {
+	const day = date.getUTCDay()
+	const month = new Intl.DateTimeFormat('en-AU', {
 		month: 'short',
-	}).format(date)} ${date.getUTCFullYear()}`
+	}).format(date)
+	const year = date.getUTCFullYear()
+
+	return `${day} ${month} ${year}`
 }
