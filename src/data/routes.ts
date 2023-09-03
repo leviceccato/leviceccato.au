@@ -1,7 +1,10 @@
-const pages = import.meta.glob('../pages/**/*.astro', {
-	eager: true,
-	import: 'isHidden',
-})
+const pages = import.meta.glob(
+	['../pages/**/*.astro', '!**/_*', '!**/_*.astro'],
+	{
+		eager: true,
+		import: 'isHidden',
+	},
+)
 
 export type Route = {
 	filePath: string
