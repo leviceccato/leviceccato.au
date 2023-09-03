@@ -12,32 +12,37 @@ export type Route = {
 	isHidden: boolean
 }
 
-export const routes = Object.entries(pages).map<Route>(([path, isHidden]) => {
-	let segments = path.split('/')
+export const routes = Object.entries(pages)
+	.map<Route>(([path, isHidden]) => {
+		let segments = path.split('/')
 
-	// Get segments relative to 'pages', e.g; ['about', 'index.astro']
-	segments = segments.slice(segments.indexOf('pages') + 1, segments.length + 1)
+		// Get segments relative to 'pages', e.g; ['about', 'index.astro']
+		segments = segments.slice(
+			segments.indexOf('pages') + 1,
+			segments.length + 1,
+		)
 
-	segments = segments.flatMap((segment, index) => {
-		// Remove file extension
-		if (index === segments.length - 1) {
-			;[segment] = segment.split('.')
+		segments = segments.flatMap((segment, index) => {
+			// Remove file extension
+			if (index === segments.length - 1) {
+				;[segment] = segment.split('.')
+			}
+
+			// Ignore indexes
+			if (segment === 'index') {
+				return []
+			}
+
+			return [segment]
+		})
+
+		return {
+			path: '/' + segments.join('/'),
+			filePath: path,
+			isHidden: Boolean(isHidden),
 		}
-
-		// Ignore indexes
-		if (segment === 'index') {
-			return []
-		}
-
-		return [segment]
 	})
-
-	return {
-		path: '/' + segments.join('/'),
-		filePath: path,
-		isHidden: Boolean(isHidden),
-	}
-})
+	.sort((a, b) => a.path.localeCompare(b.path, 'en-AU', { numeric: true }))
 
 export function getRoute(path: string): Route | undefined {
 	return routes.find((route) => route.path === path)
