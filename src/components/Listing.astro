@@ -1,11 +1,48 @@
 ---
-import Container from './Container.astro'
-import A from './A.astro'
+import { clampVw } from '../utils/misc'
 import { getChildRoutes } from '../data/routes'
+import Container from './Container.astro'
+import Grid from './Grid.astro'
+import Text from './Text.astro'
 
 const childRoutes = await getChildRoutes(Astro.url.pathname)
 ---
 
-<Container>
-	{childRoutes.map((route) => <A href={route.url}>{route.page.meta?.title}</A>)}
+<Container
+	style={{
+		'--listingFontSize': clampVw(17, 19),
+	}}
+>
+	<Grid columns="1">
+		{
+			childRoutes.map((route) => (
+				<a
+					class="item"
+					href={route.url}
+				>
+					<Text>{route.page.meta?.title}</Text>
+				</a>
+			))
+		}
+	</Grid>
 </Container>
+
+<style>
+	.listing {
+		margin-block-start: 32px;
+		margin-block-end: 32px;
+		display: flex;
+		flex-direction: column;
+		gap: calc(1px * var(--sizeColumnGap));
+	}
+
+	.item {
+		--textLineHeight: 1.3;
+		font-size: var(--listingFontSize);
+		border-inline-start: 2px solid currentColor;
+		display: block;
+		font-weight: 700;
+		padding-inline-start: calc(1px * var(--sizePageInlineMargin));
+		padding-block-end: calc(1px * var(--sizePageInlineMargin));
+	}
+</style>
