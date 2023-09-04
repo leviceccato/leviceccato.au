@@ -16,7 +16,7 @@ const title = Astro.props.meta.title
 	? `${Astro.props.meta.title} — Levi Ceccato`
 	: 'Levi Ceccato'
 
-const _theme = Object.fromEntries(
+const themeProperties = Object.fromEntries(
 	Object.entries(theme).map(([name, value]) => ['--' + name, value]),
 )
 
@@ -130,7 +130,7 @@ if (nextRoute) {
 			content={Astro.props.meta.description}
 		/>
 	</head>
-	<body style={_theme}>
+	<body style={themeProperties}>
 		<header
 			id="header"
 			class="header"
