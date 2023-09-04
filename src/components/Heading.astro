@@ -34,10 +34,7 @@ const Tag = `h${Astro.props.level}` as HTMLTag
 		<Text variant="block">
 			{
 				Astro.props.isAnchor ? (
-					<A href={href}>
-						{' '}
-						<span set:html={content} />
-					</A>
+					<A href={href}>{content}</A>
 				) : (
 					<span set:html={content} />
 				)
