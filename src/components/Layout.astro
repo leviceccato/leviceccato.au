@@ -12,6 +12,10 @@ interface Props {
 	meta: Meta
 }
 
+const title = Astro.props.meta.title
+	? `${Astro.props.meta.title} — Levi Ceccato`
+	: 'Levi Ceccato'
+
 const _theme = Object.fromEntries(
 	Object.entries(theme).map(([name, value]) => ['--' + name, value]),
 )
@@ -120,7 +124,7 @@ if (nextRoute) {
 			type="font/woff2"
 			crossorigin
 		/>
-		<title>{Astro.props.meta.title}</title>
+		<title>{title}</title>
 		<meta
 			name="description"
 			content={Astro.props.meta.description}
