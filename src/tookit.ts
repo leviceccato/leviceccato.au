@@ -1,6 +1,5 @@
 // This file exposes commonly used components and helpers
-// for use in pages. No check so we can re-export Astro
-// components
+// for use in pages.
 
 // The `ts-ignore` comments here are necessary because we're
 // importing this file inside TypeScript, which means that
