@@ -10,12 +10,9 @@
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
-		"jsx": "preserve",
-		"jsxImportSource": "solid-js",
 		"noEmit": true,
 		"skipLibCheck": true,
 		"isolatedModules": true,
-		"typeRoots": ["./node_modules", "./src"],
 		"types": ["vite/client"],
 		"baseUrl": ".",
 		"paths": {

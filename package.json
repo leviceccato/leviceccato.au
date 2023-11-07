@@ -1,34 +1,13 @@
 {
-	"//": "The name property is required by vanilla-extract. npm will automatically run postbuild after build.",
-	"name": "leviceccato.au",
-	"private": true,
-	"scripts": {
-		"start": "vite",
-		"check": "tsc --noEmit",
-		"postbuild": "vite-node postbuild.ts",
-		"build": "npm run check && vite build",
-		"preview": "npm run build && vite preview"
-	},
-	"prettier": {
-		"useTabs": true,
-		"semi": false,
-		"singleQuote": true,
-		"trailingComma": "all",
-		"singleAttributePerLine": true
-	},
-	"dependencies": {
-		"@solidjs/router": "^0.8.2",
-		"modern-normalize": "^2.0.0",
-		"solid-js": "^1.7.6"
-	},
-	"devDependencies": {
-		"@types/node": "^20.3.1",
-		"@vanilla-extract/css": "^1.12.0",
-		"@vanilla-extract/vite-plugin": "^3.8.2",
-		"cheerio": "^1.0.0-rc.12",
-		"typescript": "^5.1.3",
-		"vite": "^4.3.9",
-		"vite-node": "^0.32.2",
-		"vite-plugin-solid": "^2.7.0"
-	}
+  "private": true,
+  "scripts": {
+    "start": "vite",
+    "check": "tsc --noEmit",
+    "build": "bun run check && vite build",
+    "preview": "bun run build && vite preview"
+  },
+  "devDependencies": {
+    "lightningcss": "^1.22.0",
+    "vite": "^4.5.0"
+  }
 }
