@@ -12,3 +12,24 @@ function raf(time: number) {
 }
 
 requestAnimationFrame(raf)
+
+// Progressively enhance link behaviour
+const headerLinkEls =
+	document.querySelectorAll<HTMLAnchorElement>('[data-header-link]')
+for (const linkEl of headerLinkEls) {
+	const href = linkEl.getAttribute('href')
+	if (!href) {
+		continue
+	}
+
+	const targetEl = document.querySelector(href)
+	if (!targetEl) {
+		continue
+	}
+
+	linkEl.addEventListener('click', (event) => {
+		event.preventDefault()
+
+		lenis.scrollTo(targetEl)
+	})
+}
