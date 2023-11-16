@@ -1,3 +1,8 @@
+:root {
+	--fontInterDisplayCropStart: 1;
+	--fontInterDisplayCropEnd: 1.35;
+}
+
 @font-face {
 	font-family: 'Inter Display';
 	font-weight: 600;
@@ -12,11 +17,6 @@
 	font-style: normal;
 	src: url('/fonts/interdisplay-regular.woff2') format('woff2'),
 		url('/fonts/interdisplay-regular.woff') format('woff');
-}
-
-:root {
-	--fontInterDisplayCropStart: 1;
-	--fontInterDisplayCropEnd: 1.35;
 }
 
 .Text {
