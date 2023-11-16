@@ -1,3 +1,5 @@
+import 'modern-normalize/modern-normalize.css'
+import './main.css'
 import Lenis from '@studio-freight/lenis'
 
 // Init Lenis smooth scrolling
