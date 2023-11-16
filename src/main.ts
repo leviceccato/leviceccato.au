@@ -1,16 +1,11 @@
 import Lenis from '@studio-freight/lenis'
 
+// Init Lenis smooth scrolling
 const lenis = new Lenis()
-
-lenis.on('scroll', (e: any) => {
-	console.log(e)
-})
-
 function raf(time: number) {
 	lenis.raf(time)
 	requestAnimationFrame(raf)
 }
-
 requestAnimationFrame(raf)
 
 // Progressively enhance link behaviour
