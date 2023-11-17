@@ -1,6 +1,20 @@
 :root {
-	--fontInterDisplayCropStart: 1;
-	--fontInterDisplayCropEnd: 1.35;
+	--fontInterDisplayCropStart: 0.8;
+	--fontInterDisplayCropEnd: 1.15;
+	--colorPrimary: #cacaca;
+	--colorSecondary: black;
+}
+
+@custom-media --twoColumn (min-width: 600px);
+
+::-moz-selection {
+	background-color: var(--colorSecondary);
+	color: var(--colorPrimary);
+}
+
+::selection {
+	background-color: var(--colorSecondary);
+	color: var(--colorPrimary);
 }
 
 @font-face {
@@ -20,9 +34,13 @@
 }
 
 .Text {
-	--TextDefaultLineHeight: 1.4;
-	display: block;
+	--Text-defaultLineHeight: 1.5;
+	margin: var(--Text-margin, 0);
+	display: var(--Text-display, block);
 	font-family: 'Inter Display', sans-serif;
+	font-weight: var(--Text-fontWeight, 400);
+	letter-spacing: var(--Text-letterSpacing, 0.01em);
+	line-height: var(--Text-lineHeight, var(--Text-defaultLineHeight));
 
 	&::before,
 	&::after {
@@ -36,7 +54,7 @@
 		margin-block-start: calc(
 			(
 					var(--fontInterDisplayCropStart) -
-						var(--TextLineHeight, var(--TextDefaultLineHeight))
+						var(--Text-lineHeight, var(--Text-defaultLineHeight))
 				) * 0.5em
 		);
 	}
@@ -45,10 +63,23 @@
 		margin-block-end: calc(
 			(
 					var(--fontInterDisplayCropEnd) -
-						var(--TextLineHeight, var(--TextDefaultLineHeight))
+						var(--Text-lineHeight, var(--Text-defaultLineHeight))
 				) * 0.5em
 		);
 	}
+}
+
+.Text_headingPrimary {
+	--Text-lineHeight: 1.1;
+	--Text-letterSpacing: 0.07em;
+	--Text-fontWeight: 600;
+	text-transform: uppercase;
+	font-size: 12px;
+}
+
+.Text_headingSecondary {
+	--Text-lineHeight: 1.3;
+	font-size: 28px;
 }
 
 .Link {
@@ -57,9 +88,35 @@
 	-webkit-tap-highlight-color: transparent;
 }
 
+.Body {
+	--Body-margin: 20px;
+	--Body-paddingBlock: 100px;
+	background-color: var(--colorPrimary);
+	color: var(--colorSecondary);
+	block-size: 100vh;
+	display: flex;
+	flex-direction: column;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@media (--twoColumn) {
+	.Body {
+		flex-direction: row;
+	}
+}
+
 .Header {
 	position: fixed;
-	padding: 20px;
+	padding: var(--Body-margin);
+}
+
+@media (--twoColumn) {
+	.Header {
+		position: static;
+		padding-block: var(--Body-paddingBlock);
+		padding-inline-start: calc(var(--Body-margin) * 2);
+	}
 }
 
 .Header-nav {
@@ -67,6 +124,53 @@
 	margin: -10px;
 }
 
+@media (--twoColumn) {
+	.Header-nav {
+		flex-direction: column;
+	}
+}
+
 .Header-link {
 	padding: 10px;
+	font-size: 16px;
+	letter-spacing: 0.01em;
+}
+
+.Main {
+	padding-inline: var(--Body-margin);
+	overflow: auto;
+	inline-size: 100%;
+	max-block-size: 100%;
+}
+
+.Main-container {
+	height: 2000px;
+}
+
+.Main-section {
+	padding-block: var(--Body-paddingBlock);
+	min-block-size: 100vh;
+}
+
+.Main-text {
+	max-inline-size: 600px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 35px;
+}
+
+.Button {
+	--Text-display: inline-flex;
+	--Text-lineHeight: 1;
+	padding: 0.15em 0.3em;
+	text-decoration: inherit;
+	border: 1px solid var(--colorSecondary);
+	color: var(--colorSecondary);
+	border-radius: 1000px;
+
+	&:hover {
+		color: var(--colorPrimary);
+		background-color: var(--colorSecondary);
+	}
 }

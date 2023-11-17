@@ -14,6 +14,7 @@ export default {
 		transformer: 'lightningcss',
 		lightningcss: {
 			drafts: {
+				customMedia: true,
 				nesting: true,
 			},
 		},

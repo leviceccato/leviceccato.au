@@ -44,7 +44,7 @@
 			src="./main.ts"
 		></script>
 	</head>
-	<body>
+	<body class="Body">
 		<header class="Header">
 			<nav class="Header-nav">
 				<span class="Header-indicator"></span>
@@ -56,11 +56,11 @@
 					Intro
 				</a>
 				<a
-					href="#art"
+					href="#artwork"
 					class="Header-link Link Text"
 					data-header-link
 				>
-					Art
+					Artwork
 				</a>
 				<a
 					href="#logos"
@@ -78,6 +78,44 @@
 				</a>
 			</nav>
 		</header>
-		<main class="Main"></main>
+		<main
+			data-main
+			class="Main"
+		>
+			<div
+				data-main-container
+				class="Main-container"
+			>
+				<div
+					id="intro"
+					class="Main-section"
+				>
+					<div class="Main-text">
+						<h1 class="Text Text_headingPrimary">Levi Ceccato</h1>
+						<h2 class="Text Text_headingSecondary">
+							I’m a multidisciplinary designer based in Newcastle‚ Australia.
+						</h2>
+						<p class="Text">
+							My passion for design drives me to explore all of it’s avenues‚
+							including illustration‚ graphic design and software development.
+							I’m currently developing the <em>MOST</em> platform at Orygen to
+							provide mental health support to young people.
+						</p>
+						<a
+							href="#contact"
+							class="Button Text"
+						>
+							Contact me
+						</a>
+					</div>
+				</div>
+				<div
+					id="artwork"
+					class="Main-section"
+				>
+					<h1 class="Text Text_headingPrimary">Artwork</h1>
+				</div>
+			</div>
+		</main>
 	</body>
 </html>
