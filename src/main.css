@@ -82,6 +82,20 @@
 	font-size: 28px;
 }
 
+.Text_label {
+	--Text-lineHeight: 1.1;
+	--Text-letterSpacing: 0.08em;
+	text-transform: uppercase;
+	font-size: 11px;
+}
+
+.FieldText {
+	background-color: transparent;
+	appearance: none;
+	border: 1px solid currentColor;
+	border-radius: 5px;
+}
+
 .Link {
 	color: inherit;
 	text-decoration: inherit;
@@ -167,10 +181,18 @@
 	text-decoration: inherit;
 	border: 1px solid var(--colorSecondary);
 	color: var(--colorSecondary);
+	background-color: transparent;
 	border-radius: 1000px;
 
 	&:hover {
 		color: var(--colorPrimary);
 		background-color: var(--colorSecondary);
 	}
+}
+
+.Form {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 10px;
 }
