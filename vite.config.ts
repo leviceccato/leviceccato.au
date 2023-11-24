@@ -2,6 +2,7 @@ import { type UserConfig } from 'vite'
 import { ViteMinifyPlugin } from 'vite-plugin-minify'
 
 const src = new URL('./src', import.meta.url)
+const dist = new URL('./dist', import.meta.url)
 
 export default {
 	root: src.pathname,
@@ -9,6 +10,10 @@ export default {
 	plugins: [ViteMinifyPlugin()],
 	server: {
 		host: true,
+	},
+	build: {
+		outDir: dist.pathname,
+		emptyOutDir: true,
 	},
 	css: {
 		transformer: 'lightningcss',
@@ -18,10 +23,6 @@ export default {
 				nesting: true,
 			},
 		},
-	},
-	build: {
-		outDir: '../dist',
-		emptyOutDir: true,
 	},
 	resolve: {
 		alias: {
