@@ -2,7 +2,7 @@
 
 ## About
 
-Welcome to the repository of Levi Ceccato's website. It’s built as a simple optimised HTML and vanilla JS landing page.
+Welcome to the repository of Levi Ceccato's website. It’s built as a single optimised HTML file.
 
 ## Usage
 
