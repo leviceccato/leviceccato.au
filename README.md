@@ -32,8 +32,6 @@ Build and preview the site in production mode.
 npm run preview
 ```
 
-See `package.json#scripts` for more commands.
-
 ## Deployment
 
 This app is hosted on Netlify. Commits to `main` will trigger a deploy.
