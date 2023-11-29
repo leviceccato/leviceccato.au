@@ -27,10 +27,4 @@ export default defineConfig({
 			},
 		},
 	},
-	resolve: {
-		alias: {
-			// '#' is used since '@' may be confused with npm organisations
-			'#': src.pathname,
-		},
-	},
 })
