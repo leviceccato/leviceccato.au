@@ -29,7 +29,7 @@ bun start
 Build and preview the site in production mode.
 
 ```shell
-npm run preview
+bun run preview
 ```
 
 ## Deployment
