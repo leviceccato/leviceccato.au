@@ -1,0 +1,23 @@
+[[redirects]]
+from = "https://leviceccato.com.au/*"
+to = "https://leviceccato.au/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "https://www.leviceccato.com.au/*"
+to = "https://leviceccato.au/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "https://levic.com.au/*"
+to = "https://leviceccato.au/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "https://www.levic.com.au/*"
+to = "https://leviceccato.au/:splat"
+status = 301
+force = true
