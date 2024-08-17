@@ -2,7 +2,7 @@
 
 ## About
 
-Welcome to the repository of Levi Ceccato's website. It’s built as a single optimised HTML file.
+Welcome to the repository of Levi Ceccato's website. It’s built using plain vanilla web standards.
 
 ## Usage
 
@@ -29,7 +29,7 @@ bun start
 Build and preview the site in production mode.
 
 ```shell
-bun run preview
+bun run build && bunx vite preview
 ```
 
 ## Deployment
