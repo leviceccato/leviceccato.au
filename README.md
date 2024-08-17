@@ -26,10 +26,16 @@ Run development server.
 bun start
 ```
 
-Build and preview the site in production mode.
+Format and lint all source code and config.
 
 ```shell
-bun run build && bunx vite preview
+bun run check
+```
+
+Build the site in production mode.
+
+```shell
+bun run build
 ```
 
 ## Deployment
