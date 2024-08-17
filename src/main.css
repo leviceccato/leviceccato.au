@@ -36,7 +36,7 @@
 	color: var(--color-primary);
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
 	width: 15px;
 }
 
@@ -55,7 +55,7 @@
 
 ::-webkit-scrollbar-thumb:hover {
 	border: none;
-}
+} */
 
 * {
 	cursor: var(--cursor-default);
@@ -164,9 +164,30 @@
 	background-color: var(--color-primary);
 	padding: 20px;
 	color: var(--color-secondary);
-	block-size: 100vh;
+	block-size: 200vh;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+@supports (scrollbar-width: auto) {
+	.body {
+		scrollbar-color: var(--color-secondary) var(--color-primary);
+		scrollbar-width: thin;
+		scrollbar-gutter: stable;
+	}
+}
+
+@supports selector(::-webkit-scrollbar) {
+	.body::-webkit-scrollbar-thumb {
+		background-color: var(--color-secondary);
+	}
+	.body::-webkit-scrollbar-track {
+		background-color: var(--color-primary);
+	}
+	.body::-webkit-scrollbar {
+		max-width: 10px;
+		max-height: 10px;
+	}
 }
 
 @media (--two-column) {
