@@ -1,2 +1,3 @@
-import 'modern-normalize/modern-normalize.css'
-import './main.css'
+console.log('hello from main')
+
+export default {}
