@@ -80,6 +80,7 @@
 
 .text {
 	--text-default-line-height: 1.5;
+
 	margin: var(--text-margin, 0);
 	display: var(--text-display, block);
 	font-family: "Inter Display", sans-serif;
@@ -127,6 +128,7 @@
 	--text-letter-spacing: 0.05em;
 	--text-font-weight: 600;
 	--text-font-size: 13px;
+
 	text-transform: uppercase;
 }
 
