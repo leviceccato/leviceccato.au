@@ -9,6 +9,7 @@ Thumbs.db
 # Vendor
 node_modules
 
-# Built files
+# Built files and caches
 .output
 .vinxi
+.jampack

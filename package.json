@@ -1,19 +1,22 @@
 {
+	"name": "leviceccato.au",
 	"type": "module",
 	"scripts": {
 		"start": "vinxi dev",
-		"build": "vinxi build",
-		"check": "biome check --write ."
+		"build": "biome check --write . && tsc && vinxi build && jampack ./.output/public"
 	},
 	"dependencies": {
 		"@biomejs/biome": "^1.8.3",
+		"@divriots/jampack": "^0.27.1",
 		"@solidjs/router": "^0.14.3",
 		"@solidjs/start": "^1.0.6",
+		"@vanilla-extract/css": "^1.15.5",
+		"@vanilla-extract/vite-plugin": "^4.0.15",
 		"lenis": "^1.1.9",
 		"medium-zoom": "^1.1.0",
 		"modern-normalize": "^2.0.0",
 		"solid-js": "^1.8.18",
-		"vinxi": "^0.4.1",
-		"vite-imagetools": "^7.0.4"
+		"typescript": "^5.6.2",
+		"vinxi": "^0.4.1"
 	}
 }
