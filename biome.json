@@ -14,18 +14,8 @@
 			"quoteStyle": "single"
 		}
 	},
-	"css": {
-		"linter": {
-			"enabled": true
-		},
-		"formatter": {
-			"enabled": true
-		}
-	},
 	"linter": {
-		"enabled": true,
 		"rules": {
-			"recommended": true,
 			"correctness": {
 				"noUnusedVariables": "error"
 			},

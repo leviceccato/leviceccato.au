@@ -10,4 +10,5 @@ Thumbs.db
 node_modules
 
 # Built files
-dist
+.output
+.vinxi

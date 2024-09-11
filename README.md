@@ -2,7 +2,7 @@
 
 ## About
 
-Welcome to the repository of Levi Ceccato's website. It’s built using plain vanilla web standards.
+Welcome to the repository of Levi Ceccato's website. It’s built using SolidStart.
 
 ## Usage
 
