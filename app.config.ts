@@ -9,9 +9,6 @@ export default defineConfig({
 	},
 	vite: {
 		plugins: [imagetools()],
-		build: {
-			emptyOutDir: true,
-		},
 		resolve: {
 			alias: {
 				'@': './src',
