@@ -13,7 +13,6 @@
 		"lib": ["es2022", "dom", "dom.iterable"],
 		"strict": true,
 		"allowUnusedLabels": false,
-		"allowSyntheticDefaultImports": true,
 		"allowUnreachableCode": false,
 		"exactOptionalPropertyTypes": true,
 		"noFallthroughCasesInSwitch": true,
