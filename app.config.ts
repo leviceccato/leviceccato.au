@@ -8,6 +8,7 @@ const src = new URL('./src', import.meta.url)
 
 export default defineConfig({
 	server: {
+		// Render entire statically
 		prerender: {
 			crawlLinks: true,
 		},
@@ -22,7 +23,10 @@ export default defineConfig({
 		}
 
 		if (router === 'client') {
-			config.plugins = [vanillaExtractPlugin()]
+			config.plugins = [
+				// Doesn't work in SSR context
+				vanillaExtractPlugin(),
+			]
 		}
 
 		return config
