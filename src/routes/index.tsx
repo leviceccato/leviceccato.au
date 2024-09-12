@@ -1,3 +1,5 @@
+import { LayoutMain } from '@/components/layout-main'
+
 export default function () {
-	return <div>Welcome to my site!!!!</div>
+	return <LayoutMain>Welcome to my site!!!!</LayoutMain>
 }
