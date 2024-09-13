@@ -25,6 +25,11 @@ export const fontInterDisplayRegular = {
 	}),
 } satisfies Font
 
-g('html', {
-	color: 'red',
+g('body', {
+	backgroundColor: '',
+	color: '',
+	blockSize: '200vh',
+	fontSize: '0.625rem',
+	WebkitFontSmoothing: 'antialiased',
+	MozOsxFontSmoothing: 'grayscale',
 })
