@@ -29,21 +29,21 @@ export function createSmoothScroll(options?: LenisOptions) {
 		lenis?.on('scroll', callback)
 	}
 
+	function handleFrame(time: DOMHighResTimeStamp) {
+		lenis?.raf(time)
+		window.requestAnimationFrame(handleFrame)
+	}
+
+	createEventListener({
+		eventName: 'popstate',
+		target: () => window,
+		listener: handlePopstate,
+	})
+
 	onMount(() => {
 		lenis = new Lenis(options)
 
-		function handleFrame(time: DOMHighResTimeStamp) {
-			lenis?.raf(time)
-			window.requestAnimationFrame(handleFrame)
-		}
-
 		window.requestAnimationFrame(handleFrame)
-
-		createEventListener({
-			eventName: 'popstate',
-			target: window,
-			listener: handlePopstate,
-		})
 	})
 
 	onCleanup(() => {

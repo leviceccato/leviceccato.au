@@ -1,15 +1,26 @@
-import Clickable from '@/components/clickable'
+import Link from '@/components/link'
 import Text from '@/components/text'
 import { createSmoothScroll } from '@/primitives/smooth-scroll'
-import { For, type JSX } from 'solid-js'
+import { slugify } from '@/utils/misc'
+import { For, type JSX, createMemo } from 'solid-js'
 import * as css from './layout-main.css'
 
 export default function LayoutMain(props: {
-	sections: { id: string; linkText: string; content: JSX.Element }[]
+	sections: { title: string; content: JSX.Element }[]
 }) {
 	const smoothScroll = createSmoothScroll()
 
 	const sectionRefsAndIds: { id: string; ref: HTMLElement }[] = []
+
+	const sections = createMemo(() => {
+		return props.sections.map((section) => {
+			return {
+				id: slugify(section.title),
+				linkText: section.title,
+				content: section.content,
+			}
+		})
+	})
 
 	smoothScroll.onScroll((instance) => {
 		const centreScroll = instance.scroll + instance.rootElement.clientHeight / 2
@@ -21,7 +32,7 @@ export default function LayoutMain(props: {
 				closestSectionRefAndId?.ref.offsetTop ?? Number.POSITIVE_INFINITY
 
 			if (
-				sectionRefAndId.ref.offsetTop < centreScroll &&
+				-sectionRefAndId.ref.offsetTop < centreScroll &&
 				sectionRefAndId.ref.offsetTop > closestOffset
 			) {
 				closestSectionRefAndId = sectionRefAndId
@@ -38,16 +49,16 @@ export default function LayoutMain(props: {
 	return (
 		<div>
 			<nav class={css.nav}>
-				<For each={props.sections}>
+				<For each={sections()}>
 					{(section) => (
-						<Clickable class={css.link} href={`#${section.id}`}>
-							<Text is="body-s">{section.linkText}</Text>
-						</Clickable>
+						<Link class={css.link} to={`#${section.id}`}>
+							<Text variant="body-s">{section.linkText}</Text>
+						</Link>
 					)}
 				</For>
 			</nav>
 			<main>
-				<For each={props.sections}>
+				<For each={sections()}>
 					{(section) => (
 						<div
 							id={section.id}

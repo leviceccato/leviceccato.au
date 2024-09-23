@@ -1,23 +1,36 @@
-import { createRoot, onCleanup } from 'solid-js'
+import { createSignal, onCleanup, onMount } from 'solid-js'
+
+type Options<TEvent extends Event> = AddEventListenerOptions & {
+	eventName: string
+	target: () => EventTarget
+	listener: (event: TEvent) => void
+}
 
 export function createEventListener<TEvent extends Event>(
-	options: {
-		eventName: string
-		target: EventTarget
-		listener: (event: TEvent) => void
-	} & AddEventListenerOptions,
+	options: Options<TEvent>,
 ): () => void {
-	const listener: EventListener = (event: Event) => {
+	const [hasListener, setHasListener] = createSignal(false)
+
+	function listener(event: Event): void {
 		options.listener(event as TEvent)
 	}
 
-	const removeListener = () => {
-		options.target.removeEventListener(options.eventName, listener, options)
+	function removeListener(): void {
+		if (!hasListener()) {
+			return
+		}
+
+		options.target().removeEventListener(options.eventName, listener, options)
+		setHasListener(false)
 	}
 
-	createRoot(() => {
-		options.target.addEventListener(options.eventName, listener, options)
-		onCleanup(removeListener)
+	onMount(() => {
+		options.target().addEventListener(options.eventName, listener, options)
+		setHasListener(true)
+	})
+
+	onCleanup(() => {
+		removeListener()
 	})
 
 	return removeListener
