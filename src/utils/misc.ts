@@ -1,20 +1,22 @@
 export function slugify(text: string): string {
 	return (
 		text
-			// Split accented characters into their base characters and diacritical marks
+			/**
+			 * 1. Split accented characters into their base characters and diacritical marks
+			 * 2. Remove all the accents, which happen to be all in the \u03xx UNICODE block.
+			 * 3. Trim leading or trailing whitespace
+			 * 4. Convert to lowercase
+			 * 5. Remove non-alphanumeric characters
+			 * 6. Replace spaces with hyphens
+			 * 7. Remove consecutive hyphens
+			 */
 			.normalize('NFKD')
-			// Remove all the accents, which happen to be all in the \u03xx UNICODE block.
-			// biome-ignore lint/suspicious/noMisleadingCharacterClass: Not sure, just supress
+			// biome-ignore lint:
 			.replace(/[\u0300-\u036f]/g, '')
-			// Trim leading or trailing whitespace
 			.trim()
-			// Convert to lowercase
 			.toLowerCase()
-			// Remove non-alphanumeric characters
 			.replace(/[^a-z0-9 -]/g, '')
-			// Replace spaces with hyphens
 			.replace(/\s+/g, '-')
-			// Remove consecutive hyphens
 			.replace(/-+/g, '-')
 	)
 }

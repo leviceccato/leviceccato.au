@@ -9,6 +9,10 @@ type Options<TEvent extends Event> = AddEventListenerOptions & {
 export function createEventListener<TEvent extends Event>(
 	options: Options<TEvent>,
 ): () => void {
+	/**
+	 * Track if our listener was actually added in case `onCleanup`
+	 * runs before `onMount`.
+	 */
 	const [hasListener, setHasListener] = createSignal(false)
 
 	function listener(event: Event): void {
