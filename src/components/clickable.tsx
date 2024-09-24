@@ -8,6 +8,7 @@ export default function Clickable(_props: {
 	children?: JSX.Element
 	class?: string
 	attrs?: Record<string, string | undefined>
+	onClick?: JSX.HTMLAttributes<HTMLElement>['onclick']
 }) {
 	const props = defaultProps(_props, { class: '', attrs: {} })
 
