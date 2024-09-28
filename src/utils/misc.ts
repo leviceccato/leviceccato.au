@@ -1,3 +1,7 @@
+/**
+ * All generic utility functions or types should be defined in this file.
+ */
+
 export function slugify(text: string): string {
 	return (
 		text

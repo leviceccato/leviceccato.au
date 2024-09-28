@@ -3,6 +3,9 @@ import type { JSX } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import * as css from './text.css'
 
+/**
+ * All text in the app should be with this component. They may be nested.
+ */
 export default function Text(_props: {
 	as?: string
 	children?: JSX.Element

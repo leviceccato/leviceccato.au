@@ -5,6 +5,11 @@ import { slugify } from '@/utils/misc'
 import { For, type JSX, createMemo } from 'solid-js'
 import * as css from './layout-main.css'
 
+/**
+ * Rather than having a single child like most layouts, this one splits
+ * them up into sections, that way on page navigation can be more easily
+ * managed.
+ */
 export default function LayoutMain(props: {
 	sections: { title: string; content: JSX.Element }[]
 }) {

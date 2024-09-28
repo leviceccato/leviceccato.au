@@ -3,6 +3,10 @@ import type { JSX } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import * as css from './clickable.css'
 
+/**
+ * A generic clickable component that could act as any element.
+ * Event handlers should be defined as they are needed.
+ */
 export default function Clickable(_props: {
 	as: string
 	children?: JSX.Element

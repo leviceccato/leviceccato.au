@@ -2,6 +2,9 @@ import Lenis, { type LenisOptions } from 'lenis'
 import { createSignal, onCleanup, onMount } from 'solid-js'
 import { createEventListener } from './event-listener'
 
+/**
+ * A reactive wrapper around Lenis, a modern smooth scrolling library
+ */
 export function createSmoothScroll(options?: LenisOptions) {
 	let lenis: Lenis | undefined
 	const [activeSectionId, _setActiveSectionId] = createSignal<string>()

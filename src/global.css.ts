@@ -25,11 +25,18 @@ export const fontInterDisplayRegular = {
 	}),
 } satisfies Font
 
+g('html', {
+	/**
+	 * By setting the root font size to this value we can use 1rem, 2rem,
+	 * 3rem etc to represent 10px, 20px, 30px respectively.
+	 */
+	fontSize: '0.625rem',
+})
+
 g('body', {
 	backgroundColor: '',
 	color: '',
 	blockSize: '200vh',
-	fontSize: '0.625rem',
 	WebkitFontSmoothing: 'antialiased',
 	MozOsxFontSmoothing: 'grayscale',
 })

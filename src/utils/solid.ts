@@ -1,3 +1,8 @@
+/**
+ * Solid.JS specific utilities that are not stateful and would otherwise belong
+ * in `src/primitives`.
+ */
+
 import { mergeProps } from 'solid-js'
 
 /**
