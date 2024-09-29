@@ -3,7 +3,7 @@ import {
 	fontInterDisplayRegular,
 	fontInterDisplaySemibold,
 } from '@/global.css'
-import { style, styleVariants } from '@vanilla-extract/css'
+import { globalStyle, style, styleVariants } from '@vanilla-extract/css'
 
 function createCroppedFont(font: Font, lineHeight: number) {
 	return {
@@ -36,6 +36,10 @@ export const body = style([
 	root,
 	createCroppedFont(fontInterDisplayRegular, 1.4),
 ])
+
+globalStyle(`${body} strong`, {
+	fontWeight: fontInterDisplaySemibold.weight,
+})
 
 export const heading = style([
 	root,
