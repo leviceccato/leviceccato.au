@@ -15,7 +15,7 @@ export default function LayoutMain(props: {
 }) {
 	const smoothScroll = createSmoothScroll()
 
-	const sectionRefsAndIds: { id: string; ref: HTMLElement }[] = []
+	const sectionRefs: HTMLElement[] = []
 
 	const sections = createMemo(() => {
 		return props.sections.map((section) => {
@@ -30,25 +30,23 @@ export default function LayoutMain(props: {
 	smoothScroll.onScroll((instance) => {
 		const centreScroll = instance.scroll + instance.rootElement.clientHeight / 2
 
-		let closestSectionRefAndId: { id: string; ref: HTMLElement } | undefined
+		let closestSectionRef: HTMLElement | undefined
 
-		for (const sectionRefAndId of sectionRefsAndIds) {
+		for (const sectionRef of sectionRefs) {
 			const closestOffset =
-				closestSectionRefAndId?.ref.offsetTop ?? Number.POSITIVE_INFINITY
+				closestSectionRef?.offsetTop ?? Number.POSITIVE_INFINITY
 
 			if (
-				-sectionRefAndId.ref.offsetTop < centreScroll &&
-				sectionRefAndId.ref.offsetTop > closestOffset
+				-sectionRef.offsetTop < centreScroll &&
+				sectionRef.offsetTop > closestOffset
 			) {
-				closestSectionRefAndId = sectionRefAndId
+				closestSectionRef = sectionRef
 			}
 		}
 
-		if (!closestSectionRefAndId) {
-			return
+		if (closestSectionRef) {
+			smoothScroll.setActiveSectionId(closestSectionRef.id)
 		}
-
-		smoothScroll.setActiveSectionId(closestSectionRefAndId.id)
 	})
 
 	return (
@@ -65,11 +63,7 @@ export default function LayoutMain(props: {
 			<main>
 				<For each={sections()}>
 					{(section) => (
-						<div
-							id={section.id}
-							class={css.section}
-							ref={(ref) => sectionRefsAndIds.push({ ref, id: section.id })}
-						>
+						<div id={section.id} class={css.section} ref={sectionRefs.push}>
 							{section.content}
 						</div>
 					)}
