@@ -1,4 +1,3 @@
-// @refresh reload
 import { background, foreground } from '@/data/colors'
 import { description, title } from '@/data/copy'
 import { StartServer, createHandler } from '@solidjs/start/server'

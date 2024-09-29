@@ -3,7 +3,17 @@ import {
 	fontInterDisplayRegular,
 	fontInterDisplaySemibold,
 } from '@/global.css'
-import { globalStyle, style, styleVariants } from '@vanilla-extract/css'
+import {
+	createVar,
+	fallbackVar,
+	globalStyle,
+	style,
+	styleVariants,
+} from '@vanilla-extract/css'
+
+export const fontSize = createVar()
+
+const defaultFontSize = createVar()
 
 function createCroppedFont(font: Font, lineHeight: number) {
 	return {
@@ -29,7 +39,7 @@ function createCroppedFont(font: Font, lineHeight: number) {
 
 export const root = style({
 	display: 'block',
-	fontSize: 'inherit',
+	fontSize: fallbackVar(fontSize, defaultFontSize, 'inherit'),
 	cursor: 'inherit',
 })
 
@@ -48,46 +58,19 @@ export const heading = style([
 ])
 
 export const variant = styleVariants({
-	'body-xxs': [
-		body,
-		{
-			fontSize: '1.2rem',
-		},
-	],
-	'body-xs': [
-		body,
-		{
-			fontSize: '1.4rem',
-		},
-	],
-	'body-s': [
-		body,
-		{
-			letterSpacing: '0.01em',
-			fontSize: '1.8rem',
-		},
-	],
 	'body-m': [
 		body,
 		{
 			lineHeight: 1.5,
 			letterSpacing: '0.01em',
-			fontSize: '2rem',
-		},
-	],
-	'heading-xs': [
-		heading,
-		{
-			letterSpacing: '0.6em',
-			lineHeight: 1,
 			fontSize: '1.6rem',
 		},
 	],
-	'heading-s': [
-		heading,
+	'body-l': [
+		body,
 		{
-			letterSpacing: '0.6em',
-			lineHeight: 1.1,
+			lineHeight: 1.5,
+			letterSpacing: '0.01em',
 			fontSize: '1.7rem',
 		},
 	],
@@ -97,7 +80,7 @@ export const variant = styleVariants({
 			textTransform: 'uppercase',
 			letterSpacing: '0.06em',
 			lineHeight: 1.1,
-			fontSize: '1.6rem',
+			fontSize: '1.3rem',
 		},
 	],
 })

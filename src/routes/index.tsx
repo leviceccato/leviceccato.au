@@ -12,13 +12,12 @@ export default function Index() {
 					content: (
 						<>
 							<Text as="h1" variant="heading-m">
-								{title} !!!
+								{title}
 							</Text>
 							<Text as="p" variant="body-m">
 								{description}
 								I’m currently developing
-								<Link to="https://www.most.org.au">MOST</Link>
-								at
+								<Link to="https://www.most.org.au">MOST</Link> at
 								<Link to="https://www.orygen.org.au">Orygen</Link>‚ a social
 								platform that provides mental health support to young people.
 							</Text>

@@ -27,8 +27,7 @@ export const fontInterDisplayRegular = {
 } satisfies Font
 
 /**
- * Rather than include a CSS reset, this project resets styles at the component
- * level. Any reset properties are likely taken from modern-normalize.
+ * Any reset properties are likely taken from modern-normalize.
  *
  * The following two declarations must be separate to be valid.
  */
@@ -86,4 +85,8 @@ g('body', {
 	 */
 	WebkitFontSmoothing: 'antialiased',
 	MozOsxFontSmoothing: 'grayscale',
+})
+
+g(':where(h1, h2, h3, h4, h5, h6, p)', {
+	margin: 0,
 })

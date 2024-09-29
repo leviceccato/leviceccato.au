@@ -2,7 +2,6 @@ import { background, foreground } from '@/data/colors'
 import { style } from '@vanilla-extract/css'
 
 export const root = style({
-	color: 'inherit',
 	/**
 	 * Custom made cursor
 	 */

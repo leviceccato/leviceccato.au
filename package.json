@@ -8,14 +8,14 @@
 	"dependencies": {
 		"@biomejs/biome": "^1.8.3",
 		"@divriots/jampack": "^0.27.1",
-		"@solidjs/router": "^0.14.3",
-		"@solidjs/start": "^1.0.6",
+		"@solidjs/router": "^0.14.7",
+		"@solidjs/start": "^1.0.8",
 		"@vanilla-extract/css": "^1.15.5",
 		"@vanilla-extract/vite-plugin": "^4.0.15",
 		"lenis": "^1.1.9",
 		"medium-zoom": "^1.1.0",
-		"solid-js": "^1.8.18",
+		"solid-js": "^1.9.1",
 		"typescript": "^5.6.2",
-		"vinxi": "^0.4.1"
+		"vinxi": "^0.4.3"
 	}
 }

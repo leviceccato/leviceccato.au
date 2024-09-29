@@ -1,4 +1,3 @@
-// @refresh reload
 import '@/global.css'
 import { StartClient, mount } from '@solidjs/start/client'
 

@@ -33,12 +33,10 @@ export default function LayoutMain(props: {
 		let closestSectionRef: HTMLElement | undefined
 
 		for (const sectionRef of sectionRefs) {
-			const closestOffset =
-				closestSectionRef?.offsetTop ?? Number.POSITIVE_INFINITY
-
 			if (
 				-sectionRef.offsetTop < centreScroll &&
-				sectionRef.offsetTop > closestOffset
+				sectionRef.offsetTop >
+					(closestSectionRef?.offsetTop ?? Number.POSITIVE_INFINITY)
 			) {
 				closestSectionRef = sectionRef
 			}
@@ -55,7 +53,7 @@ export default function LayoutMain(props: {
 				<For each={sections()}>
 					{(section) => (
 						<Link class={css.link} to={`#${section.id}`}>
-							<Text variant="body-s">{section.linkText}</Text>
+							<Text variant="body-l">{section.linkText}</Text>
 						</Link>
 					)}
 				</For>

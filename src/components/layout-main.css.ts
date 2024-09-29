@@ -8,6 +8,14 @@ export const nav = style({
 	gap: '2rem',
 })
 
-export const link = style({})
+export const link = style({
+	padding: '1rem',
+	margin: '-1rem',
+})
 
-export const section = style({})
+export const section = style({
+	padding: '7rem 2rem 2rem 2rem',
+	display: 'flex',
+	flexDirection: 'column',
+	gap: '2.5rem',
+})
