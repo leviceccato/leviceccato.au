@@ -13,28 +13,22 @@ export function createEventListener<TEvent extends Event>(
 	 * Track if our listener was actually added in case `onCleanup`
 	 * runs before `onMount`.
 	 */
-	const [hasListener, setHasListener] = createSignal(false)
+	const [removeListener, setRemoveListener] = createSignal<() => void>()
 
 	function listener(event: Event): void {
 		options.listener(event as TEvent)
 	}
 
-	function removeListener(): void {
-		if (!hasListener()) {
-			return
-		}
-
-		options.target().removeEventListener(options.eventName, listener, options)
-		setHasListener(false)
-	}
-
 	onMount(() => {
 		options.target().addEventListener(options.eventName, listener, options)
-		setHasListener(true)
+
+		setRemoveListener(() => () => {
+			options.target().removeEventListener(options.eventName, listener, options)
+		})
 	})
 
 	onCleanup(() => {
-		removeListener()
+		removeListener()?.()
 	})
 
 	return removeListener
