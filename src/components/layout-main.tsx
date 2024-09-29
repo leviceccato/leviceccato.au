@@ -63,7 +63,11 @@ export default function LayoutMain(props: {
 			<main>
 				<For each={sections()}>
 					{(section) => (
-						<div id={section.id} class={css.section} ref={sectionRefs.push}>
+						<div
+							id={section.id}
+							class={css.section}
+							ref={(ref) => sectionRefs.push(ref)}
+						>
 							{section.content}
 						</div>
 					)}
