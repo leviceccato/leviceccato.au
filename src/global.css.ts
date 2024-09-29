@@ -1,3 +1,4 @@
+import { background, foreground } from '@/data/colors'
 import { fontFace, globalStyle as g } from '@vanilla-extract/css'
 
 export type Font = {
@@ -44,9 +45,16 @@ g('::-moz-selection', {
 
 /**
  * Opininated change to default box model.
- */
+ */ 0
 g('*, ::before, ::after', {
 	boxSizing: 'border-box',
+	/**
+	 * Custom made cursor.
+	 */
+	cursor: [
+		`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='26' viewBox='0 0 17 26' stroke='${encodeURIComponent(foreground)}' fill='${encodeURIComponent(background)}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10'%3E%3Cpath d='M13.12 14.99L1.02 2.88V22.7a1.82 1.82 0 003.1 1.28L8.12 20h5.62a1.82 1.82 0 001.3-3.11l-1.91-1.9z' /%3E%3C/svg%3E"), default`,
+		`-webkit-image-set(url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='26' viewBox='0 0 17 26' stroke='${encodeURIComponent(foreground)}' fill='${encodeURIComponent(background)}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10'%3E%3Cpath d='M13.12 14.99L1.02 2.88V22.7a1.82 1.82 0 003.1 1.28L8.12 20h5.62a1.82 1.82 0 001.3-3.11l-1.91-1.9z' /%3E%3C/svg%3E") 1x, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 25 39' width='25' height='39' fill='${encodeURIComponent(background)}' stroke='${encodeURIComponent(foreground)}' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10'%3E%3Cpath d='M19.75 22.99L1.59 4.83v29.71a2.73 2.73 0 004.67 1.94l5.97-5.97h8.44a2.73 2.73 0 001.93-4.67l-2.85-2.85z' /%3E%3C/svg%3E") 2x), default`,
+	],
 })
 
 g('html', {
