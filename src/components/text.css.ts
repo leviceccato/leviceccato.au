@@ -1,4 +1,8 @@
-import { type Font, fontInterDisplayRegular } from '@/data/fonts'
+import {
+	type Font,
+	fontInterDisplayRegular,
+	fontInterDisplaySemibold,
+} from '@/global.css'
 import { style, styleVariants } from '@vanilla-extract/css'
 
 function createCroppedFont(font: Font, lineHeight: number) {
@@ -26,21 +30,16 @@ function createCroppedFont(font: Font, lineHeight: number) {
 export const root = style({
 	display: 'block',
 	fontSize: 'inherit',
-	...createCroppedFont(fontInterDisplayRegular, 1.4),
 })
 
 export const body = style([
 	root,
-	{
-		...createCroppedFont(fontInterDisplayRegular, 1.4),
-	},
+	createCroppedFont(fontInterDisplayRegular, 1.4),
 ])
 
 export const heading = style([
 	root,
-	{
-		fontWeight: 600,
-	},
+	createCroppedFont(fontInterDisplaySemibold, 1.4),
 ])
 
 export const variant = styleVariants({
@@ -66,7 +65,7 @@ export const variant = styleVariants({
 	'body-m': [
 		body,
 		{
-			lineHeight: 1.4,
+			lineHeight: 1.5,
 			letterSpacing: '0.01em',
 			fontSize: '2rem',
 		},
@@ -90,9 +89,10 @@ export const variant = styleVariants({
 	'heading-m': [
 		heading,
 		{
-			letterSpacing: '0.7em',
-			lineHeight: 1.3,
-			fontSize: '2.2rem',
+			textTransform: 'uppercase',
+			letterSpacing: '0.06em',
+			lineHeight: 1.1,
+			fontSize: '1.6rem',
 		},
 	],
 })

@@ -1,7 +1,7 @@
 import LayoutMain from '@/components/layout-main'
 import Link from '@/components/link'
 import Text from '@/components/text'
-import { description, title } from '@/data/global'
+import { description, title } from '@/data/copy'
 
 export default function Index() {
 	return (
@@ -12,9 +12,9 @@ export default function Index() {
 					content: (
 						<>
 							<Text as="h1" variant="heading-m">
-								{title}
+								{title} !!!
 							</Text>
-							<Text as="p" variant="body-s">
+							<Text as="p" variant="body-m">
 								{description}
 								I’m currently developing
 								<Link to="https://www.most.org.au">MOST</Link>

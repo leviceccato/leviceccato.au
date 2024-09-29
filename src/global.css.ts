@@ -1,4 +1,29 @@
-import { globalStyle as g } from '@vanilla-extract/css'
+import { fontFace, globalStyle as g } from '@vanilla-extract/css'
+
+export type Font = {
+	weight: number
+	top: number
+	bottom: number
+	family: string
+}
+
+export const fontInterDisplaySemibold = {
+	weight: 600,
+	top: 0.85,
+	bottom: 0.85,
+	family: fontFace({
+		src: 'local("Inter Display"), url("/fonts/interdisplay-semibold.woff2") format("woff2"), url("/fonts/interdisplay-semibold.woff") format("woff")',
+	}),
+} satisfies Font
+
+export const fontInterDisplayRegular = {
+	weight: 400,
+	top: 0.85,
+	bottom: 0.85,
+	family: fontFace({
+		src: 'local("Inter Display"), url("/fonts/interdisplay-regular.woff2") format("woff2"), url("/fonts/interdisplay-regular.woff") format("woff")',
+	}),
+} satisfies Font
 
 /**
  * Rather than include a CSS reset, this project resets styles at the component
@@ -10,13 +35,13 @@ import { globalStyle as g } from '@vanilla-extract/css'
  */
 
 g('::selection', {
-	backgroundColor: 'var(--color-secondary)',
-	color: 'var(--color-primary)',
+	backgroundColor: 'var(--color-foreground)',
+	color: 'var(--color-background)',
 })
 
 g('::-moz-selection', {
-	backgroundColor: 'var(--color-secondary)',
-	color: 'var(--color-primary)',
+	backgroundColor: 'var(--color-foreground)',
+	color: 'var(--color-background)',
 })
 
 /**
@@ -40,8 +65,12 @@ g('html', {
 
 g('body', {
 	margin: 0,
-	backgroundColor: '',
-	color: '',
+	/**
+	 * Setting background colour on body so that we can get nice overflow
+	 * bleed in Safari.
+	 */
+	backgroundColor: 'var(--color-background)',
+	color: 'var(--color-foreground)',
 	blockSize: '200vh',
 	/**
 	 * Improve text rendering in all browsers.

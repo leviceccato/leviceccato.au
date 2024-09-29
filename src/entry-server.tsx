@@ -1,5 +1,6 @@
 // @refresh reload
-import { description, title } from '@/data/global'
+import { background, foreground } from '@/data/colors'
+import { description, title } from '@/data/copy'
 import { StartServer, createHandler } from '@solidjs/start/server'
 
 export default createHandler(() => (
@@ -34,7 +35,12 @@ export default createHandler(() => (
 					<meta name="description" content={description} />
 					{assets}
 				</head>
-				<body>
+				<body
+					style={{
+						'--color-foreground': foreground,
+						'--color-background': background,
+					}}
+				>
 					<div id="app">{children}</div>
 					{scripts}
 				</body>
