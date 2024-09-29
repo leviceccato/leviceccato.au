@@ -1,4 +1,4 @@
-import { type Font, fontInterDisplayRegular } from '@/global.css'
+import { type Font, fontInterDisplayRegular } from '@/data/fonts'
 import { style, styleVariants } from '@vanilla-extract/css'
 
 function createCroppedFont(font: Font, lineHeight: number) {

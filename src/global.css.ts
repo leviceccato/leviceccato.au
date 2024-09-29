@@ -1,34 +1,30 @@
-import { fontFace, globalStyle as g } from '@vanilla-extract/css'
-
-export type Font = {
-	weight: number
-	top: number
-	bottom: number
-	family: string
-}
-
-export const fontInterDisplaySemibold = {
-	weight: 600,
-	top: 0.85,
-	bottom: 0.85,
-	family: fontFace({
-		src: 'local("Inter Display"), url("interdisplay-semibold.woff2") format("woff2"), url("interdisplay-semibold.woff") format("woff")',
-	}),
-} satisfies Font
-
-export const fontInterDisplayRegular = {
-	weight: 400,
-	top: 0.85,
-	bottom: 0.85,
-	family: fontFace({
-		src: 'local("Inter Display"), url("interdisplay-regular.woff2") format("woff2"), url("interdisplay-regular.woff") format("woff")',
-	}),
-} satisfies Font
+import { globalStyle as g } from '@vanilla-extract/css'
 
 /**
  * Rather than include a CSS reset, this project resets styles at the component
  * level. Any reset properties are likely taken from modern-normalize.
  */
+
+/**
+ * The following two declarations must be separate to be valid.
+ */
+
+g('::selection', {
+	backgroundColor: 'var(--color-secondary)',
+	color: 'var(--color-primary)',
+})
+
+g('::-moz-selection', {
+	backgroundColor: 'var(--color-secondary)',
+	color: 'var(--color-primary)',
+})
+
+/**
+ * Opininated change to default box model.
+ */
+g('*, ::before, ::after', {
+	boxSizing: 'border-box',
+})
 
 g('html', {
 	/**
