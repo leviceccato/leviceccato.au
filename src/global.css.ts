@@ -44,9 +44,12 @@ g('::-moz-selection', {
 })
 
 /**
- * Opininated change to default box model.
- */ 0
-g('*, ::before, ::after', {
+ * Using `:where()` to ensure 0 specificity.
+ */
+g(':where(*, ::before, ::after)', {
+	/**
+	 * Saner `box-sizing` default.
+	 */
 	boxSizing: 'border-box',
 	/**
 	 * Custom made cursor.
