@@ -30,6 +30,7 @@ function createCroppedFont(font: Font, lineHeight: number) {
 export const root = style({
 	display: 'block',
 	fontSize: 'inherit',
+	cursor: 'inherit',
 })
 
 export const body = style([
