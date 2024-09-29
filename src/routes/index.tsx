@@ -1,6 +1,7 @@
 import LayoutMain from '@/components/layout-main'
 import Link from '@/components/link'
 import Text from '@/components/text'
+import { description, title } from '@/data/global'
 
 export default function Index() {
 	return (
@@ -11,12 +12,10 @@ export default function Index() {
 					content: (
 						<>
 							<Text as="h1" variant="heading-m">
-								Levi Ceccato
+								{title}
 							</Text>
 							<Text as="p" variant="body-s">
-								I’m a multidisciplinary designer based in Townsville‚ Australia.
-								My passion for design drives me to explore all of it’s avenues‚
-								including illustration‚ graphic design and software development.
+								{description}
 								I’m currently developing
 								<Link to="https://www.most.org.au">MOST</Link>
 								at

@@ -1,4 +1,5 @@
 // @refresh reload
+import { description, title } from '@/data/global'
 import { StartServer, createHandler } from '@solidjs/start/server'
 
 export default createHandler(() => (
@@ -29,14 +30,8 @@ export default createHandler(() => (
 						crossorigin="anonymous"
 						href="/fonts/interdisplay-semibold.woff2"
 					/>
-					<title>Levi Ceccato</title>
-					<meta
-						name="description"
-						content="I’m a multidisciplinary designer based in Townsville‚ Australia. My
-						passion for design drives me to explore all of it’s avenues‚ including
-						illustration‚ graphic design and software development. I’m currently
-						developing"
-					/>
+					<title>{title}</title>
+					<meta name="description" content={description} />
 					{assets}
 				</head>
 				<body>
