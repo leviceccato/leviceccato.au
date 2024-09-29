@@ -28,9 +28,7 @@ export const fontInterDisplayRegular = {
 /**
  * Rather than include a CSS reset, this project resets styles at the component
  * level. Any reset properties are likely taken from modern-normalize.
- */
-
-/**
+ *
  * The following two declarations must be separate to be valid.
  */
 
