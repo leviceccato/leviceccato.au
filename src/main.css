@@ -81,10 +81,12 @@
 
 .Text {
 	--Text-defaultLineHeight: 1.5;
+	--Text-defaultFontWeight: 400;
 	margin: var(--Text-margin, 0);
 	display: var(--Text-display, block);
 	font-family: 'Inter Display', sans-serif;
 	font-size: var(--Text-fontSize, 16px);
+	font-weight: var(--Text-fontWeight, var(--Text-defaultFontWeight));
 	letter-spacing: var(--Text-letterSpacing, 0.01em);
 	line-height: var(--Text-lineHeight, var(--Text-defaultLineHeight));
 
@@ -145,15 +147,16 @@
 }
 
 .Link {
-	color: inherit;
-	text-decoration: inherit;
+	color: inherit; 
+	text-decoration-line: underline;
+	text-decoration-thickness: 0.1em;
+	text-underline-offset: 0.1em;
 	-webkit-tap-highlight-color: transparent;
-	font-weight: 600;
 	cursor: var(--cursorPointer);
 	cursor: var(--cursorPointerImageSet);
 
 	&:hover {
-		text-decoration: underline;
+		color: #555;
 	}
 }
 
