@@ -10,6 +10,4 @@ Thumbs.db
 node_modules
 
 # Built files and caches
-.output
-.vinxi
-.jampack
+/dist

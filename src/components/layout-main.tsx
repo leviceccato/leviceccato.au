@@ -1,5 +1,7 @@
+import Head from '@/components/head'
 import Link from '@/components/link'
 import Text from '@/components/text'
+import type { Meta } from '@/data/routes'
 import { createSmoothScroll } from '@/primitives/smooth-scroll'
 import { slugify } from '@/utils/misc'
 import { For, type JSX, createMemo } from 'solid-js'
@@ -11,6 +13,7 @@ import * as css from './layout-main.css'
  * managed.
  */
 export default function LayoutMain(props: {
+	meta: Meta
 	sections: { title: string; content: JSX.Element }[]
 }) {
 	const smoothScroll = createSmoothScroll()
@@ -48,29 +51,32 @@ export default function LayoutMain(props: {
 	})
 
 	return (
-		<div>
-			<nav class={css.nav}>
-				<For each={sections()}>
-					{(section) => (
-						<Link class={css.link} to={`#${section.id}`}>
-							<Text variant="body-l">{section.linkText}</Text>
-						</Link>
-					)}
-				</For>
-			</nav>
-			<main>
-				<For each={sections()}>
-					{(section) => (
-						<div
-							id={section.id}
-							class={css.section}
-							ref={(ref) => sectionRefs.push(ref)}
-						>
-							{section.content}
-						</div>
-					)}
-				</For>
-			</main>
-		</div>
+		<>
+			<Head {...props.meta} />
+			<div>
+				<nav class={css.nav}>
+					<For each={sections()}>
+						{(section) => (
+							<Link class={css.link} to={`#${section.id}`}>
+								<Text variant="body-l">{section.linkText}</Text>
+							</Link>
+						)}
+					</For>
+				</nav>
+				<main>
+					<For each={sections()}>
+						{(section) => (
+							<div
+								id={section.id}
+								class={css.section}
+								ref={(ref) => sectionRefs.push(ref)}
+							>
+								{section.content}
+							</div>
+						)}
+					</For>
+				</main>
+			</div>
+		</>
 	)
 }

@@ -35,7 +35,8 @@ export default function Link(_props: {
 			 * have to ensure proper formatting to get spaces. This
 			 * will not effect elements outside of an inline
 			 * context.
-			 */}&#32;<span class={css.inner}>{props.children}</span>&#32;
+			 */}
+			&#32;<span class={css.inner}>{props.children}</span>&#32;
 		</Clickable>
 	)
 }

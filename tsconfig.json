@@ -14,7 +14,6 @@
 		"strict": true,
 		"allowUnusedLabels": false,
 		"allowUnreachableCode": false,
-		"exactOptionalPropertyTypes": true,
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitOverride": true,
 		"noImplicitReturns": true,
@@ -24,7 +23,7 @@
 		"noUnusedParameters": true,
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js",
-		"types": ["vite/client", "@solidjs/start/env"],
+		"types": ["vite/client", "@types/bun"],
 		"paths": {
 			"@/*": ["./src/*"]
 		}
