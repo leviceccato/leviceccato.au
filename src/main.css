@@ -162,7 +162,7 @@
 
 .Body {
 	background-color: var(--colorPrimary);
-	padding: 20px;
+	padding: 25px 20px;
 	color: var(--colorSecondary);
 	block-size: 100vh;
 	-webkit-font-smoothing: antialiased;
@@ -171,7 +171,7 @@
 
 @media (--twoColumn) {
 	.Body {
-		padding: 50px;
+		padding: 60px 50px;
 	}
 }
 
